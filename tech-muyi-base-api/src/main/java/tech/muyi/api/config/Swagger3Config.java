@@ -1,9 +1,19 @@
 package tech.muyi.api.config;
 
+import cn.hutool.core.annotation.AnnotationUtil;
+import com.google.common.base.Predicates;
+import io.swagger.annotations.ApiOperation;
+import org.apache.commons.collections.functors.AllPredicate;
+import org.apache.commons.collections.functors.OrPredicate;
+import org.apache.commons.lang3.AnnotationUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.AnnotationConfigUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import springfox.documentation.RequestHandler;
 import springfox.documentation.builders.*;
 import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.service.*;
@@ -14,6 +24,7 @@ import tech.muyi.common.constant.enumtype.ProfileActiveEnum;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * description: Swagger3Config
@@ -27,16 +38,17 @@ public class Swagger3Config {
     @Value("${spring.profiles.active}")
     private String profileActive;
 
-    private String basePackage;
     @Bean
     public Docket createRestApi() {
+
+//        只在开发环境和本地环境提供接口文档
         boolean enable = ProfileActiveEnum.LOCAL.getCode().equals(profileActive) || ProfileActiveEnum.DEV.getCode().equals(profileActive);
         //返回文档摘要信息
         return new Docket(DocumentationType.OAS_30)
                 .enable(enable)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage(basePackage))
+                .apis(getBasePackages())
                 .paths(PathSelectors.any())
                 .build()
                 .globalResponses(HttpMethod.GET, getGlobalResponseMessage())
@@ -50,7 +62,7 @@ public class Swagger3Config {
         return new ApiInfoBuilder()
                 .title("Swagger3接口文档")
                 .description("muyi")
-                .contact(new Contact("muyi","www.muyi.top","zcy_nemo@aliyun.com"))
+                .contact(new Contact("沐乙老师傅","https://github.com/pomole","zcy_nemo@aliyun.com"))
                 .version("1.0")
                 .build();
     }
@@ -63,5 +75,10 @@ public class Swagger3Config {
         List<Response> responseList = new ArrayList<>();
         responseList.add(new ResponseBuilder().code("404").description("未找到资源").build());
         return responseList;
+    }
+
+    // 设置多路径
+    private Predicate<RequestHandler> getBasePackages() {
+        return RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class);
     }
 }

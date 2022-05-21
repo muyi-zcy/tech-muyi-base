@@ -34,6 +34,7 @@ public class ${table.controllerName} {
      * @param ${entity?uncap_first}DTO
      * @return
      */
+    @ApiOperation(value = "保存")
     @PostMapping("/${entity?uncap_first}")
     @ResponseBody
     public MyResult<Boolean> save${entity}(@RequestBody ${entity}DTO ${entity?uncap_first}DTO){
@@ -53,6 +54,7 @@ public class ${table.controllerName} {
     * 删除
     * @return
     */
+    @ApiOperation(value = "删除")
     @DeleteMapping("/${entity?uncap_first}/{id}")
     @ResponseBody
     public MyResult<Boolean> delete${entity}(@PathVariable Long id){
@@ -72,6 +74,7 @@ public class ${table.controllerName} {
     * @param ${entity?uncap_first}DTO
     * @return
     */
+    @ApiOperation(value = "更新")
     @PutMapping("/${entity?uncap_first}")
     @ResponseBody
     public MyResult<Boolean> update${entity}(@RequestBody ${entity}DTO ${entity?uncap_first}DTO){
@@ -92,6 +95,7 @@ public class ${table.controllerName} {
     * @param id
     * @return
     */
+    @ApiOperation(value = "详情查询")
     @GetMapping("/${entity?uncap_first}/{id}")
     @ResponseBody
     public MyResult<${entity}DTO> get${entity}ById(@PathVariable Long id){
@@ -111,6 +115,7 @@ public class ${table.controllerName} {
     * @param ${entity?uncap_first}Query 查询条件，根据业务自行扩展
     * @return
     */
+    @ApiOperation(value = "分页查询")
     @GetMapping("/${entity?uncap_first}/query")
     @ResponseBody
     public MyResult<List<${entity}DTO>> query${entity}(${entity}Query ${entity?uncap_first}Query ){

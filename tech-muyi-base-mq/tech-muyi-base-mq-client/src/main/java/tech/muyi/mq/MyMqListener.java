@@ -1,8 +1,7 @@
 package tech.muyi.mq;
 
 
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
@@ -18,9 +17,8 @@ import java.util.List;
  * @Author: muyi
  * @Date: 2021/1/31 3:57
  */
+@Slf4j
 public class MyMqListener  implements MessageListenerConcurrently {
-    private static Logger LOGGER = LoggerFactory.getLogger(MyMqListener.class);
-
     private MyMqMessageListener myMqMessageListener;
 
     public MyMqListener() {
@@ -48,9 +46,9 @@ public class MyMqListener  implements MessageListenerConcurrently {
                     message = new String(Base64.decodeBase64(messageExt.getBody()), "UTF-8");
                     myMqConsumeStatus = this.myMqMessageListener.consumeMessage(message, reconsumeTimes);
                 } catch (Throwable throwable) {
-                    LOGGER.error("consume_message_exception,msgId:{},topic:{},tags:{},reconsumeTimes:{},smqConsumeStatus:{},message:{}", new Object[]{msgId, topic, tags, reconsumeTimes, myMqConsumeStatus, message, throwable});
+                    log.error("consume_message_exception,msgId:{},topic:{},tags:{},reconsumeTimes:{},smqConsumeStatus:{},message:{}", new Object[]{msgId, topic, tags, reconsumeTimes, myMqConsumeStatus, message, throwable});
                 } finally {
-                    LOGGER.debug("comsume_message,msgId:{},topic:{},tags:{},reconsumeTimes:{},smqConsumeStatus:{},message:{}", new Object[]{msgId, topic, tags, reconsumeTimes, myMqConsumeStatus, message});
+                    log.debug("comsume_message,msgId:{},topic:{},tags:{},reconsumeTimes:{},smqConsumeStatus:{},message:{}", new Object[]{msgId, topic, tags, reconsumeTimes, myMqConsumeStatus, message});
                 }
             }
 
