@@ -1,0 +1,62 @@
+<included>
+
+    <springProperty scope="context" name="APP" source="spring.application.name" />
+
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [${APP},%X{traceId}] [%X{spanId}] [%X{requestIp}] [%thread] %-5level %logger{50} - %msg%n"/>
+
+    <!--    本地调试控制台输出-->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!--    全量日志记录-->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>./logs/app-info.%d.%i.log</fileNamePattern>
+            <maxHistory>90</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!--    业务日志记录-->
+    <appender name="businessLogAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>./logs/business-${APP}.log</File>
+        <append>true</append>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>1
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>./logs/app-business.%d.%i.log</fileNamePattern>
+            <maxHistory>90</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <logger name="org.apache.zookeeper.ClientCnxn" additivity="false">
+
+    </logger>
+
+    <logger name="businessLog" additivity="false" level="INFO">
+        <appender-ref ref="businessLogAppender"/>
+    </logger>
+
+    <root level="info">
+        <!--        <appender-ref ref="STDOUT" />-->
+        <appender-ref ref="FILE" />
+    </root>
+</included>

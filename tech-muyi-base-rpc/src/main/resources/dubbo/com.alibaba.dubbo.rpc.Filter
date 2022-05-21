@@ -1,0 +1,2 @@
+logDubboConsumerFilter=com.muyi.base.log.filter.RpcConsumerContextFilter
+logDubboProviderFilter=com.muyi.base.log.filter.RpcProviderContextFilter

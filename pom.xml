@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>tech.muyi</groupId>
+    <artifactId>tech-muyi-base</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>tech-muyi-base-oss</module>
+        <module>tech-muyi-base-exception</module>
+        <module>tech-muyi-base-redis</module>
+        <module>tech-muyi-base-job-elastic</module>
+        <module>tech-muyi-base-job-easy</module>
+        <module>tech-muyi-base-on</module>
+        <module>tech-muyi-base-dependencies</module>
+        <module>tech-muyi-base-log</module>
+        <module>tech-muyi-base-api</module>
+        <module>tech-muyi-base-common</module>
+        <module>tech-muyi-base-util</module>
+        <module>tech-muyi-base-db</module>
+        <module>tech-muyi-base-mq</module>
+        <module>tech-muyi-base-config</module>
+        <module>tech-muyi-base-auth</module>
+        <module>tech-muyi-base-message</module>
+        <module>tech-muyi-base-mq/tech-muyi-base-mq-client</module>
+        <module>tech-muyi-base-mq/tech-muyi-base-mq-server</module>
+        <module>tech-muyi-base-rpc</module>
+        <module>tech-muyi-base-gengrator</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
+</project>

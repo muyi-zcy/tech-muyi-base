@@ -1,0 +1,20 @@
+# 项目排除路径
+/tech-muyi-base-api/target/
+/tech-muyi-base-auth/target/
+/tech-muyi-base-common/target/
+/tech-muyi-base-config/target/
+/tech-muyi-base-db/target/
+/tech-muyi-base-exception/target/
+/tech-muyi-base-gengrator/target/
+/tech-muyi-base-job-easy/target/
+/tech-muyi-base-job-elastic/target/
+/tech-muyi-base-log/target/
+/tech-muyi-base-message/target/
+/tech-muyi-base-mq/target/
+/tech-muyi-base-mq/tech-muyi-base-mq-client/target/
+/tech-muyi-base-mq/tech-muyi-base-mq-server/target/
+/tech-muyi-base-on/target/
+/tech-muyi-base-oss/target/
+/tech-muyi-base-redis/target/
+/tech-muyi-base-rpc/target/
+/tech-muyi-base-util/target/

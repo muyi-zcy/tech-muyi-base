@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>tech.muyi</groupId>
+    <artifactId>tech-muyi-base-job-elastic</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <base.version>1.0-SNAPSHOT</base.version>
+        <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
+        <elastic-job-lite-core.version>2.1.5</elastic-job-lite-core.version>
+        <elastic-job-lite-spring.version>2.1.5</elastic-job-lite-spring.version>
+        <elastic-job-lite-lifecycle.version>2.1.5</elastic-job-lite-lifecycle.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>tech.muyi</groupId>
+            <artifactId>tech-muyi-base-exception</artifactId>
+            <version>${base.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>tech.muyi</groupId>
+            <artifactId>tech-muyi-base-on</artifactId>
+            <version>${base.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.dangdang</groupId>
+            <artifactId>elastic-job-lite-core</artifactId>
+            <version>${elastic-job-lite-core.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.dangdang/elastic-job-lite-spring -->
+        <dependency>
+            <groupId>com.dangdang</groupId>
+            <artifactId>elastic-job-lite-spring</artifactId>
+            <version>${elastic-job-lite-spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>elastic-job-lite-lifecycle</artifactId>
+            <groupId>com.dangdang</groupId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.eclipse.jetty.aggregate</groupId>
+                    <artifactId>jetty-all-server</artifactId>
+                </exclusion>
+            </exclusions>
+            <version>${elastic-job-lite-lifecycle.version}</version>
+        </dependency>
+    </dependencies>
+</project>

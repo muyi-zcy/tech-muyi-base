@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>tech.muyi</groupId>
+    <artifactId>tech-muyi-base-job-easy</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <base.version>1.0-SNAPSHOT</base.version>
+        <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
+        <logback-classic.version>1.2.3</logback-classic.version>
+        <lombok.version>1.18.22</lombok.version>
+        <hutool-all.version>5.7.22</hutool-all.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool-all.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>tech.muyi</groupId>
+            <artifactId>tech-muyi-base-on</artifactId>
+            <version>${base.version}</version>
+        </dependency>
+    </dependencies>
+</project>
