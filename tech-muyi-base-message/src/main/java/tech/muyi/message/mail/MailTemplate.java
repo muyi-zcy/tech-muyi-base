@@ -57,8 +57,8 @@ public class MailTemplate  implements Serializable {
      * @param mailList
      * @return
      */
-    public void SendMailMessage(List<MailDTO> mailList){
-        for(MailDTO mailDTO:mailList){
+    public void SendMailMessage(List<MailEntity> mailList){
+        for(MailEntity mailDTO:mailList){
             try {
                 sendMail(mailDTO);
             }catch (Exception e){
@@ -73,7 +73,7 @@ public class MailTemplate  implements Serializable {
      * @param mailDTO
      * @return
      */
-    public void SendMailMessage(MailDTO mailDTO){
+    public void SendMailMessage(MailEntity mailDTO){
         try {
             sendMail(mailDTO);
         }catch (Exception e){
@@ -82,7 +82,7 @@ public class MailTemplate  implements Serializable {
         }
     }
     //    发送邮件接口
-    private void sendMail(MailDTO... receiveMail) throws Exception{
+    private void sendMail(MailEntity... receiveMail) throws Exception{
 
         // 1. 创建参数配置, 用于连接邮件服务器的参数配置
         Properties props = new Properties();                    // 参数配置
@@ -127,7 +127,7 @@ public class MailTemplate  implements Serializable {
      * @auther:
      * @date:
      */
-    private MimeMessage createMessage(Session session, MailDTO mailDTO) throws Exception {
+    private MimeMessage createMessage(Session session, MailEntity mailDTO) throws Exception {
         // 1. 创建一封邮件
         MimeMessage message = new MimeMessage(session);
         // 2. From: 发件人
@@ -168,10 +168,10 @@ public class MailTemplate  implements Serializable {
         return message;
     }
 
-    private InternetAddress[]  dealSendToAddress(List<ReceiveUserDTO> receiveUserDTOS) throws UnsupportedEncodingException {
+    private InternetAddress[]  dealSendToAddress(List<ReceiveUserInfo> receiveUserDTOS) throws UnsupportedEncodingException {
         InternetAddress[] sendTo = new InternetAddress[receiveUserDTOS.size()];
         for(int i = 0;  i < receiveUserDTOS.size(); i++){
-            ReceiveUserDTO receiveUserDTO = receiveUserDTOS.get(i);
+            ReceiveUserInfo receiveUserDTO = receiveUserDTOS.get(i);
             sendTo[i] =  new InternetAddress(receiveUserDTO.getMail(), receiveUserDTO.getName(), "UTF-8");
         }
         return sendTo;
