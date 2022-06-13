@@ -2,16 +2,33 @@ package tech.muyi.exception.enumtype;
 
 
 import tech.muyi.exception.BaseErrorInfoInterface;
+import tech.muyi.exception.sdk.anno.ErrorCodeInfoAnno;
 
 /**
+ * 公共错误码
  * @Author: muyi
  * @Date: 2021/1/3 21:38
  */
+@ErrorCodeInfoAnno(name = "基础公共错误码", code = "base-error-code", desc = "基础公共错误码")
 public enum CommonErrorCodeEnum implements BaseErrorInfoInterface {
     /***************************************************************************************************************
      *                通用状态码:
-     *                4XX：前端发生错误
-     *                5XX：服务端发生错误
+     *                1XX	信息，服务器收到请求，需要请求者继续执行操作
+     *                2XX	成功，操作被成功接收并处理
+     *                3XX	重定向，需要进一步的操作以完成请求
+     *                4XX	客户端错误，请求包含语法错误或无法完成请求
+     *                5XX	服务器错误，服务器在处理请求的过程中发生了错误
+     *                6XX   未知错误
+     *                后续各中间件和服务的异常由各自复制，按照规范分配
+     *                1000：系统启动和运行异常
+     *                2000：网关服务(包含api和rpc)
+     *                3000：关系型数据库
+     *                4000：非关系型数据库
+     *                5000：定时任务
+     *                6000：文件存储
+     *                7000：mq
+     *                8000：配置中心
+     *                100000：分配给各业务服务
      * *************************************************************************************************************/
     SUCCESS("200", "成功!"),
     BAD_REQUEST("400","请求有误!"),
