@@ -1,7 +1,9 @@
 package tech.muyi.common.constant.enumtype;
 
+import java.util.Objects;
+
 /**
- * description: ProfileActiveEnum
+ * description: 系统环境枚举
  * date: 2022/1/3 0:15
  * author: muyi
  * version: 1.0
@@ -16,7 +18,7 @@ public enum ProfileActiveEnum {
 
     private String desc;
 
-    private ProfileActiveEnum(String code,String desc) {
+    ProfileActiveEnum(String code,String desc) {
         this.code = code;
         this.desc = desc;
     }
@@ -36,12 +38,13 @@ public enum ProfileActiveEnum {
     public void setDesc(String desc) {
         this.desc = desc;
     }
+
     public static String getDesc(String code){
         for(ProfileActiveEnum item : ProfileActiveEnum.values()){
-            if(item.getCode() == code){
-                return item.desc;
+            if(Objects.equals(item.getCode(), code)){
+                return item.getDesc();
             }
         }
-        return "other";
+        return DEV.getDesc();
     }
 }

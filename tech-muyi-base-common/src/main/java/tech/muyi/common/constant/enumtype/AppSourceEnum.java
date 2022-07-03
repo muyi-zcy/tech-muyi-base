@@ -7,7 +7,7 @@ package tech.muyi.common.constant.enumtype;
  */
 public enum AppSourceEnum {
     APP(1,"APP"),
-    WX_APPLET(2,"WXAPPLET"),
+    APPLET(2,"APPLET"),
     WEB(3,"WEB"),
     LOT(4,"LOT"),
     PDA(5,"PDA"),
@@ -42,10 +42,10 @@ public enum AppSourceEnum {
     }
     public static String getDesc(Integer code){
         for(AppSourceEnum item : AppSourceEnum.values()){
-            if(item.getCode() == code){
-                return item.desc;
+            if(item.getCode().equals(code)){
+                return item.getDesc();
             }
         }
-        return "other";
+        return OTHER.getDesc();
     }
 }

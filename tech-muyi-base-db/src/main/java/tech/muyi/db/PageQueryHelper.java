@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * description: MybatisPlusServiceImpl
+ * description: PageQueryHelper
  * date: 2022/1/9 20:06
  * author: muyi
  * version: 1.0

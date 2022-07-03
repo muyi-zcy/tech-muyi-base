@@ -1,5 +1,6 @@
 package tech.muyi.mq;
 
+import mq.exception.MqErrorCodeEnum;
 import org.apache.rocketmq.client.exception.MQBrokerException;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
@@ -36,7 +37,7 @@ public class MyMqProduct {
         try {
             this.defaultMQProducer.start();
         } catch (MQClientException e) {
-            throw new MyException(CommonErrorCodeEnum.MQ_PRODUCT_EXCEPTION.getResultCode(), CommonErrorCodeEnum.MQ_PRODUCT_EXCEPTION.getResultMsg());
+            throw new MyException(MqErrorCodeEnum.MQ_PRODUCT_EXCEPTION);
         }
     }
 
@@ -53,7 +54,7 @@ public class MyMqProduct {
             Message message = new Message(topic, tag, key, Base64.encodeBase64(JsonUtil.toJson(body, body.getClass()).getBytes("UTF-8")));
             return message;
         } catch (UnsupportedEncodingException e) {
-            throw new MyException(CommonErrorCodeEnum.SERIALIZATION_FAIL.getResultCode(), CommonErrorCodeEnum.SERIALIZATION_FAIL.getResultMsg(),e);
+            throw new MyException(CommonErrorCodeEnum.SERIALIZATION_FAIL, e);
         }
     }
 
@@ -80,10 +81,10 @@ public class MyMqProduct {
                     throw e;
                 }
             } catch (Exception e1) {
-                throw new MyException(CommonErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION.getResultCode(), CommonErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION.getResultMsg(),e1);
+                throw new MyException(MqErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION, e1);
             }
         } catch( MQClientException | RemotingException | InterruptedException e2) {
-            throw new MyException(CommonErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION.getResultCode(), CommonErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION.getResultMsg(),e2);
+            throw new MyException(MqErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION, e2);
         }
     }
 
@@ -114,10 +115,10 @@ public class MyMqProduct {
                     throw e;
                 }
             } catch (Exception e1) {
-                throw new MyException(CommonErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION.getResultCode(), CommonErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION.getResultMsg(),e1);
+                throw new MyException(MqErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION, e1);
             }
         } catch( MQClientException | RemotingException | InterruptedException e2) {
-            throw new MyException(CommonErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION.getResultCode(), CommonErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION.getResultMsg(),e2);
+            throw new MyException(MqErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION, e2);
         }
     }
 
@@ -127,7 +128,7 @@ public class MyMqProduct {
      * @param topic
      * @param tag
      * @param key
-     * @param body
+     * @param bodies
      * @return
      */
     public SendResult send(String topic, String tag, String key, List<?> bodies) {
@@ -146,10 +147,10 @@ public class MyMqProduct {
                     throw e;
                 }
             } catch (Exception e1) {
-                throw new MyException(CommonErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION.getResultCode(), CommonErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION.getResultMsg(),e1);
+                throw new MyException(MqErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION, e1);
             }
-        } catch (MQClientException | RemotingException | InterruptedException e) {
-            throw new MyException(CommonErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION.getResultCode(), CommonErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION.getResultMsg(),e);
+        } catch (MQClientException | RemotingException | InterruptedException e2) {
+            throw new MyException(MqErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION, e2);
         }
     }
 
@@ -158,7 +159,7 @@ public class MyMqProduct {
      * @param topic
      * @param tag
      * @param key
-     * @param body
+     * @param bodies
      * @param timeout
      * @return
      */
@@ -178,10 +179,10 @@ public class MyMqProduct {
                     throw e;
                 }
             } catch (Exception e1) {
-                throw new MyException(CommonErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION.getResultCode(), CommonErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION.getResultMsg(),e1);
+                throw new MyException(MqErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION, e1);
             }
-        } catch (MQClientException | RemotingException | InterruptedException e) {
-            throw new MyException(CommonErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION.getResultCode(), CommonErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION.getResultMsg(),e);
+        } catch (MQClientException | RemotingException | InterruptedException e2) {
+            throw new MyException(MqErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION, e2);
         }
     }
 
@@ -199,7 +200,7 @@ public class MyMqProduct {
      */
     private SendResult retrySend(Message message, int retryTimes) throws InterruptedException, RemotingException, MQClientException, MQBrokerException {
         if (0 == retryTimes) {
-            throw new MyException(CommonErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION.getResultCode(), CommonErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION.getResultMsg());
+            throw new MyException(MqErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION);
         } else {
             Thread.sleep((long)((new Random()).nextInt(10) + 1));
             try {
@@ -212,7 +213,7 @@ public class MyMqProduct {
     }
     private SendResult retrySend(Message message, int retryTimes,Long timeout) throws InterruptedException, RemotingException, MQClientException, MQBrokerException {
         if (0 == retryTimes) {
-            throw new MyException(CommonErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION.getResultCode(), CommonErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION.getResultMsg());
+            throw new MyException(MqErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION);
         } else {
             Thread.sleep((long)((new Random()).nextInt(10) + 1));
             try {
@@ -237,7 +238,7 @@ public class MyMqProduct {
      */
     private SendResult retrySend(List<Message> messages, int retryTimes) throws InterruptedException, RemotingException, MQClientException, MQBrokerException {
         if (0 == retryTimes) {
-            throw new MyException(CommonErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION.getResultCode(), CommonErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION.getResultMsg());
+            throw new MyException(MqErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION);
         } else {
             Thread.sleep((long)((new Random()).nextInt(10) + 1));
             try {
@@ -250,7 +251,7 @@ public class MyMqProduct {
     }
     private SendResult retrySend(List<Message> messages, int retryTimes,Long timeout) throws InterruptedException, RemotingException, MQClientException, MQBrokerException {
         if (0 == retryTimes) {
-            throw new MyException(CommonErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION.getResultCode(), CommonErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION.getResultMsg());
+            throw new MyException(MqErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION);
         } else {
             Thread.sleep((long)((new Random()).nextInt(10) + 1));
             try {
@@ -275,7 +276,7 @@ public class MyMqProduct {
         try {
             this.defaultMQProducer.send(this.convert(topic, tag, key, body),sendCallback);
         } catch (RemotingException | InterruptedException | MQClientException e) {
-            throw new MyException(CommonErrorCodeEnum.MQ_ASNY_SEND_FAIL_EXCEPTION.getResultCode(), CommonErrorCodeEnum.MQ_ASNY_SEND_FAIL_EXCEPTION.getResultMsg(),e);
+            throw new MyException(MqErrorCodeEnum.MQ_ASNY_SEND_FAIL_EXCEPTION, e);
         }
     }
 
@@ -292,7 +293,7 @@ public class MyMqProduct {
         try {
             this.defaultMQProducer.send(this.convert(topic, tag, key, body),sendCallback, timeout);
         } catch (RemotingException | InterruptedException | MQClientException e) {
-            throw new MyException(CommonErrorCodeEnum.MQ_ASNY_SEND_FAIL_EXCEPTION.getResultCode(), CommonErrorCodeEnum.MQ_ASNY_SEND_FAIL_EXCEPTION.getResultMsg(),e);
+            throw new MyException(MqErrorCodeEnum.MQ_ASNY_SEND_FAIL_EXCEPTION, e);
         }
     }
 
@@ -307,7 +308,7 @@ public class MyMqProduct {
         try {
             this.defaultMQProducer.sendOneway(this.convert(topic, tag, key, body));
         } catch (RemotingException | InterruptedException | MQClientException e) {
-            throw new MyException(CommonErrorCodeEnum.MQ_ONE_WAY_SEND_FAIL_EXCEPTION.getResultCode(), CommonErrorCodeEnum.MQ_ONE_WAY_SEND_FAIL_EXCEPTION.getResultMsg(),e);
+            throw new MyException(MqErrorCodeEnum.MQ_ONE_WAY_SEND_FAIL_EXCEPTION, e);
         }
     }
 }

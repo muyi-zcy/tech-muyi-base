@@ -122,10 +122,7 @@ public class MyIdGenerator {
             sequence = 0L;
         }
         lastTimestamp = timestamp;
-        return ((timestamp - twepoch) << timestampLeftShift)
-                | (dataCenterId << dataCenterIdShift)
-                | (workerId << workerIdShift)
-                | sequence;
+        return ((timestamp - twepoch) << timestampLeftShift) | (dataCenterId << dataCenterIdShift) | (workerId << workerIdShift) | sequence;
     }
 
     private long tilNextMillis(long lastTimestamp) {

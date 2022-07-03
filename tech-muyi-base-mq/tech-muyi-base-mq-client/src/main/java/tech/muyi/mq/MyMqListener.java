@@ -10,6 +10,7 @@ import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.slf4j.MDC;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.List;
 
@@ -28,10 +29,8 @@ public class MyMqListener  implements MessageListenerConcurrently {
     public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext consumeConcurrentlyContext) {
         if (null != list && !CollectionUtils.isEmpty(list)) {
             MyMqConsumeStatus myMqConsumeStatus = null;
-            Iterator iterator = list.iterator();
 
-            while(iterator.hasNext()) {
-                MessageExt messageExt = (MessageExt)iterator.next();
+            for (MessageExt messageExt : list) {
                 String msgId = messageExt.getMsgId();
                 if (null != msgId) {
                     MDC.put("traceId", msgId);
@@ -43,12 +42,12 @@ public class MyMqListener  implements MessageListenerConcurrently {
                 String message = null;
 
                 try {
-                    message = new String(Base64.decodeBase64(messageExt.getBody()), "UTF-8");
+                    message = new String(Base64.decodeBase64(messageExt.getBody()), StandardCharsets.UTF_8);
                     myMqConsumeStatus = this.myMqMessageListener.consumeMessage(message, reconsumeTimes);
                 } catch (Throwable throwable) {
-                    log.error("consume_message_exception,msgId:{},topic:{},tags:{},reconsumeTimes:{},smqConsumeStatus:{},message:{}", new Object[]{msgId, topic, tags, reconsumeTimes, myMqConsumeStatus, message, throwable});
+                    log.error("consume_message_exception,msgId:{},topic:{},tags:{},reconsumeTimes:{},smqConsumeStatus:{},message:{}", msgId, topic, tags, reconsumeTimes, myMqConsumeStatus, message, throwable);
                 } finally {
-                    log.debug("comsume_message,msgId:{},topic:{},tags:{},reconsumeTimes:{},smqConsumeStatus:{},message:{}", new Object[]{msgId, topic, tags, reconsumeTimes, myMqConsumeStatus, message});
+                    log.debug("comsume_message,msgId:{},topic:{},tags:{},reconsumeTimes:{},smqConsumeStatus:{},message:{}", msgId, topic, tags, reconsumeTimes, myMqConsumeStatus, message);
                 }
             }
 

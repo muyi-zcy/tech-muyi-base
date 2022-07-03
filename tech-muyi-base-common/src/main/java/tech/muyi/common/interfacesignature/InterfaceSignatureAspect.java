@@ -7,6 +7,7 @@ import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.asymmetric.Sign;
 import cn.hutool.crypto.asymmetric.SignAlgorithm;
 import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -33,34 +34,33 @@ import java.util.Map;
  * @Author: muyi
  * @Date: 2021/1/16 0:57
  */
+@Slf4j
 @Aspect
 @Component
 public class InterfaceSignatureAspect {
-    private static Logger LOGGER = LoggerFactory.getLogger(InterfaceSignatureAspect.class);
+    // 权重
+    private static final Integer[] WEIGHT = {7, 9, 10 ,5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2};
 
-    public static final Integer[] WEIGHT = {7, 9, 10 ,5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2};
-
-
-    public static final String SIGN = "SIGN";
+    private static final String SIGN = "SIGN";
 
     @Value("auth.sign.public_key:default")
-    public String PUBLIC_KEY;
+    private String PUBLIC_KEY;
 
     @Value("auth.sign.private_key:default")
-    public String PRIVATE_KEY;
+    private String PRIVATE_KEY;
 
     @Value("auth.sign.ras_salt:default")
-    public String RAS_SALT;
+    private String RAS_SALT;
 
-    public static final String REQUEST_METHON = "http_method";
+    private static final String REQUEST_METHON = "http_method";
 
-    public static final String IP = "ip";
+    private static final String IP = "ip";
 
-    public static final String URL = "url";
+    private static final String URL = "url";
 
-    public static final String CLASS_METHOD = "class_method";
+    private static final String CLASS_METHOD = "class_method";
 
-    public static final String PARAMS = "params";
+    private static final String PARAMS = "params";
 
     @Pointcut("@annotation(tech.muyi.common.interfacesignature.annotation.InterfaceSignature)")
     public void pointCut(){
@@ -146,15 +146,15 @@ public class InterfaceSignatureAspect {
                 return targetSign.verify(data,bytes);
             }
 
-            LOGGER.info("接口签名,请求来源:[{}],方法:[{}],操作:[{}],请求参数[{}]",
+            log.info("接口签名,请求来源:[{}],方法:[{}],操作:[{}],请求参数[{}]",
                     appSource,methodName,function,params);
             return true;
         }catch (Exception e){
-            LOGGER.error("接口校验失败,请求参数=[{}]",map);
+            log.error("接口校验失败,请求参数=[{}]",map);
             return false;
         }finally {
             long endTime = System.currentTimeMillis();
-            LOGGER.info("接口签名,处理时长:[{}]",endTime - beginTime);
+            log.info("接口签名,处理时长:[{}]",endTime - beginTime);
         }
     }
 
@@ -221,7 +221,7 @@ public class InterfaceSignatureAspect {
         Object[] sortObject = new Object[param.length];
 
         for(int i = 0; i < param.length; i++){
-            String s = String.valueOf(NumberUtil.mul(new Double(HashUtil.mixHash((String) param[i])),new Double(WEIGHT[i%WEIGHT.length])))+ RandomUtil.randomString(6);
+            String s = NumberUtil.mul(new Double(HashUtil.mixHash((String) param[i])), new Double(WEIGHT[i % WEIGHT.length])) + RandomUtil.randomString(6);
             hashMap.put(s,param[i]);
             sortObject[i] = s;
         }

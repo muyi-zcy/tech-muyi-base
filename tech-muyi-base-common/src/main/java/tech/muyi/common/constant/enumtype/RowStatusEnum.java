@@ -11,7 +11,7 @@ public enum RowStatusEnum {
 
     private Integer code;
 
-    private RowStatusEnum(int code) {
+    RowStatusEnum(int code) {
         this.code = code;
     }
 

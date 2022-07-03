@@ -29,6 +29,7 @@
         <module>tech-muyi-base-mq/tech-muyi-base-mq-server</module>
         <module>tech-muyi-base-rpc</module>
         <module>tech-muyi-base-gengrator</module>
+        <module>tech-muyi-base-gateway</module>
     </modules>
 
     <properties>

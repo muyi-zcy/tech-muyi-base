@@ -1,15 +1,7 @@
 package tech.muyi.api.config;
 
-import cn.hutool.core.annotation.AnnotationUtil;
-import com.google.common.base.Predicates;
 import io.swagger.annotations.ApiOperation;
-import org.apache.commons.collections.functors.AllPredicate;
-import org.apache.commons.collections.functors.OrPredicate;
-import org.apache.commons.lang3.AnnotationUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.AnnotationConfigUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

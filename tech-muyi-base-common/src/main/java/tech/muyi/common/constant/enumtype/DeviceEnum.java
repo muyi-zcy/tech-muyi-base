@@ -16,7 +16,7 @@ public enum DeviceEnum {
 
     private String desc;
 
-    private DeviceEnum(int code,String desc) {
+    DeviceEnum(int code,String desc) {
         this.code = code;
         this.desc = desc;
     }
@@ -38,10 +38,10 @@ public enum DeviceEnum {
     }
     public static String getDesc(Integer code){
         for(DeviceEnum item : DeviceEnum.values()){
-            if(item.getCode() == code){
-                return item.desc;
+            if(item.getCode().equals(code)){
+                return item.getDesc();
             }
         }
-        return "other";
+        return OTHER.getDesc();
     }
 }
