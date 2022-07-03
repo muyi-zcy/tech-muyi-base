@@ -1,9 +1,9 @@
 package dubbo.filter;
 
-import com.alibaba.dubbo.common.Constants;
-import com.alibaba.dubbo.common.extension.Activate;
-import com.alibaba.dubbo.rpc.*;
+import org.apache.dubbo.rpc.*;
 import dubbo.LogRecordContext;
+import org.apache.dubbo.common.constants.CommonConstants;
+import org.apache.dubbo.common.extension.Activate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tech.muyi.util.JsonUtil;
@@ -14,7 +14,7 @@ import tech.muyi.util.JsonUtil;
  * author: muyi
  * version: 1.0
  */
-@Activate(group = Constants.PROVIDER, order = -10000)
+@Activate(group = CommonConstants.PROVIDER, order = -10000)
 public class RpcProviderContextFilter implements Filter {
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {

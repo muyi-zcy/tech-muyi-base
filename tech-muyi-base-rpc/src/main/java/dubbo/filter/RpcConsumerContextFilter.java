@@ -1,8 +1,8 @@
 package dubbo.filter;
 
-import com.alibaba.dubbo.common.Constants;
-import com.alibaba.dubbo.common.extension.Activate;
-import com.alibaba.dubbo.rpc.*;
+import org.apache.dubbo.common.constants.CommonConstants;
+import org.apache.dubbo.common.extension.Activate;
+import org.apache.dubbo.rpc.*;
 import dubbo.LogRecordContext;
 
 /**
@@ -11,7 +11,7 @@ import dubbo.LogRecordContext;
  * author: muyi
  * version: 1.0
  */
-@Activate(group = Constants.CONSUMER, order = -10000)
+@Activate(group = CommonConstants.CONSUMER, order = -10000)
 public class RpcConsumerContextFilter implements Filter {
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {

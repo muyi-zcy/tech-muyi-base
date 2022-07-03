@@ -1,20 +1,11 @@
 package dubbo;
 
 
-import com.alibaba.dubbo.rpc.RpcContext;
+import org.apache.dubbo.rpc.RpcContext;
 import lombok.Data;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.MDC;
 import tech.muyi.log.LogConstant;
 import tech.muyi.log.LogRecordUtil;
-import tech.muyi.log.annotation.MyTraceIdCreate;
-import tech.muyi.util.IpUtil;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
-import java.util.concurrent.Callable;
 
 @Data
 public class LogRecordContext {
