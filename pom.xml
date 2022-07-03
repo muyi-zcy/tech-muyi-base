@@ -25,6 +25,7 @@
         <module>tech-muyi-base-config</module>
         <module>tech-muyi-base-auth</module>
         <module>tech-muyi-base-message</module>
+        <module>tech-muyi-base-mq/tech-muyi-base-mq-common</module>
         <module>tech-muyi-base-mq/tech-muyi-base-mq-client</module>
         <module>tech-muyi-base-mq/tech-muyi-base-mq-server</module>
         <module>tech-muyi-base-rpc</module>
