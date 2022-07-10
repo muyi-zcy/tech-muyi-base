@@ -5,12 +5,15 @@ import org.redisson.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import tech.muyi.exception.MyException;
 import tech.muyi.redis.exception.RedisErrorCodeEnum;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -22,7 +25,10 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class RedissonManage {
 
-    private final String PREFIX = System.getenv("project.name").concat(":");
+    private String PREFIX;
+
+    @Autowired
+    private Environment environment;
 
     @Autowired
     private RedissonClient redissonClient;
@@ -45,6 +51,9 @@ public class RedissonManage {
 
 
     public String getKey(String key){
+        if(this.PREFIX == null){
+            this.PREFIX = environment.getProperty("spring.application.name").concat(":");
+        }
         if(key == null || "".equals(key)){
             throw new MyException(RedisErrorCodeEnum.REDIS_KEY_NULL);
         }

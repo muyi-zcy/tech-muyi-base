@@ -38,6 +38,11 @@
             <artifactId>tech-muyi-base-api</artifactId>
             <version>${base.version}</version>
         </dependency>
+        <dependency>
+            <groupId>tech.muyi</groupId>
+            <artifactId>tech-muyi-base-redis</artifactId>
+            <version>${base.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
