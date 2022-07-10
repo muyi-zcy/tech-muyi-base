@@ -11,12 +11,13 @@
         <module name="tech-muyi-base-oss" />
         <module name="tech-muyi-base-job-elastic" />
         <module name="tech-muyi-base-config" />
+        <module name="tech-muyi-base-gateway" />
         <module name="tech-muyi-base-on" />
         <module name="tech-muyi-base-gengrator" />
+        <module name="tech-muyi-base-mq-common" />
         <module name="tech-muyi-base-api" />
         <module name="tech-muyi-base-db" />
         <module name="tech-muyi-base-redis" />
-        <module name="tech-muyi-base-mq" />
         <module name="tech-muyi-base-auth" />
         <module name="tech-muyi-base-message" />
         <module name="tech-muyi-base-rpc" />
@@ -25,11 +26,17 @@
         <module name="tech-muyi-base-exception" />
         <module name="tech-muyi-base-mq-client" />
         <module name="tech-muyi-base-job-easy" />
+        <module name="tech-muyi-base-sentinel" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="tech-muyi-base-job-quartz" target="8" />
       <module name="tech-muyi-base-registry" target="8" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="tech-muyi-base-dependencies" options="-parameters" />
+    </option>
   </component>
 </project>

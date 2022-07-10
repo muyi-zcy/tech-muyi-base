@@ -44,11 +44,17 @@ public class MyElasticJobAutoConfiguration {
 
     @PostConstruct
     public void initElasticJob() {
+        if(StringUtils.isEmpty(serverList) || StringUtils.isEmpty(namespace)){
+            log.info("job连接zk失败");
+            return;
+        }
+        log.info("开始配置elastic-job");
         ZookeeperConfiguration zookeeperConfiguration = new ZookeeperConfiguration(this.serverList, this.namespace);
         zookeeperConfiguration.setConnectionTimeoutMilliseconds(10000);
         ZookeeperRegistryCenter regCenter = new ZookeeperRegistryCenter(zookeeperConfiguration);
         regCenter.init();
         this.initSimpleJob(regCenter);
+        log.info("配置elastic-job结束");
     }
 
     private void initSimpleJob(ZookeeperRegistryCenter regCenter) {

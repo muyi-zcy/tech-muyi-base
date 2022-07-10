@@ -1,7 +1,10 @@
 package tech.muyi.api.config;
 
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Api;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -11,6 +14,7 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import tech.muyi.api.properties.ApiConfigProperties;
 import tech.muyi.common.constant.enumtype.ProfileActiveEnum;
 
 
@@ -26,9 +30,14 @@ import java.util.function.Predicate;
  */
 @Configuration
 @EnableOpenApi
+@EnableConfigurationProperties({ApiConfigProperties.class})
 public class Swagger3Config {
+
     @Value("${spring.profiles.active}")
     private String profileActive;
+
+    @Autowired
+    private ApiConfigProperties apiConfigProperties;
 
     @Bean
     public Docket createRestApi() {
@@ -51,11 +60,24 @@ public class Swagger3Config {
      * 生成接口信息，包括标题、联系人等
      */
     private ApiInfo apiInfo() {
+        if(apiConfigProperties == null){
+            apiConfigProperties = new ApiConfigProperties();
+        }
+
+        ApiConfigProperties.Contact contact = apiConfigProperties.getContact();
+        if(contact == null){
+            contact = new ApiConfigProperties.Contact();
+        }
+
+
         return new ApiInfoBuilder()
-                .title("Swagger3接口文档")
-                .description("muyi")
-                .contact(new Contact("沐乙老师傅","https://github.com/pomole","zcy_nemo@aliyun.com"))
-                .version("1.0")
+                .title(StringUtils.isEmpty(apiConfigProperties.getTitle()) ? "Swagger3接口文档" : apiConfigProperties.getTitle())
+                .description(StringUtils.isEmpty(apiConfigProperties.getDesc()) ? "muyi" : apiConfigProperties.getDesc())
+                .contact(new Contact(
+                        StringUtils.isEmpty(contact.getName()) ? "沐乙老师傅" : contact.getName(),
+                        StringUtils.isEmpty(contact.getUrl()) ? "https://github.com/pomole" : contact.getUrl(),
+                        StringUtils.isEmpty(contact.getEmail()) ? "zcy_nemo@aliyun.com" : contact.getName()))
+                .version(StringUtils.isEmpty(apiConfigProperties.getVersion()) ? "1.0" : apiConfigProperties.getVersion())
                 .build();
     }
 
@@ -71,6 +93,6 @@ public class Swagger3Config {
 
     // 设置多路径
     private Predicate<RequestHandler> getBasePackages() {
-        return RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class);
+        return RequestHandlerSelectors.withMethodAnnotation(Api.class);
     }
 }
