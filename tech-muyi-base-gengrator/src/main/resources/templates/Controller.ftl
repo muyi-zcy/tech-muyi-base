@@ -1,5 +1,6 @@
 package ${package.Controller};
 
+import io.swagger.annotations.ApiOperation;
 import tech.muyi.common.MyResult;
 import lombok.extern.slf4j.Slf4j;
 import tech.muyi.exception.MyException;
@@ -40,8 +41,7 @@ public class ${table.controllerName} {
     public MyResult<Boolean> save${entity}(@RequestBody ${entity}DTO ${entity?uncap_first}DTO){
 
         if(${entity?uncap_first}DTO == null){
-            throw new MyException(CommonErrorCodeEnum.INVALID_PARAM.getResultCode(),
-                        CommonErrorCodeEnum.INVALID_PARAM.getResultMsg());
+            throw new MyException(CommonErrorCodeEnum.INVALID_PARAM.getResultCode(), CommonErrorCodeEnum.INVALID_PARAM.getResultMsg());
         }
 
         Boolean cnt = ${entity?uncap_first}Service.save(${entity?uncap_first}DTO);
@@ -60,8 +60,7 @@ public class ${table.controllerName} {
     public MyResult<Boolean> delete${entity}(@PathVariable Long id){
 
         if(id == null || id < 1){
-            throw new MyException(CommonErrorCodeEnum.INVALID_PARAM.getResultCode(),
-                        CommonErrorCodeEnum.INVALID_PARAM.getResultMsg());
+            throw new MyException(CommonErrorCodeEnum.INVALID_PARAM.getResultCode(), CommonErrorCodeEnum.INVALID_PARAM.getResultMsg());
         }
 
         Boolean cnt = ${entity?uncap_first}Service.delete(id);
@@ -80,11 +79,10 @@ public class ${table.controllerName} {
     public MyResult<Boolean> update${entity}(@RequestBody ${entity}DTO ${entity?uncap_first}DTO){
 
         if(${entity?uncap_first}DTO == null || ${entity?uncap_first}DTO.getId() == null){
-            throw new MyException(CommonErrorCodeEnum.INVALID_PARAM.getResultCode(),
-                        CommonErrorCodeEnum.INVALID_PARAM.getResultMsg());
+            throw new MyException(CommonErrorCodeEnum.INVALID_PARAM.getResultCode(), CommonErrorCodeEnum.INVALID_PARAM.getResultMsg());
         }
 
-            Boolean cnt = ${entity?uncap_first}Service.update(${entity?uncap_first}DTO);
+        Boolean cnt = ${entity?uncap_first}Service.update(${entity?uncap_first}DTO);
         return MyResult.ok(cnt);
 
     }
@@ -101,8 +99,7 @@ public class ${table.controllerName} {
     public MyResult<${entity}DTO> get${entity}ById(@PathVariable Long id){
 
         if(id == null || id < 1){
-            throw new MyException(CommonErrorCodeEnum.INVALID_PARAM.getResultCode(),
-                        CommonErrorCodeEnum.INVALID_PARAM.getResultMsg());
+            throw new MyException(CommonErrorCodeEnum.INVALID_PARAM.getResultCode(), CommonErrorCodeEnum.INVALID_PARAM.getResultMsg());
         }
 
         ${entity}DTO ${entity?uncap_first}DTO = ${entity?uncap_first}Service.getById(id);
@@ -121,8 +118,7 @@ public class ${table.controllerName} {
     public MyResult<List<${entity}DTO>> query${entity}(${entity}Query ${entity?uncap_first}Query ){
 
         if(${entity?uncap_first}Query == null){
-            throw new MyException(CommonErrorCodeEnum.INVALID_PARAM.getResultCode(),
-                        CommonErrorCodeEnum.INVALID_PARAM.getResultMsg());
+            throw new MyException(CommonErrorCodeEnum.INVALID_PARAM.getResultCode(), CommonErrorCodeEnum.INVALID_PARAM.getResultMsg());
         }
         //分页
         List<${entity}DTO> list = ${entity?uncap_first}Service.query(${entity?uncap_first}Query);

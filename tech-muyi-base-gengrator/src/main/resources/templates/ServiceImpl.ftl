@@ -13,6 +13,9 @@ import ${groupId}.client.dto.${entity}DTO;
 import ${groupId}.client.query.${entity}Query;
 import ${groupId}.core.manager.${entity}Manager;
 import ${groupId}.core.service.${entity}Service;
+import tech.muyi.util.bean.MapperUtils;
+import tech.muyi.util.MyIdGenerator;
+
 /**
 * <p>
     * ${table.comment!}
@@ -30,18 +33,18 @@ public class ${entity}ServiceImpl implements ${entity}Service {
 
     @Override
     public Boolean save(${entity}DTO ${entity?uncap_first}DTO) {
-        ${entity}DO ${entity?uncap_first}DO = new ${entity}DO();
-        BeanUtils.copyProperties(${entity?uncap_first}DTO,${entity?uncap_first}DO);
+        ${entity}DO ${entity?uncap_first}DO = MapperUtils.ORIKA.map(${entity}DO.class, ${entity?uncap_first}DTO);
+        ${entity?uncap_first}DO.setId(MyIdGenerator.getNextId());
         return  ${entity?uncap_first}Manager.save(${entity?uncap_first}DO);
     }
 
     @Override
     public Boolean update(${entity}DTO ${entity?uncap_first}DTO) {
         ${entity}DO ${entity?uncap_first}DO;
-        if((${entity?uncap_first}DO = ${entity?uncap_first}Manager.getById(${entity?uncap_first}DTO.getId())) == null){
+        if(${entity?uncap_first}Manager.getById(${entity?uncap_first}DTO.getId()) == null){
             return false;
         }
-        BeanUtils.copyProperties(${entity?uncap_first}DTO, ${entity?uncap_first}DO);
+        ${entity?uncap_first}DO = MapperUtils.ORIKA.map(${entity}DO.class, ${entity?uncap_first}DTO);
         return ${entity?uncap_first}Manager.update(${entity?uncap_first}DO);
     }
 
@@ -57,8 +60,7 @@ public class ${entity}ServiceImpl implements ${entity}Service {
         //对象转换
         ${entity}DTO ${entity?uncap_first}DTO = null;
         if(null != ${entity?uncap_first}DO){
-            ${entity?uncap_first}DTO = new ${entity}DTO();
-            BeanUtils.copyProperties(${entity?uncap_first}DO,${entity?uncap_first}DTO);
+            ${entity?uncap_first}DTO = MapperUtils.ORIKA.map(${entity}DTO.class, ${entity?uncap_first}DO);
         }
         return ${entity?uncap_first}DTO;
     }
@@ -73,13 +75,7 @@ public class ${entity}ServiceImpl implements ${entity}Service {
             Long cnt = ${entity?uncap_first}Manager.queryCount(${entity?uncap_first}Query);
             ${entity?uncap_first}Query.setTotal(cnt == null ? 0 : cnt);
         }
-        List<${entity}DTO> resultList = list.stream()
-                .map(d -> {
-                    ${entity}DTO dto = new ${entity}DTO();
-                    BeanUtils.copyProperties(d, dto);
-                    return dto;
-                })
-                .collect(Collectors.toList());
+        List<${entity}DTO> resultList = MapperUtils.ORIKA.mapAsList(${entity}DTO.class,list);
         return resultList;
     }
 
