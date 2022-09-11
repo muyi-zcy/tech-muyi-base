@@ -20,7 +20,7 @@
         <transmittable-thread-local.version>2.12.6</transmittable-thread-local.version>
         <spring-boot-starter-web.version>2.3.12.RELEASE</spring-boot-starter-web.version>
         <freemarker.version>2.3.23</freemarker.version>
-        <reflections.version>0.9.10</reflections.version>
+        <reflections.version>0.9.11</reflections.version>
         <orika-core.version>1.5.4</orika-core.version>
     </properties>
 
