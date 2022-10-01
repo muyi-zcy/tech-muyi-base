@@ -1,6 +1,6 @@
 package tech.muyi.log;
 
-import com.alibaba.fastjson.JSON;
+import cn.hutool.json.JSON;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
@@ -13,9 +13,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import tech.muyi.util.JsonUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 /**
  * @Author: muyi
  * @Date: 2021/1/4 23:15
@@ -61,7 +63,7 @@ public class RestApiLog {
                     if (parameterNames != null && parameterNames.length != 0) {
                         for (int i = 0; i < parameterNames.length; ++i) {
                             if (!(args[i] instanceof HttpServletResponse) && !(args[i] instanceof MultipartFile) && !(args[i] instanceof HttpServletRequest)) {
-                                logMsg.append(parameterNames[i]).append(":").append(JSON.toJSONString(args[i])).append(",");
+                                logMsg.append(parameterNames[i]).append(":").append(JsonUtil.toJson(args[i])).append(",");
                             }
                         }
                     } else {
@@ -85,13 +87,13 @@ public class RestApiLog {
                             .append(" result:{},")
                             .append("use time:{}");
 
-                    logger.info(logMsg.toString(), JSON.toJSONString(object), System.currentTimeMillis() - startTime);
+                    logger.info(logMsg.toString(), JsonUtil.toJson(object), System.currentTimeMillis() - startTime);
                 } catch (Exception e) {
                     logger.error("print REST log error", e);
                 }
                 return object;
             }
-        }finally {
+        } finally {
             LogRecordContext.clearMDC();
         }
     }
