@@ -21,7 +21,7 @@ import java.util.*;
 @ApiModel(value = "${entity}对象", description = "${table.comment!}")
 public class ${entity} extends MyBaseDTO {
 
-    private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list table.fields as field>
     <#if field.keyFlag>
@@ -31,23 +31,23 @@ public class ${entity} extends MyBaseDTO {
     /**
     * ${field.comment}
     */
-@ApiModelProperty("${field.comment}")
-<#if field.keyFlag>
+    @ApiModelProperty("${field.comment}")
+    <#if field.keyFlag>
     <#-- 主键 -->
-@TableId(value = "${field.annotationColumnName}", type = IdType.AUTO)
+        @TableId(value = "${field.annotationColumnName}", type = IdType.AUTO)
     <#-- 普通字段 -->
-<#elseif field.convert>
-@TableField("${field.annotationColumnName}")
-</#if>
+    <#elseif field.convert>
+        @TableField("${field.annotationColumnName}")
+    </#if>
 <#-- 乐观锁注解 -->
-<#if field.versionField>
-@Version
-</#if>
+    <#if field.versionField>
+        @Version
+    </#if>
 <#-- 逻辑删除注解 -->
-<#if field.logicDeleteField>
-@TableLogic
-</#if>
-private ${field.propertyType} ${field.propertyName};
+    <#if field.logicDeleteField>
+        @TableLogic
+    </#if>
+    private ${field.propertyType} ${field.propertyName};
 </#list>
 <#------------  END 字段循环遍历  ---------->
 }

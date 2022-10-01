@@ -13,7 +13,6 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <gson.version>2.9.0</gson.version>
-        <fastjson.version>2.0.2</fastjson.version>
         <hutool-all.version>5.7.22</hutool-all.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
@@ -49,12 +48,6 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>${hutool-all.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>${fastjson.version}</version>
         </dependency>
 
         <dependency>

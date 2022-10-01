@@ -3,6 +3,7 @@ package tech.muyi.common.DO;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @Author: muyi
@@ -12,8 +13,8 @@ import java.io.Serializable;
 public class MyBaseDO implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long id;
-    private String gmtCreate;
-    private String gmtModified;
+    private Date gmtCreate;
+    private Date gmtModified;
     private Integer rowVersion;
     private Integer rowStatus;
     private Integer bizType;

@@ -12,6 +12,7 @@ public class Controller {
     public static void deal(String projectName,String tableName,String path,String url,String username,String password,String groupId){
         Map<String,Object> custom = new HashMap<>();
         custom.put("groupId",groupId);
+        custom.put("apiName",projectName);
         FastAutoGenerator.create(url,username, password)
                 .globalConfig(builder -> {
                     builder.author(System.getProperty("user.name")) // 设置作者

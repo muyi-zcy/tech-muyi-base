@@ -24,7 +24,7 @@ import ${groupId}.core.service.${entity}Service;
 */
 @Slf4j
 @RestController
-@RequestMapping("api/${table.entityPath}")
+@RequestMapping("${apiName}/${table.entityPath}")
 public class ${table.controllerName} {
     @Autowired
     private ${entity}Service ${entity?uncap_first}Service;
@@ -36,7 +36,7 @@ public class ${table.controllerName} {
      * @return
      */
     @ApiOperation(value = "保存")
-    @PostMapping("/${entity?uncap_first}")
+    @PostMapping("/")
     @ResponseBody
     public MyResult<Boolean> save${entity}(@RequestBody ${entity}DTO ${entity?uncap_first}DTO){
 
@@ -55,7 +55,7 @@ public class ${table.controllerName} {
     * @return
     */
     @ApiOperation(value = "删除")
-    @DeleteMapping("/${entity?uncap_first}/{id}")
+    @DeleteMapping("/{id}")
     @ResponseBody
     public MyResult<Boolean> delete${entity}(@PathVariable Long id){
 
@@ -74,7 +74,7 @@ public class ${table.controllerName} {
     * @return
     */
     @ApiOperation(value = "更新")
-    @PutMapping("/${entity?uncap_first}")
+    @PutMapping("/")
     @ResponseBody
     public MyResult<Boolean> update${entity}(@RequestBody ${entity}DTO ${entity?uncap_first}DTO){
 
@@ -94,7 +94,7 @@ public class ${table.controllerName} {
     * @return
     */
     @ApiOperation(value = "详情查询")
-    @GetMapping("/${entity?uncap_first}/{id}")
+    @GetMapping("/{id}")
     @ResponseBody
     public MyResult<${entity}DTO> get${entity}ById(@PathVariable Long id){
 
@@ -113,7 +113,7 @@ public class ${table.controllerName} {
     * @return
     */
     @ApiOperation(value = "分页查询")
-    @GetMapping("/${entity?uncap_first}/query")
+    @GetMapping("/query")
     @ResponseBody
     public MyResult<List<${entity}DTO>> query${entity}(${entity}Query ${entity?uncap_first}Query ){
 
