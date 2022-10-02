@@ -2,6 +2,7 @@ package tech.muyi.exception;
 
 /**
  * 自定义异常
+ *
  * @Author: muyi
  * @Date: 2021/1/3 21:25
  */
@@ -31,7 +32,7 @@ public class MyException extends RuntimeException {
     public MyException(BaseErrorInfoInterface errorInfoInterface, Throwable cause) {
         super(errorInfoInterface.getResultCode(), cause);
         this.errorCode = errorInfoInterface.getResultCode();
-        this.errorMsg = errorInfoInterface.getResultMsg();
+        this.errorMsg = joinError(errorInfoInterface.getResultMsg(),cause);
     }
 
     public MyException(String errorMsg) {
@@ -45,10 +46,16 @@ public class MyException extends RuntimeException {
         this.errorMsg = errorMsg;
     }
 
+    public MyException(String errorCode, String errorMsg, String errorDetail) {
+        super(errorCode);
+        this.errorCode = errorCode;
+        this.errorMsg = joinError(errorMsg, errorDetail);
+    }
+
     public MyException(String errorCode, String errorMsg, Throwable cause) {
         super(errorCode, cause);
         this.errorCode = errorCode;
-        this.errorMsg = errorMsg;
+        this.errorMsg = joinError(errorMsg, cause);
     }
 
 
@@ -74,10 +81,22 @@ public class MyException extends RuntimeException {
     }
 
     /**
+     *
      */
     @Override
     public Throwable fillInStackTrace() {
         return this;
+    }
+
+    private String joinError(String errorMsg, String errorDetail) {
+        return errorMsg.concat(";错误详情:").concat(errorDetail);
+    }
+
+    private String joinError(String errorMsg, Throwable cause) {
+        if (cause != null && cause.getMessage() != null && !"".equals(cause.getMessage())) {
+            return errorMsg.concat(";错误详情:").concat(cause.getMessage());
+        }
+        return errorMsg;
     }
 
 }

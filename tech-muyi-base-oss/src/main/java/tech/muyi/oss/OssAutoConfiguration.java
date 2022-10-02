@@ -9,6 +9,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
+import tech.muyi.exception.MyException;
+import tech.muyi.oss.exception.OssErrorCodeEnum;
 import tech.muyi.oss.properties.OssProperties;
 
 
@@ -41,7 +43,8 @@ public class OssAutoConfiguration {
                     ossProperties.getSecretKey());
 
         } catch (InvalidEndpointException | InvalidPortException e) {
-            e.printStackTrace();
+            log.error("OSS连接服务器失败，错误原因：{}",e.getMessage());
+            throw new MyException(OssErrorCodeEnum.CONN_ERROR,e);
         }
         return minioClient;
     }

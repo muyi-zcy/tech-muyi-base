@@ -10,6 +10,8 @@ import io.minio.messages.Item;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tech.muyi.exception.MyException;
+import tech.muyi.oss.exception.OssErrorCodeEnum;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,8 +46,8 @@ public class OssTemplate {
             return minioClient.bucketExists(bucketName);
         } catch (MinioException | IOException | NoSuchAlgorithmException | InvalidKeyException e) {
             log.error("存储桶【{}】查询失败！异常原因：{}", bucketName, e);
+            throw new MyException(OssErrorCodeEnum.EXIST_BUCKET_ERROR, e);
         }
-        return false;
     }
 
     /**
@@ -65,12 +67,14 @@ public class OssTemplate {
             }
         } catch (MinioException | IOException | NoSuchAlgorithmException | InvalidKeyException e) {
             log.error("存储桶【{}】创建失败！异常原因：{}", bucketName, e);
+            throw new MyException(OssErrorCodeEnum.MAKE_BUCKET_ERROR, e);
         }
         return true;
     }
 
     /**
      * 查询所有存储桶
+     *
      * @return 结果
      */
     public List<Bucket> listBuckets() {
@@ -78,13 +82,14 @@ public class OssTemplate {
             // 列出所有存储桶
             return minioClient.listBuckets();
         } catch (MinioException | InvalidKeyException | IOException | NoSuchAlgorithmException e) {
-            log.error("存储桶列表查询失败！异常原因：{}", e);
+            log.error("存储桶列表查询失败！异常原因：{}", e.getMessage());
+            throw new MyException(OssErrorCodeEnum.LIST_BUCKET_ERROR, e);
         }
-        return new ArrayList<>();
     }
 
     /**
      * 删除存储桶
+     *
      * @param bucketName 存储桶名称
      * @return 结果
      */
@@ -93,14 +98,15 @@ public class OssTemplate {
             boolean found = minioClient.bucketExists(bucketName);
             if (found) {
                 minioClient.removeBucket(bucketName);
+                return true;
             } else {
                 log.info("存储桶【{}】不存在!", bucketName);
-                return false;
+                throw new MyException(OssErrorCodeEnum.EXIST_BUCKET);
             }
         } catch (MinioException | InvalidKeyException | IOException | NoSuchAlgorithmException e) {
             log.error("存储桶【{}】删除失败！异常原因：{}", bucketName, e);
+            throw new MyException(OssErrorCodeEnum.REMOVE_BUCKET_ERROR, e);
         }
-        return true;
     }
 
 
@@ -117,11 +123,12 @@ public class OssTemplate {
                 return minioClient.listObjects(bucketName);
             } else {
                 log.info("存储桶【{}】不存在!", bucketName);
+                throw new MyException(OssErrorCodeEnum.EXIST_BUCKET);
             }
         } catch (MinioException | InvalidKeyException | IOException | NoSuchAlgorithmException e) {
-            log.error("存储桶【{}】查询失败！异常原因：{}", bucketName, e);
+            log.error("存储桶【{}】文件列表查询失败！异常原因：{}", bucketName, e);
+            throw new MyException(OssErrorCodeEnum.LIST_OBJECTS_ERROR, e);
         }
-        return null;
     }
 
     /**
@@ -137,11 +144,12 @@ public class OssTemplate {
                 return minioClient.listObjects(bucketName, prefix, recursive);
             } else {
                 log.info("存储桶【{}】不存在!", bucketName);
+                throw new MyException(OssErrorCodeEnum.EXIST_BUCKET);
             }
         } catch (MinioException | InvalidKeyException | IOException | NoSuchAlgorithmException e) {
-            log.error("存储桶【{}】查询失败！异常原因：{}", bucketName, e);
+            log.error("存储桶【{}】文件列表查询失败！异常原因：{}", bucketName, e);
+            throw new MyException(OssErrorCodeEnum.LIST_OBJECTS_ERROR, e);
         }
-        return null;
     }
 
     /**
@@ -149,22 +157,20 @@ public class OssTemplate {
      * @param objectName 存储桶里的对象名称
      * @param stream     要上传的流
      */
-    public String putObject(String bucketName, String objectName, InputStream stream, Long objectSize) {
+    public String putObject(String bucketName, String objectName, InputStream stream, Long objectSize) throws IOException {
         try {
             PutObjectOptions putObjectOptions = new PutObjectOptions(objectSize, PutObjectOptions.MIN_MULTIPART_SIZE);
             minioClient.putObject(bucketName, objectName, stream, putObjectOptions);
             log.info("存储桶【{}】上传文件【{}】成功!", bucketName, objectName);
             return minioClient.getObjectUrl(bucketName, objectName);
-        } catch (IOException | ErrorResponseException | InsufficientDataException | InternalException | InvalidBucketNameException | InvalidKeyException | InvalidResponseException | NoSuchAlgorithmException | XmlParserException e) {
+        } catch (IOException | ErrorResponseException | InsufficientDataException | InternalException |
+                 InvalidBucketNameException | InvalidKeyException | InvalidResponseException |
+                 NoSuchAlgorithmException | XmlParserException e) {
             log.error("存储桶【{}】上传对象【{}】失败！异常原因：{}", bucketName, objectName, e);
+            throw new MyException(OssErrorCodeEnum.PUT_OBJECTS_ERROR, e);
         } finally {
-            try {
-                stream.close();
-            } catch (IOException e) {
-                log.error("存储桶【{}】上传对象【{}】失败！异常原因：{}", bucketName, objectName, e);
-            }
+            stream.close();
         }
-        return null;
     }
 
     /**
@@ -175,23 +181,21 @@ public class OssTemplate {
      * @param metadata   元数据
      * @return
      */
-    public String putObject(String bucketName, String objectName, InputStream stream, Long objectSize, Map<String, String> metadata) {
+    public String putObject(String bucketName, String objectName, InputStream stream, Long objectSize, Map<String, String> metadata) throws IOException {
         try {
             PutObjectOptions putObjectOptions = new PutObjectOptions(objectSize, PutObjectOptions.MIN_MULTIPART_SIZE);
             putObjectOptions.setHeaders(metadata);
             minioClient.putObject(bucketName, objectName, stream, putObjectOptions);
             log.info("存储桶【{}】上传文件【{}】成功!", bucketName, objectName);
             return minioClient.getObjectUrl(bucketName, objectName);
-        } catch (IOException | ErrorResponseException | InsufficientDataException | InternalException | InvalidBucketNameException | InvalidKeyException | InvalidResponseException | NoSuchAlgorithmException | XmlParserException e) {
+        } catch (IOException | ErrorResponseException | InsufficientDataException | InternalException |
+                 InvalidBucketNameException | InvalidKeyException | InvalidResponseException |
+                 NoSuchAlgorithmException | XmlParserException e) {
             log.error("存储桶【{}】上传对象【{}】失败！异常原因：{}", bucketName, objectName, e);
+            throw new MyException(OssErrorCodeEnum.PUT_OBJECTS_ERROR, e);
         } finally {
-            try {
-                stream.close();
-            } catch (IOException e) {
-                log.error("存储桶【{}】上传对象【{}】失败！异常原因：{}", bucketName, objectName, e);
-            }
+            stream.close();
         }
-        return null;
     }
 
     /**
@@ -206,8 +210,8 @@ public class OssTemplate {
             return minioClient.statObject(bucketName, objectName);
         } catch (MinioException | InvalidKeyException | IOException | NoSuchAlgorithmException e) {
             log.error("存储桶【{}】获取【{}】元数据失败!异常原因：{}", bucketName, objectName, e);
+            throw new MyException(OssErrorCodeEnum.STAT_OBJECTS_ERROR, e);
         }
-        return null;
     }
 
     /**
@@ -223,7 +227,7 @@ public class OssTemplate {
             return minioClient.presignedGetObject(bucketName, objectName, expires);
         } catch (MinioException | IOException | NoSuchAlgorithmException | InvalidKeyException e) {
             log.error("存储桶【{}】下对象【{}】设置过期时间【{}】失败!,异常原因：{}", bucketName, objectName, expires, e);
+            throw new MyException(OssErrorCodeEnum.PRESIGNED_GET_OBJECTS_ERROR, e);
         }
-        return null;
     }
 }
