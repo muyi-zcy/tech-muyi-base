@@ -40,13 +40,13 @@ public class ${entity}Manager  extends ServiceImpl<${entity}DAO, ${entity}DO>{
         updateWrapper.eq(${entity}DO::getId,${entity?uncap_first}DO.getId());
         return this.update(${entity?uncap_first}DO,updateWrapper);
     }
-    
+
     public List<${entity}DO> query(${entity}Query ${entity?uncap_first}Query) {
         QueryWrapper<${entity}DO> queryWrapper = new QueryWrapper<>();
         ${entity}DO ${entity?uncap_first}DO = new ${entity}DO();
         BeanUtils.copyProperties(${entity?uncap_first}Query, ${entity?uncap_first}DO);
         queryWrapper.setEntity(${entity?uncap_first}DO);
-        return this.list(queryWrapper); 
+        return this.list(queryWrapper);
     }
 
     public List<${entity}DO> pageSelect(${entity}Query ${entity?uncap_first}Query){
@@ -55,9 +55,9 @@ public class ${entity}Manager  extends ServiceImpl<${entity}DAO, ${entity}DO>{
         ${entity}DO ${entity?uncap_first}DO = new ${entity}DO();
         BeanUtils.copyProperties(${entity?uncap_first}Query, ${entity?uncap_first}DO);
         lambdaQueryWrapper.setEntity(${entity?uncap_first}DO);
-        this.page(page);
+        this.page(page, lambdaQueryWrapper);
         PageQueryHelper.queryPageConfig(page,${entity?uncap_first}Query);
-        return page.getRecords(); 
+        return page.getRecords();
     }
 
     public Long queryCount(${entity}Query ${entity?uncap_first}Query) {

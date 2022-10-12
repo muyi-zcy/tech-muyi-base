@@ -67,13 +67,9 @@ public class ${entity}ServiceImpl implements ${entity}Service {
 
     @Override
     public List<${entity}DTO> query(${entity}Query ${entity?uncap_first}Query) {
-        List<${entity}DO> list = ${entity?uncap_first}Manager.query(${entity?uncap_first}Query);
+        List<${entity}DO> list = ${entity?uncap_first}Manager.pageSelect(${entity?uncap_first}Query);
         if(CollectionUtils.isEmpty(list)){
             return new ArrayList();
-        }
-        if(null == ${entity?uncap_first}Query.getTotal()){
-            Long cnt = ${entity?uncap_first}Manager.queryCount(${entity?uncap_first}Query);
-            ${entity?uncap_first}Query.setTotal(cnt == null ? 0 : cnt);
         }
         List<${entity}DTO> resultList = MapperUtils.ORIKA.mapAsList(${entity}DTO.class,list);
         return resultList;

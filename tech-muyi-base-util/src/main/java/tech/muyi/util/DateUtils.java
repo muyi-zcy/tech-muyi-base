@@ -3,20 +3,26 @@ package tech.muyi.util;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
  * 日期工具类
+ *
  * @Author: muyi
  * @Date: 2021/1/3 22:38
  */
-public final class DateUtils extends org.apache.commons.lang3.time.DateUtils{
+public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 
     public final static long ONE_DAY_SECONDS = 86400;
 
@@ -44,6 +50,7 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils{
 
     /**
      * 获取当前日期（默认）
+     *
      * @return
      */
     public static Date getNowDate() {
@@ -52,6 +59,7 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils{
 
     /**
      * 获取当前日期（输入毫秒）
+     *
      * @param millsecord 毫秒
      * @return 日期
      */
@@ -61,6 +69,7 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils{
 
     /**
      * 字符串转DateFormat
+     *
      * @param pattern 日期格式
      * @return DateFormat
      */
@@ -73,7 +82,8 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils{
 
     /**
      * 格式化日期
-     * @param date 日期
+     *
+     * @param date    日期
      * @param pattern 日期格式
      * @return 日期
      */
@@ -83,7 +93,8 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils{
 
     /**
      * 格式化日期
-     * @param date 日期
+     *
+     * @param date   日期
      * @param format 日期格式
      * @return 日期
      */
@@ -96,7 +107,8 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils{
 
     /**
      * 格式化时间戳日期
-     * @param date 日期
+     *
+     * @param date    日期
      * @param pattern 日期格式
      * @return 格式化之后日期
      */
@@ -106,7 +118,8 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils{
 
     /**
      * 格式化时间戳日期
-     * @param date 日期
+     *
+     * @param date    日期
      * @param pattern 日期格式
      * @return 格式化之后日期
      */
@@ -120,8 +133,9 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils{
 
     /**
      * 计算当前时间几天之后的时间
+     *
      * @param date 日期
-     * @param days  天数
+     * @param days 天数
      * @return 新的日期
      */
     public static Date addDays(Date date, long days) {
@@ -132,7 +146,7 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils{
     /**
      * 计算当前时间几小时之后的时间
      *
-     * @param date 日期
+     * @param date  日期
      * @param hours 增加时间
      * @return 日期
      */
@@ -143,7 +157,7 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils{
     /**
      * 计算当前时间几分钟之后的时间
      *
-     * @param date 日期
+     * @param date    日期
      * @param minutes 增加分钟
      * @return 日期
      */
@@ -153,6 +167,7 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils{
 
     /**
      * 计算当前时间几秒之后的时间
+     *
      * @param date 日期
      * @param secs 增加秒钟
      * @return 日期
@@ -164,6 +179,7 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils{
 
     /**
      * 判断输入的字符串是否为合法的小时格式
+     *
      * @param hourStr 待判断时间
      * @return true/false
      */
@@ -269,9 +285,10 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils{
 
     /**
      * 切换不同日期格式日期
+     *
      * @param dateString 处理日期
-     * @param formatIn 输入日期格式
-     * @param formatOut 输出日期格式
+     * @param formatIn   输入日期格式
+     * @param formatOut  输出日期格式
      * @return 新格式日期
      */
     public static String convert(String dateString, DateFormat formatIn, DateFormat formatOut) {
@@ -286,6 +303,7 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils{
 
     /**
      * 比较日期大小
+     *
      * @param date1 被比较日期
      * @param date2 比较日期
      * @param 日期格式
@@ -305,5 +323,153 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils{
         } catch (ParseException e) {
             return false;
         }
+    }
+
+    /**
+     * 转换为sql Date
+     * @param value 日期
+     * @return date
+     */
+    public static java.sql.Date toDate(Object value) {
+        if (value == null) {
+            return null;
+        }
+        if (value instanceof java.sql.Date) {
+            return (java.sql.Date) value;
+        }
+        if (value instanceof Date) {
+            return new java.sql.Date(((Date) value).getTime());
+        }
+        if (value instanceof Calendar) {
+            return new java.sql.Date(((Calendar) value).getTime().getTime());
+        }
+        if (value instanceof String) {
+            return java.sql.Date.valueOf((String) value);
+        }
+        if (value instanceof Number) {
+            return new java.sql.Date(((Number) value).longValue());
+        }
+        if (value instanceof LocalDate) {
+            return java.sql.Date.valueOf((LocalDate) value);
+        }
+        String m = "Unable to convert [" + value.getClass().getName() + "] into a java.sql.Date.";
+        throw new RuntimeException(m);
+    }
+
+    /**
+     * 转换为时间戳
+     * @param value 日期
+     * @return Timestamp
+     */
+    public static Timestamp toTimestamp(Object value) {
+        if (value == null) {
+            return null;
+        }
+        if (value instanceof Timestamp) {
+            return (Timestamp) value;
+        }
+        if (value instanceof Date) {
+            return new Timestamp(((Date) value).getTime());
+        }
+        if (value instanceof Calendar) {
+            return new Timestamp(((Calendar) value).getTime().getTime());
+        }
+        if (value instanceof String) {
+            LocalDateTime date = LocalDateTime.parse((String) value);
+            return Timestamp.valueOf(date);
+        } else if (value instanceof LocalDateTime) {
+            return Timestamp.valueOf((LocalDateTime) value);
+        } else {
+            if (value instanceof Number) {
+                return new Timestamp(((Number) value).longValue());
+            }
+            String msg = "Unable to convert [" + value.getClass().getName() + "] into a Timestamp.";
+            throw new RuntimeException(msg);
+        }
+    }
+
+    /**
+     * 转换为time
+     * @param value 时间
+     * @return time
+     */
+    public static Time toTime(Object value) {
+        if (value == null) {
+            return null;
+        }
+        if (value instanceof Time) {
+            return (Time) value;
+        }
+        if (value instanceof String) {
+            return Time.valueOf((String) value);
+        }
+        if (value instanceof LocalTime) {
+            return Time.valueOf((LocalTime) value);
+        }
+        String m = "Unable to convert [" + value.getClass().getName() + "] into a java.sql.Date.";
+        throw new RuntimeException(m);
+    }
+
+    /**
+     * 转换为util date
+     * @param value 日期
+     * @return util date
+     */
+    public static Date toUtilDate(Object value) {
+        if (value == null) {
+            return null;
+        }
+        if (value instanceof Timestamp) {
+            return new Date(((Timestamp) value).getTime());
+        }
+        if (value instanceof java.sql.Date) {
+            return new Date(((java.sql.Date) value).getTime());
+        }
+        if (value instanceof Date) {
+            return (Date) value;
+        }
+        if (value instanceof Calendar) {
+            return ((Calendar) value).getTime();
+        }
+        if (value instanceof String) {
+            return new Date(Timestamp.valueOf((String) value).getTime());
+        }
+        if (value instanceof Number) {
+            return new Date(((Number) value).longValue());
+        }
+        throw new RuntimeException("Unable to convert [" + value.getClass().getName() + "] into a java.util.Date");
+    }
+
+    /**
+     * 转换为 Calendar
+     * @param value Calendar
+     * @return Calendar
+     */
+        public static Calendar toCalendar(Object value) {
+        if (value == null) {
+            return null;
+        }
+        if (value instanceof Calendar) {
+            return (Calendar) value;
+        }
+        if (value instanceof Date) {
+            Date date = (Date) value;
+            return toCalendarFromDate(date);
+        } else if (value instanceof String) {
+            Date date2 = toUtilDate(value);
+            return toCalendarFromDate(date2);
+        } else if (value instanceof Number) {
+            Date date3 = new Date(((Number) value).longValue());
+            return toCalendarFromDate(date3);
+        } else {
+            String m = "Unable to convert [" + value.getClass().getName() + "] into a java.util.Date";
+            throw new RuntimeException(m);
+        }
+    }
+
+    private static Calendar toCalendarFromDate(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        return cal;
     }
 }
