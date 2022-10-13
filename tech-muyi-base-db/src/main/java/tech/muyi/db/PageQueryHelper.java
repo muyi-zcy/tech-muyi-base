@@ -35,11 +35,6 @@ public class PageQueryHelper {
             throw new MyException(CommonErrorCodeEnum.INVALID_PARAM);
         }
         QueryWrapper queryWrapper = new QueryWrapper();
-        if(CollectionUtils.isEmpty(baseQuery.getConditions())){
-            return queryWrapper;
-        }
-
-
         if(StringUtils.isNotEmpty(baseQuery.getSort())){
             switch (baseQuery.getSort()){
                 case "DESC":
@@ -70,7 +65,14 @@ public class PageQueryHelper {
         if(CollectionUtil.isNotEmpty(baseQuery.getConditions())){
             List<QueryCondition> conditions = baseQuery.getConditions();
             conditions.forEach(item->{
-                switch (ConditionEnum.getConditionByCode(item.getCondition())){
+                if(StringUtils.isEmpty(item.getCondition())){
+                    return;
+                }
+                ConditionEnum conditionEnum = ConditionEnum.getConditionByCode(item.getCondition().toUpperCase());
+                if(conditionEnum == null){
+                    return;
+                }
+                switch (conditionEnum){
                     case AND:
                         break;
                     case OR:
@@ -140,9 +142,7 @@ public class PageQueryHelper {
         if(CollectionUtils.isNotEmpty(baseQuery.getSelectColumn())) {
             List<String> selecrColumn = baseQuery.getSelectColumn();
             if (CollectionUtil.isNotEmpty(selecrColumn)) {
-                selecrColumn.forEach(item -> {
-                    queryWrapper.select(item);
-                });
+                selecrColumn.forEach(queryWrapper::select);
             }
         }
         return queryWrapper;

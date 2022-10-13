@@ -51,7 +51,7 @@ public class ${entity}Manager  extends ServiceImpl<${entity}DAO, ${entity}DO>{
 
     public List<${entity}DO> pageSelect(${entity}Query ${entity?uncap_first}Query){
         IPage<${entity}DO> page = new Page<>(${entity?uncap_first}Query.getCurrent(),${entity?uncap_first}Query.getSize());
-        QueryWrapper<${entity}DO> lambdaQueryWrapper = new QueryWrapper<>();
+        QueryWrapper<${entity}DO> lambdaQueryWrapper = PageQueryHelper.createQueryWrapper(${entity?uncap_first}Query);
         ${entity}DO ${entity?uncap_first}DO = new ${entity}DO();
         BeanUtils.copyProperties(${entity?uncap_first}Query, ${entity?uncap_first}DO);
         lambdaQueryWrapper.setEntity(${entity?uncap_first}DO);
