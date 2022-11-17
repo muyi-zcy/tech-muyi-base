@@ -26,12 +26,12 @@
     <file url="file://$PROJECT_DIR$/tech-muyi-base-log/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-message/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-message/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tech-muyi-base-mq-client/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tech-muyi-base-mq-client/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tech-muyi-base-mq-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tech-muyi-base-mq-server/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-mq/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-mq/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/tech-muyi-base-mq/tech-muyi-base-mq-client/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/tech-muyi-base-mq/tech-muyi-base-mq-client/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/tech-muyi-base-mq/tech-muyi-base-mq-server/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/tech-muyi-base-mq/tech-muyi-base-mq-server/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-on/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-on/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-oss/src/main/java" charset="UTF-8" />

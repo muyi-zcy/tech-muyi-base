@@ -4,9 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>tech.muyi</groupId>
+        <artifactId>tech-muyi-base</artifactId>
+        <version>${revision}</version>
+    </parent>
+
     <groupId>tech.muyi</groupId>
     <artifactId>tech-muyi-base-exception</artifactId>
-    <version>1.0-SNAPSHOT</version>
+
+    <version>${revision}</version>
+
     <packaging>jar</packaging>
 
     <properties>
@@ -20,7 +29,6 @@
         <dependency>
             <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-on</artifactId>
-            <version>${base.version}</version>
         </dependency>
         <dependency>
             <groupId>org.reflections</groupId>

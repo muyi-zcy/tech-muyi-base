@@ -32,11 +32,13 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="tech-muyi-base-job-quartz" target="8" />
+      <module name="tech-muyi-base-mq" target="1.8" />
       <module name="tech-muyi-base-registry" target="8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="tech-muyi-base-api" options="" />
       <module name="tech-muyi-base-dependencies" options="" />
     </option>
   </component>

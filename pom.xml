@@ -7,7 +7,8 @@
     <groupId>tech.muyi</groupId>
     <artifactId>tech-muyi-base</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>${revision}</version>
+
     <modules>
         <module>tech-muyi-base-oss</module>
         <module>tech-muyi-base-exception</module>
@@ -21,13 +22,12 @@
         <module>tech-muyi-base-common</module>
         <module>tech-muyi-base-util</module>
         <module>tech-muyi-base-db</module>
-        <module>tech-muyi-base-mq</module>
         <module>tech-muyi-base-config</module>
         <module>tech-muyi-base-auth</module>
         <module>tech-muyi-base-message</module>
-        <module>tech-muyi-base-mq/tech-muyi-base-mq-common</module>
-        <module>tech-muyi-base-mq/tech-muyi-base-mq-client</module>
-        <module>tech-muyi-base-mq/tech-muyi-base-mq-server</module>
+        <module>tech-muyi-base-mq-common</module>
+        <module>tech-muyi-base-mq-client</module>
+        <module>tech-muyi-base-mq-server</module>
         <module>tech-muyi-base-rpc</module>
         <module>tech-muyi-base-gengrator</module>
         <module>tech-muyi-base-gateway</module>
@@ -37,6 +37,207 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <revision>1.0-SNAPSHOT</revision>
+
+        <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
+        <spring-boot-starter-parent.version>2.3.12.RELEASE</spring-boot-starter-parent.version>
+        <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
+        <spring-cloud-alibaba.version>2.2.7.RELEASE</spring-cloud-alibaba.version>
+        <spring-context-support.version>1.0.11</spring-context-support.version>
+        <javax.mail.version>1.6.2</javax.mail.version>
+
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-auth</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-config</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-db</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-dependencies</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-exception</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-gateway</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-gengrator</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-job-easy</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-job-elastic</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-log</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-message</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-mq-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-mq-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-mq-server</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-on</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-oss</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-redis</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-rpc</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-sentinel</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-util</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.spring</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${spring-context-support.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>${spring-boot-starter-parent.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-dubbo</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.sun.mail</groupId>
+                <artifactId>javax.mail</artifactId>
+                <version>${javax.mail.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
 </project>

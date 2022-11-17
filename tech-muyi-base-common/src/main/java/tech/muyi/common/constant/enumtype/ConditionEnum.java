@@ -15,6 +15,7 @@ public enum ConditionEnum  {
     IN("包含","IN","IN"),
     NOT("否","NOT","NOT"),
     LIKE("模糊匹配","LIKE","LIKE"),
+    NOT_LIKE("反向模糊匹配","NOT_LIKE","NOT_LIKE"),
     EQ("等于","EQ","="),
     NE("不等于","NE","<>"),
     GT("大于","",">"),
@@ -24,9 +25,9 @@ public enum ConditionEnum  {
     IS_NULL("为空","IS_NULL","IS NULL"),
     IS_NOT_NULL("不为空","IS_NOT_NULL","IS NOT NULL"),
     BETWEEN("介于","BETWEEN","BETWEEN"),
+    NOT_BETWEEN("不介于","NOT_BETWEEN","NOT_BETWEEN"),
     ASC("正序","ASC","ASC"),
     DESC("倒序","DESC","DESC");
-
 
     private String alias;
     private String code;
@@ -43,12 +44,13 @@ public enum ConditionEnum  {
             return null;
         }
         for (ConditionEnum result : ConditionEnum.values()) {
-            if (result.code.equals(code)) {
+            if (result.code.equals(code) || result.condition.equals(code)) {
                 return result;
             }
         }
         return null;
     }
+
 
     public String getAlias() {
         return alias;

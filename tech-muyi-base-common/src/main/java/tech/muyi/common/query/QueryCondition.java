@@ -3,6 +3,7 @@ package tech.muyi.common.query;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * description: QueryCondition
@@ -15,4 +16,5 @@ public class QueryCondition{
     private String column;
     private String condition;
     private Object value;
+    private List<QueryCondition> children;
 }

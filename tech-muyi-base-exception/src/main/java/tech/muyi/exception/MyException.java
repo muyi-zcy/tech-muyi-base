@@ -29,10 +29,16 @@ public class MyException extends RuntimeException {
         this.errorMsg = errorInfoInterface.getResultMsg();
     }
 
+    public MyException(BaseErrorInfoInterface errorInfoInterface, String errorDetail) {
+        super(errorInfoInterface.getResultCode());
+        this.errorCode = errorInfoInterface.getResultCode();
+        this.errorMsg = joinError(errorInfoInterface.getResultMsg(), errorDetail);
+    }
+
     public MyException(BaseErrorInfoInterface errorInfoInterface, Throwable cause) {
         super(errorInfoInterface.getResultCode(), cause);
         this.errorCode = errorInfoInterface.getResultCode();
-        this.errorMsg = joinError(errorInfoInterface.getResultMsg(),cause);
+        this.errorMsg = joinError(errorInfoInterface.getResultMsg(), cause);
     }
 
     public MyException(String errorMsg) {
@@ -80,9 +86,6 @@ public class MyException extends RuntimeException {
         return errorMsg;
     }
 
-    /**
-     *
-     */
     @Override
     public Throwable fillInStackTrace() {
         return this;

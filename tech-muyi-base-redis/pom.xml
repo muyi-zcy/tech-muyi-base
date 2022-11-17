@@ -6,13 +6,20 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>tech.muyi</groupId>
     <artifactId>tech-muyi-base-redis</artifactId>
-    <version>1.0-SNAPSHOT</version>
+
+    <parent>
+        <groupId>tech.muyi</groupId>
+        <artifactId>tech-muyi-base</artifactId>
+        <version>${revision}</version>
+    </parent>
+
+    <version>${revision}</version>
+
     <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <base.version>1.0-SNAPSHOT</base.version>
         <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
         <redisson-spring-boot-starter.version>3.13.6</redisson-spring-boot-starter.version>
     </properties>
@@ -34,12 +41,10 @@
         <dependency>
             <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-exception</artifactId>
-            <version>${base.version}</version>
         </dependency>
         <dependency>
             <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-on</artifactId>
-            <version>${base.version}</version>
         </dependency>
     </dependencies>
 </project>
