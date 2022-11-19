@@ -61,11 +61,11 @@ tech-muyi-base是一个基于SpringCloudAlibaba编写的后端脚手架，便于
 ## 运行环境搭建
 
 暂时使用docker镜像搭建运行环境，后续使用k8s进行管理
-[https://github.com/pomole/InitDev_Docker](https://github.com/pomole/InitDev_Docker)
+[https://github.com/muyi-zcy/InitDev_Docker](https://github.com/muyi-zcy/InitDev_Docker)
 
 ## Archetype骨架
 
-[https://github.com/pomole/archetype](https://github.com/pomole/archetype)
+[https://github.com/muyi-zcy/archetype](https://github.com/muyi-zcy/archetype)
 
 ## 项目结构
 
