@@ -60,12 +60,12 @@ public class Swagger3Config {
      * 生成接口信息，包括标题、联系人等
      */
     private ApiInfo apiInfo() {
-        if(apiConfigProperties == null){
+        if (apiConfigProperties == null) {
             apiConfigProperties = new ApiConfigProperties();
         }
 
         ApiConfigProperties.Contact contact = apiConfigProperties.getContact();
-        if(contact == null){
+        if (contact == null) {
             contact = new ApiConfigProperties.Contact();
         }
 
@@ -75,7 +75,7 @@ public class Swagger3Config {
                 .description(StringUtils.isEmpty(apiConfigProperties.getDesc()) ? "muyi" : apiConfigProperties.getDesc())
                 .contact(new Contact(
                         StringUtils.isEmpty(contact.getName()) ? "沐乙老师傅" : contact.getName(),
-                        StringUtils.isEmpty(contact.getUrl()) ? "https://github.com/pomole" : contact.getUrl(),
+                        StringUtils.isEmpty(contact.getUrl()) ? "https://github.com/muyi-zcy" : contact.getUrl(),
                         StringUtils.isEmpty(contact.getEmail()) ? "zcy_nemo@aliyun.com" : contact.getName()))
                 .version(StringUtils.isEmpty(apiConfigProperties.getVersion()) ? "1.0" : apiConfigProperties.getVersion())
                 .build();

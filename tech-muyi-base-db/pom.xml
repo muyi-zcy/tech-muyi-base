@@ -19,50 +19,40 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <mybatis-spring-boot-starter.version>2.1.0</mybatis-spring-boot-starter.version>
-        <mybatis-plus-boot-starter.version>3.1.1</mybatis-plus-boot-starter.version>
-        <mysql-connector-java.version>8.0.17</mysql-connector-java.version>
-        <druid.version>1.1.10</druid.version>
-        <sharding-jdbc-spring-boot-starter.version>4.0.0</sharding-jdbc-spring-boot-starter.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>${mybatis-spring-boot-starter.version}</version>
         </dependency>
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql-connector-java.version}</version>
         </dependency>
 
         <!--mybatis plus驱动-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>${mybatis-plus-boot-starter.version}</version>
         </dependency>
 
         <!--druid数据源-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
-            <version>${druid.version}</version>
         </dependency>
 
         <!--shardingsphere最新版本-->
         <dependency>
             <groupId>org.apache.shardingsphere</groupId>
             <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
-            <version>${sharding-jdbc-spring-boot-starter.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.shardingsphere</groupId>
             <artifactId>sharding-jdbc-spring-namespace</artifactId>
-            <version>${sharding-jdbc-spring-boot-starter.version}</version>
         </dependency>
         <dependency>
             <groupId>tech.muyi</groupId>

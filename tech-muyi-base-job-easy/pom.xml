@@ -21,18 +21,12 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <base.version>1.0-SNAPSHOT</base.version>
-        <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
-        <logback-classic.version>1.2.3</logback-classic.version>
-        <lombok.version>1.18.22</lombok.version>
-        <hutool-all.version>5.7.22</hutool-all.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>${hutool-all.version}</version>
         </dependency>
         <dependency>
             <groupId>tech.muyi</groupId>

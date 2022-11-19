@@ -8,9 +8,9 @@
     <artifactId>tech-muyi-base-dependencies</artifactId>
 
     <parent>
-        <groupId>tech.muyi</groupId>
-        <artifactId>tech-muyi-base</artifactId>
-        <version>${revision}</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.12.RELEASE</version>
     </parent>
 
     <version>${revision}</version>
@@ -21,32 +21,32 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <revision>1.0-SNAPSHOT</revision>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-parent</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-db</artifactId>
+            <version>${revision}</version>
         </dependency>
 
         <dependency>
             <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-rpc</artifactId>
+            <version>${revision}</version>
         </dependency>
 
         <dependency>
             <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-api</artifactId>
+            <version>${revision}</version>
         </dependency>
 
         <dependency>
             <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-redis</artifactId>
+            <version>${revision}</version>
         </dependency>
     </dependencies>
 

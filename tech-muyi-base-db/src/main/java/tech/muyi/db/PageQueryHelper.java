@@ -2,11 +2,13 @@ package tech.muyi.db;
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.ArrayUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
 import tech.muyi.common.DO.MyBaseDO;
 import tech.muyi.common.constant.enumtype.ConditionEnum;
 import tech.muyi.common.query.BaseQuery;
@@ -14,9 +16,7 @@ import tech.muyi.common.query.QueryCondition;
 import tech.muyi.exception.MyException;
 import tech.muyi.exception.enumtype.CommonErrorCodeEnum;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * description: PageQueryHelper
@@ -25,18 +25,18 @@ import java.util.Objects;
  * version: 1.0
  */
 public class PageQueryHelper {
-    public static void queryPageConfig(IPage<MyBaseDO> page, BaseQuery baseQuery) {
+    public static <T extends MyBaseDO> void queryPageConfig(IPage<T> page, BaseQuery baseQuery) {
         baseQuery.setSize(page.getSize());
         baseQuery.setCurrent(page.getCurrent());
         baseQuery.setTotal(page.getTotal());
     }
 
-    public static QueryWrapper<MyBaseDO> createQueryWrapper(BaseQuery baseQuery) {
+    public static <T extends MyBaseDO> LambdaQueryWrapper<T> createQueryWrapper(BaseQuery baseQuery) {
 
         if (baseQuery == null) {
             throw new MyException(CommonErrorCodeEnum.INVALID_PARAM);
         }
-        QueryWrapper<MyBaseDO> queryWrapper = new QueryWrapper<MyBaseDO>();
+        QueryWrapper<T> queryWrapper = new QueryWrapper<>();
         if (StringUtils.isNotEmpty(baseQuery.getSort())) {
             switch (baseQuery.getSort().toUpperCase()) {
                 case "DESC":
@@ -79,31 +79,33 @@ public class PageQueryHelper {
                 selecrColumn.forEach(queryWrapper::select);
             }
         }
-        return queryWrapper;
+        return queryWrapper.lambda();
     }
 
-    private static void convertConditions(QueryWrapper<MyBaseDO> queryWrapper, QueryCondition queryCondition) {
+    private static <T extends MyBaseDO> void convertConditions(QueryWrapper<T> queryWrapper, QueryCondition queryCondition) {
         ConditionEnum conditionEnum = ConditionEnum.getConditionByCode(queryCondition.getCondition().toUpperCase());
         if (conditionEnum == null) {
             return;
         }
         switch (conditionEnum) {
             case AND:
-            case OR:
-                if (CollectionUtils.isNotEmpty(queryCondition.getChildren())) {
-                    queryWrapper.and(wrapper -> {
-                        queryCondition.getChildren().forEach(item->{
-                            if (ConditionEnum.OR.equals(conditionEnum)) {
-                                wrapper.or();
-                            }
-                            convertConditions(wrapper, item);
+                if(CollectionUtils.isNotEmpty(queryCondition.getChildren())) {
+                    queryCondition.getChildren().forEach(item->{
+                        queryWrapper.and(tQueryWrapper -> {
+                            convertConditions(tQueryWrapper, item);
+                            return tQueryWrapper;
                         });
-                        return wrapper;
                     });
-                }else {
-                    if (ConditionEnum.OR.equals(conditionEnum)) {
-                        queryWrapper.or();
-                    }
+                }
+                break;
+            case OR:
+                if(CollectionUtils.isNotEmpty(queryCondition.getChildren())) {
+                    queryCondition.getChildren().forEach(item->{
+                        queryWrapper.or(tQueryWrapper -> {
+                            convertConditions(tQueryWrapper, item);
+                            return tQueryWrapper;
+                        });
+                    });
                 }
                 break;
             case IN:
@@ -161,7 +163,7 @@ public class PageQueryHelper {
                 }
                 if (ConditionEnum.BETWEEN.equals(conditionEnum)) {
                     queryWrapper.between(queryCondition.getColumn(), objBegin, objEnd);
-                }else {
+                } else {
                     queryWrapper.notBetween(queryCondition.getColumn(), objBegin, objEnd);
                 }
                 break;

@@ -20,10 +20,6 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <spring-boot-starter-web.version>2.3.12.RELEASE</spring-boot-starter-web.version>
-        <spring-boot-starter-aop.version>2.3.12.RELEASE</spring-boot-starter-aop.version>
-        <aspectjweaver.version>1.9.9.1</aspectjweaver.version>
-        <spring-webmvc.version>5.3.3</spring-webmvc.version>
     </properties>
 
     <dependencies>
@@ -45,25 +41,21 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
-            <version>${spring-boot-starter-aop.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
-            <version>${aspectjweaver.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>${spring-boot-starter-web.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>${spring-webmvc.version}</version>
         </dependency>
     </dependencies>
 </project>

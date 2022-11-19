@@ -12,14 +12,12 @@
         <module name="tech-muyi-base-oss" />
         <module name="tech-muyi-base-job-elastic" />
         <module name="tech-muyi-base-config" />
-        <module name="tech-muyi-base-gateway" />
         <module name="tech-muyi-base-on" />
         <module name="tech-muyi-base-gengrator" />
         <module name="tech-muyi-base-mq-common" />
         <module name="tech-muyi-base-api" />
         <module name="tech-muyi-base-db" />
         <module name="tech-muyi-base-redis" />
-        <module name="tech-muyi-base-auth" />
         <module name="tech-muyi-base-message" />
         <module name="tech-muyi-base-rpc" />
         <module name="tech-muyi-base-log" />
@@ -31,6 +29,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="tech-muyi-base-auth" target="1.8" />
+      <module name="tech-muyi-base-gateway" target="1.8" />
       <module name="tech-muyi-base-job-quartz" target="8" />
       <module name="tech-muyi-base-mq" target="1.8" />
       <module name="tech-muyi-base-registry" target="8" />

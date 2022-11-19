@@ -24,7 +24,7 @@ import ${groupId}.core.service.${entity}Service;
 */
 @Slf4j
 @RestController
-@RequestMapping("${apiName}/${table.entityPath}")
+@RequestMapping("/api/${apiName}/${table.entityPath}")
 public class ${table.controllerName} {
     @Autowired
     private ${entity}Service ${entity?uncap_first}Service;

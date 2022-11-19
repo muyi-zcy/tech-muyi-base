@@ -10,6 +10,8 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/tech-muyi-base-auth/pom.xml" />
+        <option value="$PROJECT_DIR$/tech-muyi-base-gateway/pom.xml" />
         <option value="$PROJECT_DIR$/tech-muyi-base-job-quartz/pom.xml" />
         <option value="$PROJECT_DIR$/tech-muyi-base-registry/pom.xml" />
       </set>

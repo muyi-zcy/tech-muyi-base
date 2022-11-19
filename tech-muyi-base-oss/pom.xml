@@ -20,21 +20,19 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <minio.version>7.0.2</minio.version>
-        <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>io.minio</groupId>
             <artifactId>minio</artifactId>
-            <version>${minio.version}</version>
         </dependency>
+
         <dependency>
             <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-exception</artifactId>
         </dependency>
+
         <dependency>
             <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-on</artifactId>

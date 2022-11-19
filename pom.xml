@@ -10,20 +10,19 @@
     <version>${revision}</version>
 
     <modules>
+        <module>tech-muyi-base-dependencies</module>
         <module>tech-muyi-base-oss</module>
         <module>tech-muyi-base-exception</module>
         <module>tech-muyi-base-redis</module>
         <module>tech-muyi-base-job-elastic</module>
         <module>tech-muyi-base-job-easy</module>
         <module>tech-muyi-base-on</module>
-        <module>tech-muyi-base-dependencies</module>
         <module>tech-muyi-base-log</module>
         <module>tech-muyi-base-api</module>
         <module>tech-muyi-base-common</module>
         <module>tech-muyi-base-util</module>
         <module>tech-muyi-base-db</module>
         <module>tech-muyi-base-config</module>
-        <module>tech-muyi-base-auth</module>
         <module>tech-muyi-base-message</module>
         <module>tech-muyi-base-mq-common</module>
         <module>tech-muyi-base-mq-client</module>
@@ -40,11 +39,56 @@
         <revision>1.0-SNAPSHOT</revision>
 
         <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
+
+        <spring-boot-starter-web.version>2.3.12.RELEASE</spring-boot-starter-web.version>
+        <spring-boot-starter-aop.version>2.3.12.RELEASE</spring-boot-starter-aop.version>
+        <spring-webmvc.version>5.3.3</spring-webmvc.version>
         <spring-boot-starter-parent.version>2.3.12.RELEASE</spring-boot-starter-parent.version>
         <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.7.RELEASE</spring-cloud-alibaba.version>
         <spring-context-support.version>1.0.11</spring-context-support.version>
+
         <javax.mail.version>1.6.2</javax.mail.version>
+
+        <mybatis-spring-boot-starter.version>2.1.0</mybatis-spring-boot-starter.version>
+        <mybatis-plus-boot-starter.version>3.1.1</mybatis-plus-boot-starter.version>
+        <mysql-connector-java.version>8.0.17</mysql-connector-java.version>
+        <druid.version>1.1.10</druid.version>
+        <sharding-jdbc-spring-boot-starter.version>4.0.0</sharding-jdbc-spring-boot-starter.version>
+
+        <springfox-boot-starter.version>3.0.0</springfox-boot-starter.version>
+        <knife4j-spring-ui.version>3.0.3</knife4j-spring-ui.version>
+
+        <aspectjweaver.version>1.9.9.1</aspectjweaver.version>
+
+        <reflections.version>0.9.10</reflections.version>
+
+        <slf4j-api.version>1.7.21</slf4j-api.version>
+        <logback-classic.version>1.2.3</logback-classic.version>
+
+        <lombok.version>1.18.22</lombok.version>
+
+        <minio.version>7.0.2</minio.version>
+
+        <gson.version>2.9.0</gson.version>
+        <hutool-all.version>5.7.22</hutool-all.version>
+        <guava.version>30.0-jre</guava.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
+        <commons-beanutils.version>1.9.4</commons-beanutils.version>
+        <transmittable-thread-local.version>2.12.6</transmittable-thread-local.version>
+        <spring-boot-starter-web.version>2.3.12.RELEASE</spring-boot-starter-web.version>
+        <freemarker.version>2.3.23</freemarker.version>
+        <reflections.version>0.9.11</reflections.version>
+        <orika-core.version>1.5.4</orika-core.version>
+
+
+        <elastic-job-lite-core.version>2.1.5</elastic-job-lite-core.version>
+        <elastic-job-lite-spring.version>2.1.5</elastic-job-lite-spring.version>
+        <elastic-job-lite-lifecycle.version>2.1.5</elastic-job-lite-lifecycle.version>
+
+        <rocketmq-client.version>4.7.0</rocketmq-client.version>
+
+        <redisson-spring-boot-starter.version>3.13.6</redisson-spring-boot-starter.version>
 
     </properties>
 
@@ -81,11 +125,6 @@
                 <version>${project.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>tech.muyi</groupId>
-                <artifactId>tech-muyi-base-dependencies</artifactId>
-                <version>${project.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>tech.muyi</groupId>
@@ -238,6 +277,270 @@
                 <version>${javax.mail.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis-spring-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector-java.version}</version>
+            </dependency>
+
+            <!--mybatis plus驱动-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus-boot-starter.version}</version>
+            </dependency>
+
+            <!--druid数据源-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <!--shardingsphere最新版本-->
+            <dependency>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+                <version>${sharding-jdbc-spring-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>sharding-jdbc-spring-namespace</artifactId>
+                <version>${sharding-jdbc-spring-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-boot-starter</artifactId>
+                <version>${springfox-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j-spring-ui.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot-starter-web.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring-webmvc.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>${reflections.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+                <version>${spring-boot-starter-aop.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectjweaver.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool-all.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.dangdang</groupId>
+                <artifactId>elastic-job-lite-core</artifactId>
+                <version>${elastic-job-lite-core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.dangdang</groupId>
+                <artifactId>elastic-job-lite-spring</artifactId>
+                <version>${elastic-job-lite-spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <artifactId>elastic-job-lite-lifecycle</artifactId>
+                <groupId>com.dangdang</groupId>
+                <version>${elastic-job-lite-lifecycle.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+                <version>${spring-boot-starter-aop.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectjweaver.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot-starter-web.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring-webmvc.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-client</artifactId>
+                <version>${rocketmq-client.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-autoconfigure</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-configuration-processor</artifactId>
+                <version>${spring-boot.version}</version>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j-api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback-classic.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>${minio.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson-spring-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${commons-beanutils.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool-all.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${gson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>transmittable-thread-local</artifactId>
+                <version>${transmittable-thread-local.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.freemarker</groupId>
+                <artifactId>freemarker</artifactId>
+                <version>${freemarker.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot-starter-web.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>${reflections.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ma.glasnost.orika</groupId>
+                <artifactId>orika-core</artifactId>
+                <version>${orika-core.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>1.1.0</version>
+                <configuration>
+                    <!--是否更新pom文件，记得设置为true，不然无法更新module里的pom版本号-->
+                    <!--此处还有更高级的用法，具体下方的参考文档-->
+                    <updatePomFile>true</updatePomFile>
+                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

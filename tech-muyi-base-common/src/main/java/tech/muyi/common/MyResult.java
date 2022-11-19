@@ -25,7 +25,7 @@ public class MyResult<T> implements Serializable {
         MyResult<T> result = new MyResult();
         result.setData(data);
         result.setQuery(query);
-        result.setSuccess(true);
+        result.isSuccess();
         result.setErrCode("0");
         return result;
     }
@@ -35,12 +35,12 @@ public class MyResult<T> implements Serializable {
     }
 
     public static <T> MyResult<T> ok(T data) {
-        return ok(data, (BaseQuery)null);
+        return ok(data, null);
     }
 
     public static <T> MyResult<T> fail(String errCode, String errMsg) {
         MyResult result = new MyResult();
-        result.setSuccess(false);
+        result.isSuccess();
         result.setErrCode(errCode);
         result.setErrMsg(errMsg);
         return result;
@@ -54,9 +54,6 @@ public class MyResult<T> implements Serializable {
         return this.success;
     }
 
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
 
     public T getData() {
         return this.data;
