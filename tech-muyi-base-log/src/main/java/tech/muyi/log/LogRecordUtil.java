@@ -1,6 +1,7 @@
 package tech.muyi.log;
 
 import cn.hutool.core.util.RandomUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.MDC;
 import tech.muyi.util.MyIdGenerator;
 
@@ -17,9 +18,10 @@ public class LogRecordUtil {
     /**
      * 获取traceId
      * 服务器 IP + ID 产生的时间 + 雪花算法 + 当前进程号
+     *
      * @return
      */
-    public static String getInitTraceId(){
+    public static String getInitTraceId() {
         String ip = getWorkId();
 
         Thread t = Thread.currentThread();
@@ -27,64 +29,75 @@ public class LogRecordUtil {
         Long thread = t.getId();
 
         // 从ThreadLocal中获取当前线程的全链路线程ID
-        StringBuilder stringBuilder  = new StringBuilder();
-        stringBuilder.append(ip)
-                .append("-")
-                .append(System.currentTimeMillis())
-                .append("-")
-                .append(MyIdGenerator.getNextId())
-                .append("-")
-                .append(thread);
-        return stringBuilder.toString();
+        return ip +
+                "-" +
+                System.currentTimeMillis() +
+                "-" +
+                MyIdGenerator.getNextId() +
+                "-" +
+                thread;
     }
 
     /**
      * 获取当前进程SpanId
+     *
      * @return
      */
-    public static String getSpanId(){
+    public static String getSpanId() {
         return MDC.get(LogConstant.SPAN_ID);
     }
 
     /**
      * 获取当前进程TraceId
+     *
      * @return
      */
-    public static String getTraceId(){
+    public static String getTraceId() {
         return MDC.get(LogConstant.TRACE_ID);
     }
 
     /**
      * 获取当前进程LogicId
+     *
      * @return
      */
-    public static String getLogicId(){
+    public static String getLogicId() {
         return MDC.get(LogConstant.LOGIC_ID);
     }
 
+    public static String getServiceNum() {
+        return MDC.get(LogConstant.SERVICE_NUM);
+    }
+
     /**
-     * 由上游节点获取当前服务节点LogicId
-     * @param logicId
+     * 获取传递给下游的LogicId
+     *
+     * @param serviceNum
      * @return
      */
-    public static String incrLogicId(String logicId) {
-        return String.valueOf(Integer.parseInt(logicId) + 1);
+    public static String incrLogicId(String serviceNum) {
+        Integer serviceNumInt = StringUtils.isEmpty(serviceNum) ? 0 : Integer.parseInt(serviceNum);
+        serviceNumInt++;
+        MDC.put(LogConstant.SERVICE_NUM, serviceNumInt.toString());
+        return serviceNumInt.toString();
     }
 
     /**
      * 生成新的spanId
-     * @param spanId
-     * @param logicId
-     * @return
+     *
+     * @param spanId  spanId
+     * @param logicId logicId
+     * @return spanId
      */
     public static String getNewSpanId(String spanId, String logicId) {
-        return new StringBuilder(spanId).append(".").append(logicId).toString();
+        return spanId + "." + logicId;
     }
 
 
     /**
      * 获取服务器ip
-     * @return
+     *
+     * @return 当前服务器IP
      */
     private static String getWorkId() {
         try {
@@ -92,7 +105,7 @@ public class LogRecordUtil {
             String[] ints = hostAddress.split("\\.");
             StringBuilder ipString = new StringBuilder();
             for (String i : ints) {
-                ipString.append(Integer.toHexString(Integer.valueOf(i)));
+                ipString.append(Integer.toHexString(Integer.parseInt(i)));
             }
             return ipString.toString();
         } catch (UnknownHostException e) {

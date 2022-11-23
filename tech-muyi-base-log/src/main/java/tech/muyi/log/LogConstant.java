@@ -22,6 +22,10 @@ public class LogConstant {
 
     public static final String THREAD = "thread";
 
+    public static final String SERVICE_NUM = "SERVICE_NUM";
+
     public static final String DEVICE_TYPE = "deviceType";
+
+    public static final String GLOBAL_CONTEXT = "globalContext";
 
 }

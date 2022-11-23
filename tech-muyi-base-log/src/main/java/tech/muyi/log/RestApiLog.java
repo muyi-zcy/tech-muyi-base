@@ -1,6 +1,5 @@
 package tech.muyi.log;
 
-import cn.hutool.json.JSON;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
@@ -28,7 +27,7 @@ public class RestApiLog {
     public RestApiLog() {
     }
 
-    @Pointcut("execution(* com.muyi..*.*Controller.*(..))")
+    @Pointcut("@within(org.springframework.web.bind.annotation.RestController)")
     public void restApiAspect() {
     }
 

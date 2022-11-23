@@ -110,7 +110,7 @@ public class RedissonManage {
         try {
             return lock.tryLock(waitTime, leaseTime, unit);
         } catch (InterruptedException e) {
-            throw new MyException();
+            throw new MyException(e);
         }
     }
 
@@ -126,7 +126,7 @@ public class RedissonManage {
                 lock.unlock();
             }
         } catch (Exception e) {
-            throw new MyException();
+            throw new MyException(e);
         }
     }
 
@@ -140,7 +140,7 @@ public class RedissonManage {
                 lock.unlock();
             }
         } catch (Exception e) {
-            throw new MyException();
+            throw new MyException(e);
         }
     }
 

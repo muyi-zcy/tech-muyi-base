@@ -6,13 +6,13 @@ public class MyGeneratorCode {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        String projectName = "tech-muyi-user";
+        String projectName = "mybox-permission";
         System.out.println("请输入项目名："+projectName);
 
         String tableName = "t_user";
         System.out.println("表名："+tableName);
 
-        String path = "/home/muyi/muyi/tech-muyi-example";
+        String path = "/home/muyi/muyi/mybox/mybox-permission/";
         System.out.println("项目地址："+path);
 
         String url= "192.168.1.101:3306";

@@ -1,9 +1,9 @@
-package dubbo.filter;
+package tech.muyi.dubbo.filter;
 
 import org.apache.dubbo.common.constants.CommonConstants;
 import org.apache.dubbo.common.extension.Activate;
 import org.apache.dubbo.rpc.*;
-import dubbo.LogRecordContext;
+import tech.muyi.dubbo.RpcLogRecordContext;
 
 /**
  * description: ConsumerContextFilter
@@ -11,19 +11,15 @@ import dubbo.LogRecordContext;
  * author: muyi
  * version: 1.0
  */
-@Activate(group = CommonConstants.CONSUMER, order = -10000)
+@Activate(group = {CommonConstants.CONSUMER})
 public class RpcConsumerContextFilter implements Filter {
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
-        try {
-            if (RpcContext.getContext().isConsumerSide()) {
-                // 消费者
-                LogRecordContext.onceRpcConsumerLogRecord();
-            }
-            return invoker.invoke(invocation);
-        }finally {
-            LogRecordContext.clearMDC();
+        if (RpcContext.getContext().isConsumerSide()) {
+            // 消费者
+            RpcLogRecordContext.onceRpcConsumerLogRecord();
         }
+        return invoker.invoke(invocation);
     }
 
 }

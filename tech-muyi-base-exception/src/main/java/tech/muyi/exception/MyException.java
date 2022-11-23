@@ -1,5 +1,7 @@
 package tech.muyi.exception;
 
+import tech.muyi.exception.enumtype.CommonErrorCodeEnum;
+
 /**
  * 自定义异常
  *
@@ -7,9 +9,6 @@ package tech.muyi.exception;
  * @Date: 2021/1/3 21:25
  */
 public class MyException extends RuntimeException {
-
-    private static final long serialVersionUID = 1L;
-
     /**
      * 错误码
      */
@@ -18,10 +17,6 @@ public class MyException extends RuntimeException {
      * 错误信息
      */
     protected String errorMsg;
-
-    public MyException() {
-        super();
-    }
 
     public MyException(BaseErrorInfoInterface errorInfoInterface) {
         super(errorInfoInterface.getResultCode());
@@ -39,6 +34,12 @@ public class MyException extends RuntimeException {
         super(errorInfoInterface.getResultCode(), cause);
         this.errorCode = errorInfoInterface.getResultCode();
         this.errorMsg = joinError(errorInfoInterface.getResultMsg(), cause);
+    }
+
+    public MyException(Exception e) {
+        super(e);
+        this.errorCode = CommonErrorCodeEnum.INTERNAL_SERVER_ERROR.getResultCode();
+        this.errorMsg = e.getMessage();
     }
 
     public MyException(String errorMsg) {

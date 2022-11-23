@@ -28,10 +28,19 @@
             <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-on</artifactId>
         </dependency>
+        <dependency>
+            <groupId>tech.muyi</groupId>
+            <artifactId>tech-muyi-base-util</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-log</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>tech.muyi</groupId>
+            <artifactId>tech-muyi-base-context</artifactId>
         </dependency>
 
         <dependency>
@@ -47,6 +56,12 @@
         <dependency>
             <groupId>com.alibaba.spring</groupId>
             <artifactId>spring-context-support</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>30.0-jre</version>
         </dependency>
     </dependencies>
 

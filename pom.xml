@@ -29,8 +29,8 @@
         <module>tech-muyi-base-mq-server</module>
         <module>tech-muyi-base-rpc</module>
         <module>tech-muyi-base-gengrator</module>
-        <module>tech-muyi-base-gateway</module>
         <module>tech-muyi-base-sentinel</module>
+        <module>tech-muyi-base-context</module>
     </modules>
 
     <properties>
@@ -102,7 +102,7 @@
 
             <dependency>
                 <groupId>tech.muyi</groupId>
-                <artifactId>tech-muyi-base-auth</artifactId>
+                <artifactId>tech-muyi-base-context</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
