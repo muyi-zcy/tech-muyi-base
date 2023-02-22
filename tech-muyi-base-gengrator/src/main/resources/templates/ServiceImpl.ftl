@@ -15,7 +15,7 @@ import ${groupId}.core.manager.${entity}Manager;
 import ${groupId}.core.service.${entity}Service;
 import tech.muyi.util.bean.MapperUtils;
 import tech.muyi.util.MyIdGenerator;
-
+import org.springframework.transaction.annotation.Transactional;
 /**
 * <p>
     * ${table.comment!}
@@ -32,6 +32,7 @@ public class ${entity}ServiceImpl implements ${entity}Service {
     private ${entity}Manager ${entity?uncap_first}Manager;
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Boolean save(${entity}DTO ${entity?uncap_first}DTO) {
         ${entity}DO ${entity?uncap_first}DO = MapperUtils.ORIKA.map(${entity}DO.class, ${entity?uncap_first}DTO);
         ${entity?uncap_first}DO.setId(MyIdGenerator.getNextId());
@@ -39,6 +40,7 @@ public class ${entity}ServiceImpl implements ${entity}Service {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Boolean update(${entity}DTO ${entity?uncap_first}DTO) {
         ${entity}DO ${entity?uncap_first}DO;
         if(${entity?uncap_first}Manager.getById(${entity?uncap_first}DTO.getId()) == null){
@@ -49,6 +51,7 @@ public class ${entity}ServiceImpl implements ${entity}Service {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Boolean delete(Long id) {
         return ${entity?uncap_first}Manager.deleteById(id);
     }
