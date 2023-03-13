@@ -1,9 +1,14 @@
 package tech.muyi.common.DO;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.Version;
 import lombok.Data;
+import tech.muyi.common.constant.enumtype.RowStatusEnum;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * @Author: muyi
@@ -12,34 +17,24 @@ import java.util.Date;
 @Data
 public class MyBaseDO implements Serializable {
     private static final long serialVersionUID = 1L;
-    /**
-     * 主键
-     */
-    private Long id;
-    /**
-     * 创建时间
-     */
-    private Date gmtCreate;
-    /**
-     * 修改时间
-     */
-    private Date gmtModified;
-    /**
-     * 行版本号
-     */
-    private Integer rowVersion;
-    /**
-     * 行状态
-     */
-    private Integer rowStatus;
-    private Integer bizType;
-    private String extAtt;
-    /**
-     * 创建人
-     */
-    private String creator;
-    /**
-     * 修改人
-     */
-    private String operator;
+    protected Long id;
+    @TableField(fill = FieldFill.INSERT)
+    protected LocalDateTime gmtCreate;
+
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    protected LocalDateTime gmtModified;
+
+    @Version
+    protected Integer rowVersion;
+
+    @TableLogic
+    protected Integer rowStatus;
+
+    protected Integer bizType;
+
+    protected String extAtt;
+    @TableField(fill = FieldFill.INSERT)
+    protected String creator;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    protected String operator;
 }

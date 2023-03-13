@@ -1,5 +1,6 @@
 package tech.muyi.mq;
 
+import lombok.extern.slf4j.Slf4j;
 import mq.exception.MqErrorCodeEnum;
 import org.apache.rocketmq.client.exception.MQBrokerException;
 import org.apache.rocketmq.client.exception.MQClientException;
@@ -9,12 +10,14 @@ import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.remoting.exception.RemotingException;
 import org.apache.tomcat.util.codec.binary.Base64;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 import tech.muyi.exception.MyException;
 import tech.muyi.exception.enumtype.CommonErrorCodeEnum;
 import tech.muyi.util.JsonUtil;
 
+import javax.annotation.PostConstruct;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,14 +27,19 @@ import java.util.Random;
  * @Author: muyi
  * @Date: 2021/1/30 22:59
  */
+@Slf4j
+@Configuration
+@EnableConfigurationProperties({MyMqProductProperties.class})
 public class MyMqProduct {
-    private static Logger logger = LoggerFactory.getLogger(MyMqProduct.class);
-
     private DefaultMQProducer defaultMQProducer;
 
-    public MyMqProduct(String namesrvAddr, String groupName) {
-        this.defaultMQProducer = new DefaultMQProducer(groupName);
-        this.defaultMQProducer.setNamesrvAddr(namesrvAddr);
+    @Autowired
+    private MyMqProductProperties myMqProductProperties;
+
+    @PostConstruct
+    public void init() {
+        this.defaultMQProducer = new DefaultMQProducer(myMqProductProperties.getGroupName());
+        this.defaultMQProducer.setNamesrvAddr(myMqProductProperties.getNamesrvAddr());
         this.defaultMQProducer.setInstanceName(this.getClass().getSimpleName());
 
         try {
@@ -51,8 +59,7 @@ public class MyMqProduct {
      */
     private Message convert(String topic, String tag, String key, Object body) {
         try {
-            Message message = new Message(topic, tag, key, Base64.encodeBase64(JsonUtil.toJson(body, body.getClass()).getBytes("UTF-8")));
-            return message;
+            return new Message(topic, tag, key, Base64.encodeBase64(JsonUtil.toJson(body, body.getClass()).getBytes("UTF-8")));
         } catch (UnsupportedEncodingException e) {
             throw new MyException(CommonErrorCodeEnum.SERIALIZATION_FAIL, e);
         }
@@ -74,7 +81,7 @@ public class MyMqProduct {
             return this.defaultMQProducer.send(message);
         } catch (MQBrokerException e){
             try {
-                if ((new Integer(2)).equals(e.getResponseCode()) && message != null) {
+                if (new Integer(2).equals(e.getResponseCode())) {
                     int tryTime = 5;
                     return this.retrySend(message, tryTime);
                 } else {
@@ -202,7 +209,7 @@ public class MyMqProduct {
         if (0 == retryTimes) {
             throw new MyException(MqErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION);
         } else {
-            Thread.sleep((long)((new Random()).nextInt(10) + 1));
+            Thread.sleep((new Random()).nextInt(10) + 1);
             try {
                 return this.defaultMQProducer.send(message);
             } catch (MQBrokerException e) {
@@ -215,7 +222,7 @@ public class MyMqProduct {
         if (0 == retryTimes) {
             throw new MyException(MqErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION);
         } else {
-            Thread.sleep((long)((new Random()).nextInt(10) + 1));
+            Thread.sleep((new Random()).nextInt(10) + 1);
             try {
                 return this.defaultMQProducer.send(message,timeout);
             } catch (MQBrokerException e) {
@@ -240,7 +247,7 @@ public class MyMqProduct {
         if (0 == retryTimes) {
             throw new MyException(MqErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION);
         } else {
-            Thread.sleep((long)((new Random()).nextInt(10) + 1));
+            Thread.sleep((new Random()).nextInt(10) + 1);
             try {
                 return this.defaultMQProducer.send(messages);
             } catch (MQBrokerException e) {
@@ -253,7 +260,7 @@ public class MyMqProduct {
         if (0 == retryTimes) {
             throw new MyException(MqErrorCodeEnum.MQ_SYNC_SEND_FAIL_EXCEPTION);
         } else {
-            Thread.sleep((long)((new Random()).nextInt(10) + 1));
+            Thread.sleep((new Random()).nextInt(10) + 1);
             try {
                 return this.defaultMQProducer.send(messages,timeout);
             } catch (MQBrokerException e) {

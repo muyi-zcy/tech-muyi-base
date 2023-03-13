@@ -12,7 +12,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import tech.muyi.common.constant.enumtype.RowStatusEnum;
-import tech.muyi.db.PageQueryHelper;
+import tech.muyi.core.db.MyQueryHelper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
@@ -52,11 +52,11 @@ public class ${entity}Manager  extends ServiceImpl<${entity}DAO, ${entity}DO>{
 
     public List<${entity}DO> pageSelect(${entity}Query ${entity?uncap_first}Query){
         IPage<${entity}DO> page = new Page<>(${entity?uncap_first}Query.getCurrent(),${entity?uncap_first}Query.getSize());
-        LambdaQueryWrapper<${entity}DO> lambdaQueryWrapper = PageQueryHelper.createQueryWrapper(${entity?uncap_first}Query);
+        LambdaQueryWrapper<${entity}DO> lambdaQueryWrapper = MyQueryHelper.createQueryWrapper(${entity?uncap_first}Query);
         ${entity}DO ${entity?uncap_first}DO = MapperUtils.ORIKA.map(${entity}DO.class, ${entity?uncap_first}Query);
         lambdaQueryWrapper.setEntity(${entity?uncap_first}DO);
         this.page(page, lambdaQueryWrapper);
-        PageQueryHelper.queryPageConfig(page,${entity?uncap_first}Query);
+        MyQueryHelper.queryPageConfig(page,${entity?uncap_first}Query);
         return page.getRecords();
     }
 
@@ -64,7 +64,6 @@ public class ${entity}Manager  extends ServiceImpl<${entity}DAO, ${entity}DO>{
         LambdaQueryWrapper<${entity}DO> lambdaQueryWrapper = new LambdaQueryWrapper<>();
         ${entity}DO ${entity?uncap_first}DO = MapperUtils.ORIKA.map(${entity}DO.class, ${entity?uncap_first}Query);
         lambdaQueryWrapper.setEntity(${entity?uncap_first}DO);
-        Integer count =  this.count(lambdaQueryWrapper);
-        return count.longValue();
+        return this.count(lambdaQueryWrapper);
     }
 }

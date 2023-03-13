@@ -21,4 +21,18 @@
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>tech.muyi</groupId>
+            <artifactId>tech-muyi-base-on</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>tech.muyi</groupId>
+            <artifactId>tech-muyi-base-util</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
 </project>

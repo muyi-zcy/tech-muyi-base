@@ -26,6 +26,19 @@
         <dependency>
             <groupId>io.minio</groupId>
             <artifactId>minio</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <dependency>
@@ -36,6 +49,11 @@
         <dependency>
             <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-on</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>tech.muyi</groupId>
+            <artifactId>tech-muyi-base-util</artifactId>
         </dependency>
     </dependencies>
 </project>

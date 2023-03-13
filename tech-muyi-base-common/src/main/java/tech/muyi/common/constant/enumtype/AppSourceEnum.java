@@ -1,11 +1,15 @@
 package tech.muyi.common.constant.enumtype;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
+import lombok.Getter;
+
 /**
  * 数据来源
  * @Author: muyi
  * @Date: 2021/1/3 21:13
  */
-public enum AppSourceEnum {
+@Getter
+public enum AppSourceEnum implements CommonEnum<Integer>{
     APP(1,"APP"),
     APPLET(2,"APPLET"),
     WEB(3,"WEB"),
@@ -16,36 +20,13 @@ public enum AppSourceEnum {
     POS(8,"POS"),
     OTHER(9,"OTHER");
 
+    @EnumValue
     private Integer code;
 
-    private String desc;
+    private String name;
 
-    private AppSourceEnum(int code,String desc) {
+    AppSourceEnum(int code,String name) {
         this.code = code;
-        this.desc = desc;
-    }
-
-    public Integer getCode() {
-        return this.code;
-    }
-
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-    public static String getDesc(Integer code){
-        for(AppSourceEnum item : AppSourceEnum.values()){
-            if(item.getCode().equals(code)){
-                return item.getDesc();
-            }
-        }
-        return OTHER.getDesc();
+        this.name = name;
     }
 }

@@ -21,7 +21,6 @@
         <module>tech-muyi-base-api</module>
         <module>tech-muyi-base-common</module>
         <module>tech-muyi-base-util</module>
-        <module>tech-muyi-base-db</module>
         <module>tech-muyi-base-config</module>
         <module>tech-muyi-base-message</module>
         <module>tech-muyi-base-mq-common</module>
@@ -30,7 +29,17 @@
         <module>tech-muyi-base-rpc</module>
         <module>tech-muyi-base-gengrator</module>
         <module>tech-muyi-base-sentinel</module>
-        <module>tech-muyi-base-context</module>
+        <module>tech-muyi-base-core</module>
+        <module>my-log-plugins</module>
+        <module>my-log-plugins/my-log-core</module>
+        <module>my-log-plugins/my-log-springmvc-plugin</module>
+        <module>my-log-plugins/my-log-dubbo-plugin</module>
+        <module>my-log-plugins/my-log-rocketmq-plugin</module>
+        <module>my-log-plugins/my-log-redis-plugin</module>
+        <module>my-log-plugins/my-log-db-plugin</module>
+        <module>tech-muyi-base-id</module>
+        <module>tech-muyi-base-okhttp</module>
+        <module>my-log-plugins/my-log-okhttp-plugin</module>
     </modules>
 
     <properties>
@@ -51,13 +60,14 @@
         <javax.mail.version>1.6.2</javax.mail.version>
 
         <mybatis-spring-boot-starter.version>2.1.0</mybatis-spring-boot-starter.version>
-        <mybatis-plus-boot-starter.version>3.1.1</mybatis-plus-boot-starter.version>
+        <mybatis-plus-boot-starter.version>3.5.3.1</mybatis-plus-boot-starter.version>
         <mysql-connector-java.version>8.0.17</mysql-connector-java.version>
-        <druid.version>1.1.10</druid.version>
-        <sharding-jdbc-spring-boot-starter.version>4.0.0</sharding-jdbc-spring-boot-starter.version>
+        <druid.version>1.2.1</druid.version>
+        <sharding-jdbc-spring-boot-starter.version>4.1.1</sharding-jdbc-spring-boot-starter.version>
 
         <springfox-boot-starter.version>3.0.0</springfox-boot-starter.version>
         <knife4j-spring-ui.version>3.0.3</knife4j-spring-ui.version>
+        <swagger-annotations.version>1.6.6</swagger-annotations.version>
 
         <aspectjweaver.version>1.9.9.1</aspectjweaver.version>
 
@@ -80,6 +90,10 @@
         <freemarker.version>2.3.23</freemarker.version>
         <reflections.version>0.9.11</reflections.version>
         <orika-core.version>1.5.4</orika-core.version>
+        <okhttp.version>3.14.9</okhttp.version>
+        <commons-net.version>3.5</commons-net.version>
+        <commons-pool2.version>2.8.1</commons-pool2.version>
+        <caffeine.version>3.1.2</caffeine.version>
 
 
         <elastic-job-lite-core.version>2.1.5</elastic-job-lite-core.version>
@@ -90,22 +104,30 @@
 
         <redisson-spring-boot-starter.version>3.13.6</redisson-spring-boot-starter.version>
 
+        <opentracing.version>0.33.0</opentracing.version>
+        <opentracing.contrib.version>0.1.16</opentracing.contrib.version>
+
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>tech.muyi</groupId>
-                <artifactId>tech-muyi-base-api</artifactId>
+                <artifactId>tech-muyi-base-context</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>tech.muyi</groupId>
-                <artifactId>tech-muyi-base-context</artifactId>
+                <artifactId>tech-muyi-base-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>tech.muyi</groupId>
@@ -116,12 +138,6 @@
             <dependency>
                 <groupId>tech.muyi</groupId>
                 <artifactId>tech-muyi-base-config</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>tech.muyi</groupId>
-                <artifactId>tech-muyi-base-db</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -141,6 +157,12 @@
             <dependency>
                 <groupId>tech.muyi</groupId>
                 <artifactId>tech-muyi-base-gengrator</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-id</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -222,6 +244,49 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-okhttp</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>my-log-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>my-log-db-plugin</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>my-log-okhttp-plugin</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>my-log-dubbo-plugin</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>my-log-redis-plugin</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>my-log-rocketmq-plugin</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>my-log-springmvc-plugin</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -295,6 +360,17 @@
                 <version>${mybatis-plus-boot-starter.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-annotation</artifactId>
+                <version>${mybatis-plus-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-core</artifactId>
+                <version>${mybatis-plus-boot-starter.version}</version>
+            </dependency>
             <!--druid数据源-->
             <dependency>
                 <groupId>com.alibaba</groupId>
@@ -316,11 +392,22 @@
             </dependency>
 
             <dependency>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>shardingsphere-pluggable</artifactId>
+                <version>${sharding-jdbc-spring-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-boot-starter</artifactId>
                 <version>${springfox-boot-starter.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>${swagger-annotations.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-spring-boot-starter</artifactId>
@@ -451,6 +538,13 @@
                 <artifactId>redisson-spring-boot-starter</artifactId>
                 <version>${redisson-spring-boot-starter.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${redisson-spring-boot-starter.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
@@ -509,6 +603,58 @@
                 <artifactId>orika-core</artifactId>
                 <version>${orika-core.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-net</groupId>
+                <artifactId>commons-net</artifactId>
+                <version>${commons-net.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>${commons-pool2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.ben-manes.caffeine</groupId>
+                <artifactId>caffeine</artifactId>
+                <version>${caffeine.version}</version>
+            </dependency>
+
+            <!-- opentracing dependency -->
+            <dependency>
+                <groupId>io.opentracing</groupId>
+                <artifactId>opentracing-api</artifactId>
+                <version>${opentracing.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.opentracing</groupId>
+                <artifactId>opentracing-noop</artifactId>
+                <version>${opentracing.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.opentracing</groupId>
+                <artifactId>opentracing-mock</artifactId>
+                <version>${opentracing.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.opentracing</groupId>
+                <artifactId>opentracing-util</artifactId>
+                <version>${opentracing.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.opentracing.contrib</groupId>
+                <artifactId>opentracing-redis-redisson</artifactId>
+                <version>${opentracing.contrib.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

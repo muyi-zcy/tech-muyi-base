@@ -6,17 +6,17 @@ public class MyGeneratorCode {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        String projectName = "mybox-permission";
+        String projectName = "bmos-plasma";
         System.out.println("请输入项目名："+projectName);
 
         String tableName = "t_user";
         System.out.println("表名："+tableName);
 
-        String path = "/home/muyi/muyi/mybox/mybox-permission/";
+        String path = "/home/muyi/java/";
         System.out.println("项目地址："+path);
 
-        String url= "192.168.1.101:3306";
-        url = "jdbc:mysql://"+ url +"/"+projectName+"?autoReconnect=true&useUnicode=true&characterEncoding=UTF8&serverTimezone=GMT%2B8";
+        String url= "192.168.10.115:3306";
+        url = "jdbc:mysql://"+ url +"/bmos_plasma?autoReconnect=true&useUnicode=true&characterEncoding=UTF8&serverTimezone=GMT%2B8";
         System.out.println("数据库地址："+url);
 
         String username= "root";
@@ -25,7 +25,7 @@ public class MyGeneratorCode {
         String password= "devMysqlPasswd";
         System.out.println("数据库密码："+password);
 
-        String groupId = "tech.muyi";
+        String groupId = "com.bmos";
         System.out.println("系统GroupId："+groupId );
         Controller.deal(projectName,tableName,path,url,username,password,groupId);
         Query.deal(projectName,tableName,path,url,username,password,groupId);

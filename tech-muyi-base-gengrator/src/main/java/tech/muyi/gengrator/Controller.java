@@ -17,7 +17,7 @@ public class Controller {
                 .globalConfig(builder -> {
                     builder.author(System.getProperty("user.name")) // 设置作者
                             .enableSwagger() // 开启 swagger 模式
-                            .dateType(DateType.ONLY_DATE)
+                            .dateType(DateType.TIME_PACK)
                             .outputDir(path +"/"+projectName + "/" +projectName+"-web"+"/src/main/java"); // 指定输出目录
                 })
                 .packageConfig(builder -> {

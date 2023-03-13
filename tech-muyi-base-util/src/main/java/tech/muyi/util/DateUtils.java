@@ -42,23 +42,20 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 
     public final static String fullDateFormat = "yyyy-MM-dd HH:mm:ss.SSS";
 
-    static {
-
-    }
 
     public static long ONE_DAY_MILL_SECONDS = 86400000;
 
     /**
      * 获取当前日期（默认）
      *
-     * @return
+     * @return 日期
      */
     public static Date getNowDate() {
         return new Date();
     }
 
     /**
-     * 获取当前日期（输入毫秒）
+     * 获取日期（输入毫秒）
      *
      * @param millsecord 毫秒
      * @return 日期
@@ -198,7 +195,7 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
     /**
      * 判断输入的字符串是否为合法的分或秒
      *
-     * @param 待判断的时间
+     * @param str 待判断的时间
      * @return true/false
      */
     public static boolean isValidMinuteOrSecond(String str) {
@@ -304,9 +301,9 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
     /**
      * 比较日期大小
      *
-     * @param date1 被比较日期
-     * @param date2 比较日期
-     * @param 日期格式
+     * @param date1  被比较日期
+     * @param date2  比较日期
+     * @param format 日期格式
      * @return 比较结果
      */
     public static boolean dateNotLessThan(String date1, String date2,
@@ -327,6 +324,7 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 
     /**
      * 转换为sql Date
+     *
      * @param value 日期
      * @return date
      */
@@ -358,6 +356,7 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 
     /**
      * 转换为时间戳
+     *
      * @param value 日期
      * @return Timestamp
      */
@@ -390,6 +389,7 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 
     /**
      * 转换为time
+     *
      * @param value 时间
      * @return time
      */
@@ -412,6 +412,7 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 
     /**
      * 转换为util date
+     *
      * @param value 日期
      * @return util date
      */
@@ -442,10 +443,11 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 
     /**
      * 转换为 Calendar
+     *
      * @param value Calendar
      * @return Calendar
      */
-        public static Calendar toCalendar(Object value) {
+    public static Calendar toCalendar(Object value) {
         if (value == null) {
             return null;
         }

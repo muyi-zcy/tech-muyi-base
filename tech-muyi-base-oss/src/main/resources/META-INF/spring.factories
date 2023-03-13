@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-tech.muyi.oss.OssAutoConfiguration
+tech.muyi.oss.FtpTemplate,\
+tech.muyi.oss.MinioTemplate

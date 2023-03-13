@@ -30,11 +30,11 @@ import java.util.Map;
  */
 @Slf4j
 @Configuration
-@ConditionalOnExpression("'${job.elasticJob.zk.serverLists}'.length() > 0")
+@ConditionalOnExpression("'${muyi.job.elasticJob.zk.serverLists}'.length() > 0")
 public class MyElasticJobAutoConfiguration {
-    @Value("${job.elasticJob.zk.serverLists}")
+    @Value("${muyi.job.elasticJob.zk.serverLists}")
     private String serverList;
-    @Value("${job.elasticJob.zk.namespace}")
+    @Value("${muyi.job.elasticJob.zk.namespace}")
     private String namespace;
     @Autowired
     private ApplicationContext applicationContext;
@@ -59,18 +59,16 @@ public class MyElasticJobAutoConfiguration {
 
     private void initSimpleJob(ZookeeperRegistryCenter regCenter) {
         Map<String, SimpleJob> simpleJobMap = this.applicationContext.getBeansOfType(SimpleJob.class);
-        Iterator simpleJobIterator = simpleJobMap.entrySet().iterator();
 
-        while(simpleJobIterator.hasNext()) {
-            Map.Entry<String, SimpleJob> entry = (Map.Entry)simpleJobIterator.next();
-            SimpleJob simpleJob = (SimpleJob)entry.getValue();
-            MyElasticJob myElasticJob = (MyElasticJob)simpleJob.getClass().getAnnotation(MyElasticJob.class);
+        for (Map.Entry<String, SimpleJob> entry : simpleJobMap.entrySet()) {
+            SimpleJob simpleJob = entry.getValue();
+            MyElasticJob myElasticJob = simpleJob.getClass().getAnnotation(MyElasticJob.class);
             if (null != myElasticJob) {
                 SimpleJobConfiguration simpleJobConfiguration = new SimpleJobConfiguration(
                         JobCoreConfiguration.newBuilder(
-                                myElasticJob.jobName(),
-                                myElasticJob.cron(),
-                                myElasticJob.shardingTotalCount())
+                                        myElasticJob.jobName(),
+                                        myElasticJob.cron(),
+                                        myElasticJob.shardingTotalCount())
                                 .shardingItemParameters(myElasticJob.shardingItemParameters())
                                 .description(myElasticJob.description())
                                 .jobParameter(myElasticJob.jobParameter())
@@ -91,10 +89,10 @@ public class MyElasticJobAutoConfiguration {
 
             DataSource dataSource = (DataSource)this.applicationContext.getBean(dataSourceRef);
             JobEventRdbConfiguration jobEventRdbConfiguration = new JobEventRdbConfiguration(dataSource);
-            SpringJobScheduler jobScheduler = new SpringJobScheduler(elasticJob, regCenter, liteJobConfiguration, jobEventRdbConfiguration, new ElasticJobListener[0]);
+            SpringJobScheduler jobScheduler = new SpringJobScheduler(elasticJob, regCenter, liteJobConfiguration, jobEventRdbConfiguration);
             jobScheduler.init();
         } else {
-            SpringJobScheduler jobScheduler = new SpringJobScheduler(elasticJob, regCenter, liteJobConfiguration, new ElasticJobListener[0]);
+            SpringJobScheduler jobScheduler = new SpringJobScheduler(elasticJob, regCenter, liteJobConfiguration);
             jobScheduler.init();
         }
     }

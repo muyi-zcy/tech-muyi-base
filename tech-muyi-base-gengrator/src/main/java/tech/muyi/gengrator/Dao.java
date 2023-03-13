@@ -18,7 +18,7 @@ public class Dao {
                     builder.author(System.getProperty("user.name")) // 设置作者
                             .enableSwagger() // 开启 swagger 模式
                             .fileOverride() // 覆盖已生成文件
-                            .dateType(DateType.ONLY_DATE)
+                            .dateType(DateType.TIME_PACK)
                             .outputDir(path +"/"+projectName + "/" +projectName+"-core"+"/src/main/java"); // 指定输出目录
                 })
                 .packageConfig(builder -> {

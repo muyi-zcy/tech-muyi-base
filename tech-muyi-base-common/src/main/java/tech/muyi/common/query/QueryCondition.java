@@ -1,8 +1,10 @@
 package tech.muyi.common.query;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -12,9 +14,35 @@ import java.util.List;
  * version: 1.0
  */
 @Data
-public class QueryCondition{
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class QueryCondition {
     private String column;
-    private String condition;
+    @Builder.Default
+    private String operator = "and";
     private Object value;
     private List<QueryCondition> children;
+
+    public String getDbColumn() {
+        return toUnderlineCase(this.column);
+    }
+
+    private static String toUnderlineCase(String camelCaseStr) {
+        if (camelCaseStr == null) {
+            return null;
+        }
+        // 将驼峰字符串转换成数组
+        char[] charArray = camelCaseStr.toCharArray();
+        StringBuffer buffer = new StringBuffer();
+        //处理字符串
+        for (int i = 0, l = charArray.length; i < l; i++) {
+            if (charArray[i] >= 65 && charArray[i] <= 90) {
+                buffer.append("_").append(charArray[i] += 32);
+            } else {
+                buffer.append(charArray[i]);
+            }
+        }
+        return buffer.toString();
+    }
 }

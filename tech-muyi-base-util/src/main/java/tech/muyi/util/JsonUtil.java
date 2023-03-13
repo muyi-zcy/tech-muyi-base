@@ -16,9 +16,7 @@ import java.util.*;
 public class JsonUtil {
     private static Gson gson = null;
     static {
-        if (gson == null) {
-            gson= new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-        }
+        gson= new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
     }
 
     public static String toJson(Object src) {

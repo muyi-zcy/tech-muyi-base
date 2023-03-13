@@ -42,9 +42,9 @@ public class Swagger3Config {
     @Bean
     public Docket createRestApi() {
 
-//        只在开发环境和本地环境提供接口文档
+        // 只在开发环境和本地环境提供接口文档
         boolean enable = ProfileActiveEnum.LOCAL.getCode().equals(profileActive) || ProfileActiveEnum.DEV.getCode().equals(profileActive);
-        //返回文档摘要信息
+        // 返回文档摘要信息
         return new Docket(DocumentationType.OAS_30)
                 .enable(enable)
                 .apiInfo(apiInfo())
@@ -76,7 +76,7 @@ public class Swagger3Config {
                 .contact(new Contact(
                         StringUtils.isEmpty(contact.getName()) ? "沐乙老师傅" : contact.getName(),
                         StringUtils.isEmpty(contact.getUrl()) ? "https://github.com/muyi-zcy" : contact.getUrl(),
-                        StringUtils.isEmpty(contact.getEmail()) ? "zcy_nemo@aliyun.com" : contact.getName()))
+                        StringUtils.isEmpty(contact.getEmail()) ? "muyi_zcy@163.com" : contact.getName()))
                 .version(StringUtils.isEmpty(apiConfigProperties.getVersion()) ? "1.0" : apiConfigProperties.getVersion())
                 .build();
     }

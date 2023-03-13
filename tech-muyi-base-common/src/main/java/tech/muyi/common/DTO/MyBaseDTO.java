@@ -1,10 +1,13 @@
 package tech.muyi.common.DTO;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * @Author: muyi
@@ -13,9 +16,24 @@ import java.io.Serializable;
 @Data
 public class MyBaseDTO implements Serializable{
     private static final long serialVersionUID = 1L;
-    private Long id;
-    private String creator;
-    private String operator;
-    private Integer bizType;
-    private String extAtt;
+    @ApiModelProperty("id")
+    protected Long id;
+
+    @ApiModelProperty("创建时间")
+    protected LocalDateTime gmtCreate;
+
+    @ApiModelProperty("修改时间")
+    protected LocalDateTime gmtModified;
+
+    @ApiModelProperty("业务类型")
+    protected Integer bizType;
+
+    @ApiModelProperty("拓展内容")
+    protected String extAtt;
+
+    @ApiModelProperty("创建人")
+    protected String creator;
+
+    @ApiModelProperty("修改人")
+    protected String operator;
 }

@@ -46,7 +46,6 @@ public class ${table.controllerName} {
 
         Boolean cnt = ${entity?uncap_first}Service.save(${entity?uncap_first}DTO);
         return MyResult.ok(cnt);
-
     }
 
 
@@ -65,7 +64,6 @@ public class ${table.controllerName} {
 
         Boolean cnt = ${entity?uncap_first}Service.delete(id);
         return MyResult.ok(cnt);
-
     }
 
     /**
@@ -84,7 +82,6 @@ public class ${table.controllerName} {
 
         Boolean cnt = ${entity?uncap_first}Service.update(${entity?uncap_first}DTO);
         return MyResult.ok(cnt);
-
     }
 
 
@@ -104,7 +101,6 @@ public class ${table.controllerName} {
 
         ${entity}DTO ${entity?uncap_first}DTO = ${entity?uncap_first}Service.getById(id);
         return MyResult.ok(${entity?uncap_first}DTO);
-
     }
 
     /**
@@ -123,6 +119,5 @@ public class ${table.controllerName} {
         //分页
         List<${entity}DTO> list = ${entity?uncap_first}Service.query(${entity?uncap_first}Query);
         return MyResult.ok(list,${entity?uncap_first}Query);
-
     }
 }

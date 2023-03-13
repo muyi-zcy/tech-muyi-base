@@ -18,7 +18,7 @@ public class CookieUtils {
      *
      * @param request    请求
      * @param cookieName Cookie名称
-     * @return
+     * @return Cookie
      */
     public static String getCookieValue(HttpServletRequest request, String cookieName) {
         return getCookieValue(request, cookieName, false);
@@ -30,7 +30,7 @@ public class CookieUtils {
      * @param request    请求
      * @param cookieName Cookie名称
      * @param isDecoder  是否解码
-     * @return
+     * @return Cookie
      */
     public static String getCookieValue(HttpServletRequest request, String cookieName, boolean isDecoder) {
         Cookie[] cookieList = request.getCookies();
@@ -39,12 +39,12 @@ public class CookieUtils {
         }
         String retValue = null;
         try {
-            for (int i = 0; i < cookieList.length; i++) {
-                if (cookieList[i].getName().equals(cookieName)) {
+            for (Cookie cookie : cookieList) {
+                if (cookie.getName().equals(cookieName)) {
                     if (isDecoder) {
-                        retValue = URLDecoder.decode(cookieList[i].getValue(), "UTF-8");
+                        retValue = URLDecoder.decode(cookie.getValue(), "UTF-8");
                     } else {
-                        retValue = cookieList[i].getValue();
+                        retValue = cookie.getValue();
                     }
                     break;
                 }
@@ -61,7 +61,7 @@ public class CookieUtils {
      * @param request      请求
      * @param cookieName   Cookie名称
      * @param encodeString 编码格式
-     * @return
+     * @return Cookie
      */
     public static String getCookieValue(HttpServletRequest request, String cookieName, String encodeString) {
         Cookie[] cookieList = request.getCookies();
@@ -70,9 +70,9 @@ public class CookieUtils {
         }
         String retValue = null;
         try {
-            for (int i = 0; i < cookieList.length; i++) {
-                if (cookieList[i].getName().equals(cookieName)) {
-                    retValue = URLDecoder.decode(cookieList[i].getValue(), encodeString);
+            for (Cookie cookie : cookieList) {
+                if (cookie.getName().equals(cookieName)) {
+                    retValue = URLDecoder.decode(cookie.getValue(), encodeString);
                     break;
                 }
             }
@@ -169,7 +169,7 @@ public class CookieUtils {
      * @param cookieMaxage cookie生效的最大秒数
      * @param isEncode     是否编码
      */
-    private static final void doSetCookie(HttpServletRequest request, HttpServletResponse response, String cookieName, String cookieValue, int cookieMaxage, boolean isEncode) {
+    private static void doSetCookie(HttpServletRequest request, HttpServletResponse response, String cookieName, String cookieValue, int cookieMaxage, boolean isEncode) {
         try {
             if (cookieValue == null) {
                 cookieValue = "";
@@ -204,7 +204,7 @@ public class CookieUtils {
      * @param cookieMaxage cookie生效的最大秒数
      * @param encodeString 编码格式
      */
-    private static final void doSetCookie(HttpServletRequest request, HttpServletResponse response, String cookieName, String cookieValue, int cookieMaxage, String encodeString) {
+    private static void doSetCookie(HttpServletRequest request, HttpServletResponse response, String cookieName, String cookieValue, int cookieMaxage, String encodeString) {
         try {
             if (cookieValue == null) {
                 cookieValue = "";
@@ -233,12 +233,12 @@ public class CookieUtils {
      * 得到cookie的域名
      *
      * @param request 请求
-     * @return
+     * @return 域名
      */
-    private static final String getDomainName(HttpServletRequest request) {
+    private static String getDomainName(HttpServletRequest request) {
         String domainName = null;
         String serverName = request.getRequestURL().toString();
-        if (serverName == null || serverName.equals("")) {
+        if (serverName.equals("")) {
             domainName = "";
         } else {
             serverName = serverName.toLowerCase();
@@ -258,7 +258,7 @@ public class CookieUtils {
             }
         }
 
-        if (domainName != null && domainName.indexOf(":") > 0) {
+        if (domainName.indexOf(":") > 0) {
             String[] ary = domainName.split("\\:");
             domainName = ary[0];
         }

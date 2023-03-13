@@ -28,6 +28,12 @@
             <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-on</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>tech.muyi</groupId>
+            <artifactId>tech-muyi-base-config</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-util</artifactId>

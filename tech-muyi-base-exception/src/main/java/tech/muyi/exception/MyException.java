@@ -30,6 +30,12 @@ public class MyException extends RuntimeException {
         this.errorMsg = joinError(errorInfoInterface.getResultMsg(), errorDetail);
     }
 
+    public MyException(BaseErrorInfoInterface errorInfoInterface, String errorDetail, Throwable cause) {
+        super(errorInfoInterface.getResultCode());
+        this.errorCode = errorInfoInterface.getResultCode();
+        this.errorMsg = joinError(errorInfoInterface.getResultMsg(), errorDetail, cause);
+    }
+
     public MyException(BaseErrorInfoInterface errorInfoInterface, Throwable cause) {
         super(errorInfoInterface.getResultCode(), cause);
         this.errorCode = errorInfoInterface.getResultCode();
@@ -99,6 +105,13 @@ public class MyException extends RuntimeException {
     private String joinError(String errorMsg, Throwable cause) {
         if (cause != null && cause.getMessage() != null && !"".equals(cause.getMessage())) {
             return errorMsg.concat(";错误详情:").concat(cause.getMessage());
+        }
+        return errorMsg;
+    }
+
+    private String joinError(String errorMsg, String errorDetail, Throwable cause) {
+        if (cause != null && cause.getMessage() != null && !"".equals(cause.getMessage())) {
+            return errorMsg.concat(";错误详情:").concat("(").concat(errorDetail).concat(")").concat(cause.getMessage());
         }
         return errorMsg;
     }

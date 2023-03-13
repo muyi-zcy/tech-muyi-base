@@ -28,7 +28,7 @@
     <dependencies>
         <dependency>
             <groupId>tech.muyi</groupId>
-            <artifactId>tech-muyi-base-db</artifactId>
+            <artifactId>tech-muyi-base-core</artifactId>
             <version>${project.version}</version>
         </dependency>
 
@@ -52,6 +52,11 @@
         <dependency>
             <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-util</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>tech.muyi</groupId>
+            <artifactId>tech-muyi-base-id</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

@@ -1,47 +1,29 @@
 package tech.muyi.common.constant.enumtype;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
+import lombok.Getter;
+
 /**
  * description: DeviceEnum
  * date: 2021/11/13 22:09
  * author: muyi
  * version: 1.0
  */
-public enum DeviceEnum {
+@Getter
+public enum DeviceEnum implements CommonEnum<Integer>{
     MOBILE(1,"MOBILE"),
     TABLET(2,"TABLET"),
     NORMAL(3,"NORMAL"),
     OTHER(4,"OTHER");
 
+    @EnumValue
     private Integer code;
 
-    private String desc;
+    private String name;
 
-    DeviceEnum(int code,String desc) {
+    DeviceEnum(int code,String name) {
         this.code = code;
-        this.desc = desc;
+        this.name = name;
     }
 
-    public Integer getCode() {
-        return this.code;
-    }
-
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-    public static String getDesc(Integer code){
-        for(DeviceEnum item : DeviceEnum.values()){
-            if(item.getCode().equals(code)){
-                return item.getDesc();
-            }
-        }
-        return OTHER.getDesc();
-    }
 }

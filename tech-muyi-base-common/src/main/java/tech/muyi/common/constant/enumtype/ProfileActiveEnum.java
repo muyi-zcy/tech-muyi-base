@@ -1,5 +1,9 @@
 package tech.muyi.common.constant.enumtype;
 
+import com.baomidou.mybatisplus.annotation.EnumValue;
+import lombok.Getter;
+import org.checkerframework.checker.units.qual.C;
+
 import java.util.Objects;
 
 /**
@@ -8,43 +12,20 @@ import java.util.Objects;
  * author: muyi
  * version: 1.0
  */
-public enum ProfileActiveEnum {
+@Getter
+public enum ProfileActiveEnum implements CommonEnum<String> {
     LOCAL("local","本地环境"),
     DEV("dev","开发环境"),
     PRE("pre","预发环境"),
     PROD("prod","生产环境");
 
+    @EnumValue
     private String code;
 
-    private String desc;
+    private String name;
 
-    ProfileActiveEnum(String code,String desc) {
+    ProfileActiveEnum(String code,String name) {
         this.code = code;
-        this.desc = desc;
-    }
-
-    public String getCode() {
-        return this.code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    public static String getDesc(String code){
-        for(ProfileActiveEnum item : ProfileActiveEnum.values()){
-            if(Objects.equals(item.getCode(), code)){
-                return item.getDesc();
-            }
-        }
-        return DEV.getDesc();
+        this.name = name;
     }
 }

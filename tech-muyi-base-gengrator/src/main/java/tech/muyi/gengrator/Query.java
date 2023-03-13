@@ -17,7 +17,7 @@ public class Query {
                     builder.author(System.getProperty("user.name")) // 设置作者
                             .enableSwagger() // 开启 swagger 模式
                             .fileOverride() // 覆盖已生成文件
-                            .dateType(DateType.ONLY_DATE)
+                            .dateType(DateType.TIME_PACK)
                             .outputDir(path +"/"+projectName + "/" +projectName+"-client"+"/src/main/java"); // 指定输出目录
                 })
                 .packageConfig(builder -> {
@@ -36,6 +36,7 @@ public class Query {
                             .versionColumnName("row_version")
                             .logicDeleteColumnName("row_status")
                             .formatFileName("%sQuery")
+                            .addSuperEntityColumns("row_version","row_status")
                             .build(); // 设置过滤表前缀
                 })
                 .injectionConfig(builder -> {

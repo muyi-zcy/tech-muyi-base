@@ -19,4 +19,6 @@
 /tech-muyi-base-rpc/target/
 /tech-muyi-base-util/target/
 /.idea/
-/.idea/
+/tech-muyi-base-core/target/
+/**/target/
+/**/**/target/

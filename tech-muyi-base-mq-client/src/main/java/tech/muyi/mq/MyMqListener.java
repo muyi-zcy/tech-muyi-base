@@ -19,7 +19,7 @@ import java.util.List;
  * @Date: 2021/1/31 3:57
  */
 @Slf4j
-public class MyMqListener  implements MessageListenerConcurrently {
+public class MyMqListener implements MessageListenerConcurrently {
     private MyMqMessageListener myMqMessageListener;
 
     public MyMqListener() {
@@ -32,10 +32,6 @@ public class MyMqListener  implements MessageListenerConcurrently {
 
             for (MessageExt messageExt : list) {
                 String msgId = messageExt.getMsgId();
-                if (null != msgId) {
-                    MDC.put("traceId", msgId);
-                }
-
                 String topic = messageExt.getTopic();
                 String tags = messageExt.getTags();
                 int reconsumeTimes = messageExt.getReconsumeTimes();

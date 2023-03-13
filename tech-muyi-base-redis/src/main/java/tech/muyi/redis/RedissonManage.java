@@ -52,7 +52,7 @@ public class RedissonManage {
 
     public String getKey(String key){
         if(this.PREFIX == null){
-            this.PREFIX = environment.getProperty("spring.application.name").concat(":");
+            this.PREFIX = Objects.requireNonNull(environment.getProperty("spring.application.name")).concat(":");
         }
         if(key == null || "".equals(key)){
             throw new MyException(RedisErrorCodeEnum.REDIS_KEY_NULL);

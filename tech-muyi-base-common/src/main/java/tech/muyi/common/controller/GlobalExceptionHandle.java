@@ -28,15 +28,15 @@ public class GlobalExceptionHandle {
     @ResponseStatus(
             code = HttpStatus.OK
     )
-    public MyResult<String> handleSntException(MyException e) {
-        log.error("业务处理异常:", e);
-        return MyResult.fail(e);
+    public MyResult<String> handleMyException(MyException myException) {
+        log.error("业务处理异常:", myException);
+        return MyResult.fail(myException);
     }
 
-    @ExceptionHandler({Exception.class})
+    @ExceptionHandler({Throwable.class})
     @ResponseBody
-    public MyResult<Object> handleException(Exception e) {
-        log.error("内部未知异常", e);
-        return MyResult.fail(new UnknownException(e));
+    public MyResult<Object> handleThrowable(Throwable throwable) {
+        log.error("内部未知异常", throwable);
+        return MyResult.fail(new UnknownException(throwable));
     }
 }

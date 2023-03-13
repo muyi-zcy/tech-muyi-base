@@ -9,7 +9,7 @@ import tech.muyi.exception.sdk.anno.ErrorCodeInfoAnno;
  **/
 @ErrorCodeInfoAnno(name = "非关系型数据库(redis)错误码",parentCode = "cache-error-code", code = "cache-redis-error-code", desc = "非关系型数据库错误码-redis")
 public enum RedisErrorCodeEnum implements BaseErrorInfoInterface {
-    REDIS_KEY_NULL("","")
+    REDIS_KEY_NULL("4110","key is null")
     ;
 
     /** 错误码 */

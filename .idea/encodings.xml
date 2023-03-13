@@ -2,6 +2,22 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-starter-parent/2.1.7.RELEASE/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-db-plugin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-db-plugin/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-dubbo-plugin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-dubbo-plugin/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-okhttp-plugin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-okhttp-plugin/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-redis-plugin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-redis-plugin/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-rocketmq-plugin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-rocketmq-plugin/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-springmvc-plugin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-springmvc-plugin/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-log-plugins/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-log-plugins/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-api/src/main/java" charset="UTF-8" />
@@ -14,12 +30,16 @@
     <file url="file://$PROJECT_DIR$/tech-muyi-base-config/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-context/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-context/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tech-muyi-base-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tech-muyi-base-core/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-db/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-db/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-dependencies/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-dependencies/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-exception/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-exception/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tech-muyi-base-id/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tech-muyi-base-id/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-job-easy/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-job-easy/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-job-elastic/src/main/java" charset="UTF-8" />
@@ -34,6 +54,8 @@
     <file url="file://$PROJECT_DIR$/tech-muyi-base-mq-server/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-mq/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-mq/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tech-muyi-base-okhttp/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tech-muyi-base-okhttp/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-on/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-on/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-oss/src/main/java" charset="UTF-8" />
@@ -43,6 +65,8 @@
     <file url="file://$PROJECT_DIR$/tech-muyi-base-registry/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-registry/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-rpc/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tech-muyi-base-tm/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tech-muyi-base-tm/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-util/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-util/src/main/resources" charset="UTF-8" />
   </component>

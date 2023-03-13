@@ -5,6 +5,7 @@ import tech.muyi.common.DO.MyBaseDO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import java.time.LocalDateTime;
 import java.util.*;
 /**
 * <p>
@@ -26,9 +27,6 @@ private static final long serialVersionUID = 1L;
   <#assign keyPropertyName="${field.propertyName}"/>
  </#if>
 
- /**
- * ${field.comment}
- */
  @ApiModelProperty("${field.comment}")
  <#if field.keyFlag>
  <#-- 主键 -->

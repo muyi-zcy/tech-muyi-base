@@ -1,6 +1,6 @@
 package tech.muyi.common;
 
-import tech.muyi.common.query.BaseQuery;
+import tech.muyi.common.query.MyBaseQuery;
 import tech.muyi.exception.MyException;
 
 import java.io.Serializable;
@@ -13,7 +13,7 @@ public class MyResult<T> implements Serializable {
     private static final long serialVersionUID = 2994494589314183496L;
     private boolean success;
     private T data;
-    private BaseQuery query;
+    private MyBaseQuery query;
     private String errCode;
     private String errMsg;
 
@@ -21,7 +21,7 @@ public class MyResult<T> implements Serializable {
     }
 
 
-    public static <T> MyResult ok(T data, BaseQuery query) {
+    public static <T> MyResult ok(T data, MyBaseQuery query) {
         MyResult<T> result = new MyResult();
         result.setData(data);
         result.setQuery(query);
@@ -63,11 +63,11 @@ public class MyResult<T> implements Serializable {
         this.data = data;
     }
 
-    public BaseQuery getQuery() {
+    public MyBaseQuery getQuery() {
         return this.query;
     }
 
-    public void setQuery(BaseQuery query) {
+    public void setQuery(MyBaseQuery query) {
         this.query = query;
     }
 

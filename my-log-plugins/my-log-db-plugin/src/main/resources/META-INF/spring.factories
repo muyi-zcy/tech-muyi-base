@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+tech.muyi.db.config.MyLogDbAutoConfiguration

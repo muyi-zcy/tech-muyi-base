@@ -17,7 +17,7 @@ public class Dto {
                     builder.author(System.getProperty("user.name")) // 设置作者
                             .enableSwagger() // 开启 swagger 模式
                             .fileOverride() // 覆盖已生成文件
-                            .dateType(DateType.ONLY_DATE)
+                            .dateType(DateType.TIME_PACK)
                             .outputDir(path +"/"+projectName + "/" +projectName+"-client"+"/src/main/java"); // 指定输出目录
                 })
                 .packageConfig(builder -> {
@@ -36,7 +36,7 @@ public class Dto {
                             .versionColumnName("row_version")
                             .logicDeleteColumnName("row_status")
                             .formatFileName("%sDTO")
-                            .addSuperEntityColumns("id", "biz_type","ext_att","creator","operator")
+                            .addSuperEntityColumns("id", "biz_type","ext_att","creator","operator","gmt_create","gmt_modified","row_version","row_status")
                             .build(); // 设置过滤表前缀
                 })
                 .injectionConfig(builder -> {

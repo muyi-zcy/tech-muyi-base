@@ -3,7 +3,6 @@ package tech.muyi.dubbo.filter;
 import org.apache.dubbo.common.constants.CommonConstants;
 import org.apache.dubbo.common.extension.Activate;
 import org.apache.dubbo.rpc.*;
-import tech.muyi.dubbo.RpcLogRecordContext;
 
 /**
  * description: ConsumerContextFilter
@@ -15,9 +14,8 @@ import tech.muyi.dubbo.RpcLogRecordContext;
 public class RpcConsumerContextFilter implements Filter {
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
-        if (RpcContext.getContext().isConsumerSide()) {
+        if (org.apache.dubbo.rpc.RpcContext.getContext().isConsumerSide()) {
             // 消费者
-            RpcLogRecordContext.onceRpcConsumerLogRecord();
         }
         return invoker.invoke(invocation);
     }

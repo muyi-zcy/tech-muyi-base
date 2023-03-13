@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="EntryPointsManager">
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="lombok.Data" />
+    </list>
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">
@@ -11,9 +16,12 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/tech-muyi-base-auth/pom.xml" />
+        <option value="$PROJECT_DIR$/tech-muyi-base-context/pom.xml" />
+        <option value="$PROJECT_DIR$/tech-muyi-base-db/pom.xml" />
         <option value="$PROJECT_DIR$/tech-muyi-base-gateway/pom.xml" />
         <option value="$PROJECT_DIR$/tech-muyi-base-job-quartz/pom.xml" />
         <option value="$PROJECT_DIR$/tech-muyi-base-registry/pom.xml" />
+        <option value="$PROJECT_DIR$/tech-muyi-base-tm/pom.xml" />
       </set>
     </option>
   </component>

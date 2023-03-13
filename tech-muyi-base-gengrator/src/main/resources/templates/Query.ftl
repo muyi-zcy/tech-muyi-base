@@ -1,14 +1,14 @@
 package ${package.Entity};
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.Version;
-import tech.muyi.common.query.BaseQuery;
+import lombok.experimental.Tolerate;
+import tech.muyi.common.query.MyBaseQuery;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import java.util.*;
+import lombok.Builder;
+import java.time.LocalDateTime;
+
+
 /**
 * <p>
     * ${table.comment!}
@@ -18,19 +18,21 @@ import java.util.*;
 * @since ${date}
 */
 @Data
+@Builder
 @ApiModel(value = "${entity}对象", description = "${table.comment!}")
-public class ${entity} extends BaseQuery {
+public class ${entity} extends MyBaseQuery {
 
     private static final long serialVersionUID = 1L;
+
+    @Tolerate
+    public ${entity}() {}
 <#-- ----------  BEGIN 字段循环遍历  ---------->
 <#list table.fields as field>
     <#if field.keyFlag>
         <#assign keyPropertyName="${field.propertyName}"/>
     </#if>
 
-    /**
-    * ${field.comment}
-    */
+
     @ApiModelProperty("${field.comment}")
     <#if field.keyFlag>
     <#-- 主键 -->
