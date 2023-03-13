@@ -22,3 +22,6 @@
 /tech-muyi-base-core/target/
 /**/target/
 /**/**/target/
+/.flattened-pom.xml
+/**/.flattened-pom.xml
+/**/**/.flattened-pom.xml

@@ -32,6 +32,10 @@
             <artifactId>tech-muyi-base-on</artifactId>
         </dependency>
         <dependency>
+            <groupId>tech.muyi</groupId>
+            <artifactId>tech-muyi-base-common</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-spring-boot-starter</artifactId>
         </dependency>
