@@ -45,11 +45,6 @@
         </dependency>
 
         <dependency>
-            <groupId>tech.muyi</groupId>
-            <artifactId>tech-muyi-base-context</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
