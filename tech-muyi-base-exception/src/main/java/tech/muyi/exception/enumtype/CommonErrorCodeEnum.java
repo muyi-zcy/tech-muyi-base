@@ -115,6 +115,7 @@ public enum CommonErrorCodeEnum implements BaseErrorInfoInterface {
     NULL_POINTER("10002", "空指针异常"),
     FLOW_EXCEPTION("10003", "限流"),
     SERIALIZATION_FAIL("10004","序列化失败"),
+    DESERIALIZATION_FAIL("10005","反序列化失败"),
     ;
 
     /** 错误码 */

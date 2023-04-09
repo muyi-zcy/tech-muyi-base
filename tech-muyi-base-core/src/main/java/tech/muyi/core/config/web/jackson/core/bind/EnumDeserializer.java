@@ -7,8 +7,10 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.deser.ContextualDeserializer;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.util.StringUtils;
 import tech.muyi.common.constant.enumtype.CommonEnum;
 import tech.muyi.core.config.web.convert.EnumConvertFactory;
@@ -18,6 +20,8 @@ import java.util.Arrays;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
 public class EnumDeserializer extends JsonDeserializer<Enum<?>> implements ContextualDeserializer {
     private Class<?> target;
 
@@ -30,12 +34,12 @@ public class EnumDeserializer extends JsonDeserializer<Enum<?>> implements Conte
         if (IEnum.class.isAssignableFrom(target)) {
             return (Enum<?>) EnumConvertFactory.getEnum((Class) target, jsonParser.getText());
         }
-        return defaultEnumTransform(target,jsonParser.getText());
+        return defaultEnumTransform(target, jsonParser.getText());
     }
 
 
     @Override
-    public JsonDeserializer<?> createContextual(DeserializationContext ctx, BeanProperty property) throws JsonMappingException {
+    public JsonDeserializer<?> createContextual(DeserializationContext ctx, BeanProperty property) {
         Class<?> rawCls = ctx.getContextualType().getRawClass();
         EnumDeserializer enumDeserializer = new EnumDeserializer();
         enumDeserializer.setTarget(rawCls);
@@ -46,7 +50,17 @@ public class EnumDeserializer extends JsonDeserializer<Enum<?>> implements Conte
     public static Enum<?> defaultEnumTransform(Class<?> type, String indexString) {
         Enum<?>[] enumConstants = (Enum<?>[]) type.getEnumConstants();
         try {
-            return Arrays.stream(enumConstants).filter(it -> it instanceof CommonEnum).filter(it -> it.name().equals(indexString) || ((CommonEnum<?>) it).getCode().toString().equals(indexString)).findFirst().orElse(null);
+            for (Enum<?> enumConstant : enumConstants) {
+                if (!(enumConstant instanceof CommonEnum)) {
+                    continue;
+                }
+                if (enumConstant.name().equals(indexString)
+                        || ((CommonEnum<?>) enumConstant).getName().equals(indexString)
+                        || ((CommonEnum<?>) enumConstant).getCode().toString().equals(indexString)) {
+                    return enumConstant;
+                }
+            }
+            return null;
         } catch (NumberFormatException e) {
             return null;
         }

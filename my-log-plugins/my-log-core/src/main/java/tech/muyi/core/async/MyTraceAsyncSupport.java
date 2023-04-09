@@ -14,7 +14,7 @@ public class MyTraceAsyncSupport extends AbstractAsyncSupport {
 
     private final long tid = Thread.currentThread().getId();
 
-    private MyTracer myTracer;
+    private MyTracer myTracer = null;
 
     public MyTraceAsyncSupport(MyTracer myTracer) {
         this.myTracer = myTracer;
