@@ -4,13 +4,10 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import org.springframework.beans.factory.SmartInitializingSingleton;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 import tech.muyi.core.config.web.jackson.core.bind.*;
 
 import java.math.BigDecimal;
@@ -29,7 +26,6 @@ public class JacksonConfig  {
         simpleModule
                 .addDeserializer(Enum.class, new EnumDeserializer())
                 .addSerializer(BigDecimal.class, BigDecimalSerializer.INSTANCE)
-                .addSerializer(Date.class, DateSerializer.INSTANCE)
                 .addSerializer(Long.class, LongSerializer.INSTANCE)
                 .addDeserializer(LocalDateTime.class, LocalDateTimeDeserializer.INSTANCE)
                 .addSerializer(LocalDateTime.class, LocalDateTimeSerializer.INSTANCE);
