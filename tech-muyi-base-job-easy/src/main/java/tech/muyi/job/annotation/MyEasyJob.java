@@ -8,9 +8,10 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MyEasyJob {
+    String id();
 
-    String cron() default "";
+    String cron();
 
-    String jobName() default "";
+    String jobName();
 
 }

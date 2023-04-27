@@ -8,6 +8,8 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MyElasticJob {
+    String id();
+
     String cron() default "";
 
     String jobName() default "";

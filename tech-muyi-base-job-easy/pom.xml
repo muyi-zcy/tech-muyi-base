@@ -32,5 +32,13 @@
             <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-on</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>tech.muyi</groupId>
+            <artifactId>tech-muyi-base-redis</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+
     </dependencies>
 </project>

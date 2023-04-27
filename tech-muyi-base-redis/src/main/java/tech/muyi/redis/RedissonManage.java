@@ -104,14 +104,24 @@ public class RedissonManage {
      * @param leaseTime 续期时间
      * @return
      */
-    public boolean tryLock(String lockKey, TimeUnit unit, long waitTime, long leaseTime) {
+    public RLock tryLock(String lockKey, TimeUnit unit, long waitTime, long leaseTime) {
         RLock lock = this.redissonClient.getLock(getKey(lockKey));
 
         try {
-            return lock.tryLock(waitTime, leaseTime, unit);
+            lock.tryLock(waitTime, leaseTime, unit);
+            return lock;
         } catch (InterruptedException e) {
             throw new MyException(e);
         }
+    }
+    /**
+     * 获取分布式锁
+     * @param lockKey key
+     * @return
+     */
+    public boolean tryLock(String lockKey) {
+        RLock lock = this.redissonClient.getLock(getKey(lockKey));
+        return lock.tryLock();
     }
 
 
@@ -122,7 +132,7 @@ public class RedissonManage {
     public void unlock(String lockKey) {
         try {
             RLock lock = this.redissonClient.getLock(getKey(lockKey));
-            if(lock.isLocked()) {
+            if(lock.isLocked() && lock.isHeldByCurrentThread()) {
                 lock.unlock();
             }
         } catch (Exception e) {
@@ -136,7 +146,7 @@ public class RedissonManage {
      */
     public void unlock(RLock lock) {
         try {
-            if(lock.isLocked()) {
+            if(lock.isLocked() && lock.isHeldByCurrentThread()) {
                 lock.unlock();
             }
         } catch (Exception e) {
