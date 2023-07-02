@@ -29,4 +29,10 @@ public enum AppSourceEnum implements CommonEnum<Integer>{
         this.code = code;
         this.name = name;
     }
+
+    static {
+        EnumCache.registerByName(AppSourceEnum.class, AppSourceEnum.values());
+        EnumCache.registerByValue(AppSourceEnum.class, AppSourceEnum.values(), AppSourceEnum::getCode);
+    }
+
 }

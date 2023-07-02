@@ -5,5 +5,5 @@ package tech.muyi.config.constant;
  * @date: 2022/11/24
  **/
 public interface Constants {
-    String NODE_ID = "MY-NODEID";
+    String NODE_ID = "MY_NODEID";
 }

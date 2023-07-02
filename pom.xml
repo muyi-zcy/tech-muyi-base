@@ -23,9 +23,7 @@
         <module>tech-muyi-base-util</module>
         <module>tech-muyi-base-config</module>
         <module>tech-muyi-base-message</module>
-        <module>tech-muyi-base-mq-common</module>
-        <module>tech-muyi-base-mq-client</module>
-        <module>tech-muyi-base-mq-server</module>
+        <module>tech-muyi-base-mq</module>
         <module>tech-muyi-base-rpc</module>
         <module>tech-muyi-base-gengrator</module>
         <module>tech-muyi-base-sentinel</module>
@@ -80,7 +78,6 @@
 
         <minio.version>7.0.2</minio.version>
 
-        <gson.version>2.9.0</gson.version>
         <hutool-all.version>5.7.22</hutool-all.version>
         <guava.version>30.0-jre</guava.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
@@ -100,7 +97,8 @@
         <elastic-job-lite-spring.version>2.1.5</elastic-job-lite-spring.version>
         <elastic-job-lite-lifecycle.version>2.1.5</elastic-job-lite-lifecycle.version>
 
-        <rocketmq-client.version>4.7.0</rocketmq-client.version>
+        <rocketmq-client.version>5.0.0</rocketmq-client.version>
+        <rocketmq.version>2.2.2</rocketmq.version>
 
         <redisson-spring-boot-starter.version>3.13.6</redisson-spring-boot-starter.version>
 
@@ -499,6 +497,12 @@
             </dependency>
 
             <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-spring-boot-starter</artifactId>
+                <version>${rocketmq.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-autoconfigure</artifactId>
                 <version>${spring-boot.version}</version>
@@ -567,11 +571,6 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.code.gson</groupId>
-                <artifactId>gson</artifactId>
-                <version>${gson.version}</version>
             </dependency>
 
             <dependency>

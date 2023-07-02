@@ -2,11 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
     <modelVersion>4.0.0</modelVersion>
-
+    <artifactId>tech-muyi-base-mq</artifactId>
     <groupId>tech.muyi</groupId>
-    <artifactId>tech-muyi-base-rpc</artifactId>
 
     <parent>
         <groupId>tech.muyi</groupId>
@@ -18,51 +16,38 @@
 
     <packaging>jar</packaging>
 
+
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
     <dependencies>
+
         <dependency>
-            <groupId>tech.muyi</groupId>
-            <artifactId>tech-muyi-base-on</artifactId>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>
             <groupId>tech.muyi</groupId>
-            <artifactId>tech-muyi-base-config</artifactId>
+            <artifactId>tech-muyi-base-common</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>tech.muyi</groupId>
-            <artifactId>tech-muyi-base-util</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-log</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <groupId>tech.muyi</groupId>
+            <artifactId>tech-muyi-base-util</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-dubbo</artifactId>
+            <groupId>tech.muyi</groupId>
+            <artifactId>tech-muyi-base-on</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>com.alibaba.spring</groupId>
-            <artifactId>spring-context-support</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
+            <groupId>tech.muyi</groupId>
+            <artifactId>tech-muyi-base-exception</artifactId>
         </dependency>
     </dependencies>
-
 </project>

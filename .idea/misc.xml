@@ -20,6 +20,8 @@
         <option value="$PROJECT_DIR$/tech-muyi-base-db/pom.xml" />
         <option value="$PROJECT_DIR$/tech-muyi-base-gateway/pom.xml" />
         <option value="$PROJECT_DIR$/tech-muyi-base-job-quartz/pom.xml" />
+        <option value="$PROJECT_DIR$/tech-muyi-base-mq-client/pom.xml" />
+        <option value="$PROJECT_DIR$/tech-muyi-base-mq-server/pom.xml" />
         <option value="$PROJECT_DIR$/tech-muyi-base-registry/pom.xml" />
         <option value="$PROJECT_DIR$/tech-muyi-base-tm/pom.xml" />
       </set>

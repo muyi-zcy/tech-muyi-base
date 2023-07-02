@@ -105,17 +105,14 @@ public enum CommonErrorCodeEnum implements BaseErrorInfoInterface {
     NETWORK_AUTHENTICATION_REQUIRED("511", "Network Authentication Required"),
 
 
-    UNKNOWN_EXCEPTION( "600", "未知异常"),
-    SERVER_BUSY("611","服务器限流"),
+    UNKNOWN_EXCEPTION( "600", "Unknown Exception"),
 
-
-
-    INVALID_PARAM( "10000", "参数不合法"),
-    DB_EXCEPTION("10001", "数据库异常"),
-    NULL_POINTER("10002", "空指针异常"),
-    FLOW_EXCEPTION("10003", "限流"),
-    SERIALIZATION_FAIL("10004","序列化失败"),
-    DESERIALIZATION_FAIL("10005","反序列化失败"),
+    INVALID_PARAM( "10000", "Invalid Param"),
+    DB_EXCEPTION("10001", "Db Exception"),
+    NULL_POINTER("10002", "Null Pointer Exception"),
+    CURRENT_LIMITING("10003", "Current Limiting"),
+    SERIALIZATION_FAIL("10004","Serialization Fail"),
+    DESERIALIZATION_FAIL("10005","Deserialization Fail"),
     ;
 
     /** 错误码 */

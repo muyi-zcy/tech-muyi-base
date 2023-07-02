@@ -1,10 +1,8 @@
 package tech.muyi.id.snowflake;
 
 import cn.hutool.core.date.SystemClock;
-import cn.hutool.core.exceptions.UtilException;
 import cn.hutool.core.net.NetUtil;
 import cn.hutool.core.util.RuntimeUtil;
-import cn.hutool.core.util.StrUtil;
 import tech.muyi.id.MyIdGenerator;
 import tech.muyi.id.properties.MyIdSnowflakeProperties;
 
@@ -84,11 +82,11 @@ public class DefaultSnowflakeImpl implements MyIdGenerator {
         }
 
         if (workerId > 31L || workerId < 0L) {
-            throw new IllegalArgumentException(StrUtil.format("worker Id can't be greater than {} or less than 0", new Object[]{31L}));
+            throw new IllegalArgumentException(String.format("worker Id can't be greater than %s or less than 0", 31L));
         }
 
         if (dataCenterId > 31L || dataCenterId < 0L) {
-            throw new IllegalArgumentException(StrUtil.format("datacenter Id can't be greater than {} or less than 0", new Object[]{31L}));
+            throw new IllegalArgumentException(String.format("datacenter Id can't be greater than %s or less than 0", 31L));
         }
 
     }
@@ -141,7 +139,7 @@ public class DefaultSnowflakeImpl implements MyIdGenerator {
                 timestamp = lastTimestamp;
             } else {
                 // 如果服务器时间有问题(时钟后退) 报错。
-                throw new IllegalStateException(StrUtil.format("Clock moved backwards. Refusing to generate id for {}ms", lastTimestamp - timestamp));
+                throw new IllegalStateException(String.format("Clock moved backwards. Refusing to generate id for %s ms", lastTimestamp - timestamp));
             }
         }
 
@@ -189,7 +187,7 @@ public class DefaultSnowflakeImpl implements MyIdGenerator {
         if (timestamp < lastTimestamp) {
             // 如果发现新的时间戳比上次记录的时间戳数值小，说明操作系统时间发生了倒退，报错
             throw new IllegalStateException(
-                    StrUtil.format("Clock moved backwards. Refusing to generate id for {}ms", lastTimestamp - timestamp));
+                    String.format("Clock moved backwards. Refusing to generate id for %s ms", lastTimestamp - timestamp));
         }
         return timestamp;
     }

@@ -7,17 +7,15 @@ import ${groupId}.core.entity.${entity}DO;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import tech.muyi.common.constant.enumtype.RowStatusEnum;
 import tech.muyi.core.db.MyQueryHelper;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.List;
 import tech.muyi.util.bean.MapperUtils;
+import tech.muyi.core.db.MyServiceImpl;
+
 
 /**
 * <p>
@@ -28,7 +26,7 @@ import tech.muyi.util.bean.MapperUtils;
 * @since ${date}
 */
 @Component
-public class ${entity}Manager  extends ServiceImpl<${entity}DAO, ${entity}DO>{
+public class ${entity}Manager extends MyServiceImpl<${entity}DAO, ${entity}DO>{
 
     @Resource
     private ${entity}DAO ${entity?uncap_first}DAO;
@@ -50,14 +48,11 @@ public class ${entity}Manager  extends ServiceImpl<${entity}DAO, ${entity}DO>{
         return this.list(queryWrapper);
     }
 
-    public List<${entity}DO> pageSelect(${entity}Query ${entity?uncap_first}Query){
-        IPage<${entity}DO> page = new Page<>(${entity?uncap_first}Query.getCurrent(),${entity?uncap_first}Query.getSize());
+    public List<${entity}DO> pageQuery(${entity}Query ${entity?uncap_first}Query){
         LambdaQueryWrapper<${entity}DO> lambdaQueryWrapper = MyQueryHelper.createQueryWrapper(${entity?uncap_first}Query);
         ${entity}DO ${entity?uncap_first}DO = MapperUtils.ORIKA.map(${entity}DO.class, ${entity?uncap_first}Query);
         lambdaQueryWrapper.setEntity(${entity?uncap_first}DO);
-        this.page(page, lambdaQueryWrapper);
-        MyQueryHelper.queryPageConfig(page,${entity?uncap_first}Query);
-        return page.getRecords();
+        return super.pageQuery(${entity?uncap_first}Query);
     }
 
     public Long queryCount(${entity}Query ${entity?uncap_first}Query) {

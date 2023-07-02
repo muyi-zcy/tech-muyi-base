@@ -5,7 +5,7 @@ import org.apache.dubbo.common.constants.CommonConstants;
 import org.apache.dubbo.common.extension.Activate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tech.muyi.util.JsonUtil;
+import tech.muyi.util.MyJson;
 
 /**
  * description: RpcProviderContextFilter
@@ -29,7 +29,7 @@ public class RpcProviderContextFilter implements Filter {
                 invocation.getMethodName() +
                 "()" +
                 " args:" +
-                JsonUtil.toJson(invocation.getArguments());
+                MyJson.toJson(invocation.getArguments());
         logger.info(beginLogMsg);
         long startTime = System.currentTimeMillis();
 
@@ -45,7 +45,7 @@ public class RpcProviderContextFilter implements Filter {
                 " result:{}," +
                 "use time:{}";
 
-        logger.info(endLogMsg, JsonUtil.toJson(result.getValue()), elapsed);
+        logger.info(endLogMsg, MyJson.toJson(result.getValue()), elapsed);
         return result;
     }
 }

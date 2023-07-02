@@ -25,4 +25,9 @@ public enum RowStatusEnum implements CommonEnum<Integer> {
         this.code = code;
         this.name = name;
     }
+
+    static {
+        EnumCache.registerByName(RowStatusEnum.class, RowStatusEnum.values());
+        EnumCache.registerByValue(RowStatusEnum.class, RowStatusEnum.values(), RowStatusEnum::getCode);
+    }
 }

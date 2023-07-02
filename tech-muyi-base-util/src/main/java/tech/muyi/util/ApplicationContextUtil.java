@@ -13,7 +13,7 @@ public class ApplicationContextUtil implements ApplicationContextAware {
 
     private static ApplicationContext applicationContext;
 
-    public static <T> T getBean(String beanName, Class<T> glass) {
+    public static <T> T getBean(String beanName, Class<T> glass)     {
         return applicationContext.getBean(beanName, glass);
     }
 

@@ -4,7 +4,6 @@ import lombok.Data;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * 服务信息，
  *
  * @author: muyi
  * @date: 2022/11/26

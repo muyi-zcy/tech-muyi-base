@@ -16,12 +16,17 @@ import java.util.Date;
 
 @Configuration
 public class JacksonConfig  {
+
     @Autowired
     private ObjectMapper objectMapper;
 
     @Bean
-    @ConditionalOnClass({ObjectMapper.class})
-    public ObjectMapper objectMapper(ObjectMapper objectMapper) {
+    public ObjectMapper objectMapper() {
+
+        if(objectMapper == null){
+            objectMapper = new ObjectMapper();
+        }
+
         SimpleModule simpleModule = new SimpleModule();
         simpleModule
                 .addDeserializer(Enum.class, new EnumDeserializer())

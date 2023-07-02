@@ -73,7 +73,7 @@ public class ${entity}ServiceImpl implements ${entity}Service {
 
     @Override
     public List<${entity}DTO> query(${entity}Query ${entity?uncap_first}Query) {
-        List<${entity}DO> list = ${entity?uncap_first}Manager.pageSelect(${entity?uncap_first}Query);
+        List<${entity}DO> list = ${entity?uncap_first}Manager.pageQuery(${entity?uncap_first}Query);
         if(CollectionUtils.isEmpty(list)){
             return new ArrayList();
         }
