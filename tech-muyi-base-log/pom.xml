@@ -62,5 +62,11 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>tech.muyi</groupId>
+            <artifactId>tech-muyi-base-tracer</artifactId>
+        </dependency>
+
     </dependencies>
 </project>

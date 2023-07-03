@@ -23,6 +23,7 @@
         <module name="tech-muyi-base-oss" />
         <module name="my-log-dubbo-plugin" />
         <module name="my-log-redis-plugin" />
+        <module name="tech-muyi-base-tracer" />
         <module name="tech-muyi-base-job-elastic" />
         <module name="tech-muyi-base-core" />
         <module name="tech-muyi-base-okhttp" />
