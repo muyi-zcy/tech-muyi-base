@@ -14,6 +14,7 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import tech.muyi.api.properties.ApiConfigProperties;
 import tech.muyi.common.constant.enumtype.ProfileActiveEnum;
 
@@ -30,6 +31,7 @@ import java.util.function.Predicate;
  */
 @Configuration
 @EnableOpenApi
+@EnableSwagger2
 @EnableConfigurationProperties({ApiConfigProperties.class})
 public class Swagger3Config {
 
@@ -93,6 +95,6 @@ public class Swagger3Config {
 
     // 设置多路径
     private Predicate<RequestHandler> getBasePackages() {
-        return RequestHandlerSelectors.withMethodAnnotation(Api.class);
+        return RequestHandlerSelectors.any();
     }
 }
