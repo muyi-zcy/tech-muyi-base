@@ -26,7 +26,7 @@ public class ErrorCodeHelper {
      * 获取系统内所有的状态码
      * @return
      */
-    public static List<ErrorCodoInfo> getAllErrorCode(){
+    public List<ErrorCodoInfo> getAllErrorCode(){
         List<ErrorCodoInfo> errorCodoInfoList =new ArrayList<>();
         Reflections reflections = new Reflections();
 
