@@ -30,16 +30,8 @@
         <module>tech-muyi-base-gengrator</module>
         <module>tech-muyi-base-sentinel</module>
         <module>tech-muyi-base-core</module>
-        <module>my-log-plugins</module>
-        <module>my-log-plugins/my-log-core</module>
-        <module>my-log-plugins/my-log-springmvc-plugin</module>
-        <module>my-log-plugins/my-log-dubbo-plugin</module>
-        <module>my-log-plugins/my-log-rocketmq-plugin</module>
-        <module>my-log-plugins/my-log-redis-plugin</module>
-        <module>my-log-plugins/my-log-db-plugin</module>
         <module>tech-muyi-base-id</module>
         <module>tech-muyi-base-okhttp</module>
-        <module>my-log-plugins/my-log-okhttp-plugin</module>
     </modules>
 
     <properties>
