@@ -36,4 +36,5 @@ public class MyBaseDO implements Serializable {
     protected String creator;
     @TableField(fill = FieldFill.INSERT_UPDATE)
     protected String operator;
+    private String tenantId;
 }

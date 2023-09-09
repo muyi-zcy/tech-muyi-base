@@ -36,7 +36,7 @@ public class Dto {
                             .versionColumnName("row_version")
                             .logicDeleteColumnName("row_status")
                             .formatFileName("%sDTO")
-                            .addSuperEntityColumns("id", "biz_type","ext_att","creator","operator","gmt_create","gmt_modified","row_version","row_status")
+                            .addSuperEntityColumns("id", "biz_type","ext_att","creator","operator","gmt_create","gmt_modified","row_version","row_status","tenant_id")
                             .build(); // 设置过滤表前缀
                 })
                 .injectionConfig(builder -> {

@@ -36,7 +36,7 @@ public class Query {
                             .versionColumnName("row_version")
                             .logicDeleteColumnName("row_status")
                             .formatFileName("%sQuery")
-                            .addSuperEntityColumns("row_version","row_status")
+                            .addSuperEntityColumns("row_version","row_status","tenant_id")
                             .build(); // 设置过滤表前缀
                 })
                 .injectionConfig(builder -> {
