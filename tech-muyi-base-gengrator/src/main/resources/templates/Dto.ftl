@@ -32,21 +32,6 @@ private static final long serialVersionUID = 1L;
 
 
     @ApiModelProperty("${field.comment}")
-    <#if field.keyFlag>
-    <#-- 主键 -->
-        @TableId(value = "${field.annotationColumnName}", type = IdType.AUTO)
-    <#-- 普通字段 -->
-    <#elseif field.convert>
-        @TableField("${field.annotationColumnName}")
-    </#if>
-<#-- 乐观锁注解 -->
-    <#if field.versionField>
-        @Version
-    </#if>
-<#-- 逻辑删除注解 -->
-    <#if field.logicDeleteField>
-        @TableLogic
-    </#if>
     private ${field.propertyType} ${field.propertyName};
 </#list>
 <#------------  END 字段循环遍历  ---------->

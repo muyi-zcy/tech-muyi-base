@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.Version;
 import lombok.Data;
-import tech.muyi.common.constant.enumtype.RowStatusEnum;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -37,4 +36,5 @@ public class MyBaseDO implements Serializable {
     protected String creator;
     @TableField(fill = FieldFill.INSERT_UPDATE)
     protected String operator;
+    private String tenantId;
 }

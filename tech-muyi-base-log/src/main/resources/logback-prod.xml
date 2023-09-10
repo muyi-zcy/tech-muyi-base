@@ -2,7 +2,7 @@
 
     <springProperty scope="context" name="APP" source="spring.application.name" />
 
-    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [${APP:-default}, [%X{traceId}] [%X{spanId}] [%thread] %-5level %logger{50} - %msg%n"/>
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} ${APP:-default}, [%X{traceId}] [%X{spanId}] [%thread] %-5level %logger{50} - %msg%n"/>
 
     <!--    本地调试控制台输出-->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">

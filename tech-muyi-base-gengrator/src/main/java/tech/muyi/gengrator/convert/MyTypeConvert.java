@@ -16,6 +16,7 @@ public class MyTypeConvert extends MySqlTypeConvert {
     public MyTypeConvert() {
     }
 
+    @Override
     public IColumnType processTypeConvert(GlobalConfig config, String fieldType) {
        return super.processTypeConvert(config,fieldType);
     }

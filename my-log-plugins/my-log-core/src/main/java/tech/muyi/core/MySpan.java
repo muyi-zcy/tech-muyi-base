@@ -5,15 +5,13 @@ import io.opentracing.Span;
 import io.opentracing.tag.Tag;
 import lombok.Data;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.MDC;
 import tech.muyi.core.constants.TracerConstants;
 import tech.muyi.core.context.MySpanContext;
 import tech.muyi.core.span.Log;
 import tech.muyi.core.span.Reference;
 import tech.muyi.core.tracer.TraceIdGenerator;
-import tech.muyi.core.utils.StringUtil;
-import tech.muyi.util.JsonUtil;
+import tech.muyi.util.MyJson;
 
 import java.util.*;
 
@@ -163,7 +161,7 @@ public class MySpan implements Span {
         this.setFinishMicros(finishMicros);
 //        this.myTracer.appendFinishedSpan(this);
         this.finished = true;
-        System.out.println(JsonUtil.toJson(this));
+        System.out.println(MyJson.toJson(this));
         mdc();
     }
 

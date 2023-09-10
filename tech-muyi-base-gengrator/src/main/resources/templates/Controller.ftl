@@ -8,6 +8,7 @@ import tech.muyi.exception.enumtype.CommonErrorCodeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ${groupId}.client.dto.${entity}DTO;
@@ -23,6 +24,7 @@ import ${groupId}.core.service.${entity}Service;
 * @since ${date}
 */
 @Slf4j
+@Api
 @RestController
 @RequestMapping("/api/${apiName}/${table.entityPath}")
 public class ${table.controllerName} {

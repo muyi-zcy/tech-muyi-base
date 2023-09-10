@@ -23,15 +23,22 @@
         <module>tech-muyi-base-util</module>
         <module>tech-muyi-base-config</module>
         <module>tech-muyi-base-message</module>
-        <module>tech-muyi-base-mq-common</module>
-        <module>tech-muyi-base-mq-client</module>
-        <module>tech-muyi-base-mq-server</module>
+        <module>tech-muyi-base-mq</module>
         <module>tech-muyi-base-rpc</module>
         <module>tech-muyi-base-gengrator</module>
         <module>tech-muyi-base-sentinel</module>
         <module>tech-muyi-base-core</module>
+        <module>my-log-plugins</module>
+        <module>my-log-plugins/my-log-core</module>
+        <module>my-log-plugins/my-log-springmvc-plugin</module>
+        <module>my-log-plugins/my-log-dubbo-plugin</module>
+        <module>my-log-plugins/my-log-rocketmq-plugin</module>
+        <module>my-log-plugins/my-log-redis-plugin</module>
+        <module>my-log-plugins/my-log-db-plugin</module>
         <module>tech-muyi-base-id</module>
         <module>tech-muyi-base-okhttp</module>
+        <module>my-log-plugins/my-log-okhttp-plugin</module>
+        <module>tech-muyi-base-tracer</module>
     </modules>
 
     <properties>
@@ -72,7 +79,6 @@
 
         <minio.version>7.0.2</minio.version>
 
-        <gson.version>2.9.0</gson.version>
         <hutool-all.version>5.7.22</hutool-all.version>
         <guava.version>30.0-jre</guava.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
@@ -92,13 +98,14 @@
         <elastic-job-lite-spring.version>2.1.5</elastic-job-lite-spring.version>
         <elastic-job-lite-lifecycle.version>2.1.5</elastic-job-lite-lifecycle.version>
 
-        <rocketmq-client.version>4.7.0</rocketmq-client.version>
+        <rocketmq-client.version>5.0.0</rocketmq-client.version>
+        <rocketmq.version>2.2.2</rocketmq.version>
 
         <redisson-spring-boot-starter.version>3.13.6</redisson-spring-boot-starter.version>
 
         <opentracing.version>0.33.0</opentracing.version>
         <opentracing.contrib.version>0.1.16</opentracing.contrib.version>
-
+        <sofatracer.version>3.1.1</sofatracer.version>
     </properties>
 
     <dependencyManagement>
@@ -239,6 +246,12 @@
             <dependency>
                 <groupId>tech.muyi</groupId>
                 <artifactId>tech-muyi-base-okhttp</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-tracer</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -491,6 +504,12 @@
             </dependency>
 
             <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-spring-boot-starter</artifactId>
+                <version>${rocketmq.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-autoconfigure</artifactId>
                 <version>${spring-boot.version}</version>
@@ -559,11 +578,6 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.code.gson</groupId>
-                <artifactId>gson</artifactId>
-                <version>${gson.version}</version>
             </dependency>
 
             <dependency>
@@ -647,6 +661,72 @@
                 <version>${opentracing.contrib.version}</version>
             </dependency>
 
+
+            <dependency>
+                <groupId>com.alipay.sofa</groupId>
+                <artifactId>tracer-core</artifactId>
+                <version>${sofatracer.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alipay.sofa</groupId>
+                <artifactId>tracer-extensions</artifactId>
+                <version>${sofatracer.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alipay.sofa</groupId>
+                <artifactId>sofa-tracer-springmvc-plugin</artifactId>
+                <version>${sofatracer.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alipay.sofa</groupId>
+                <artifactId>sofa-tracer-httpclient-plugin</artifactId>
+                <version>${sofatracer.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alipay.sofa</groupId>
+                <artifactId>sofa-tracer-resttmplate-plugin</artifactId>
+                <version>${sofatracer.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alipay.sofa</groupId>
+                <artifactId>sofa-tracer-datasource-plugin</artifactId>
+                <version>${sofatracer.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alipay.sofa</groupId>
+                <artifactId>sofa-tracer-zipkin-plugin</artifactId>
+                <version>${sofatracer.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alipay.sofa</groupId>
+                <artifactId>sofa-tracer-spring-cloud-plugin</artifactId>
+                <version>${sofatracer.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alipay.sofa</groupId>
+                <artifactId>sofa-tracer-dubbo-plugin</artifactId>
+                <version>${sofatracer.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alipay.sofa</groupId>
+                <artifactId>sofa-tracer-dubbo-2.6.x-plugin</artifactId>
+                <version>${sofatracer.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alipay.sofa</groupId>
+                <artifactId>sofa-tracer-flexible-plugin</artifactId>
+                <version>${sofatracer.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alipay.sofa</groupId>
+                <artifactId>tracer-all</artifactId>
+                <version>${sofatracer.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alipay.sofa</groupId>
+                <artifactId>tracer-sofa-boot-starter</artifactId>
+                <version>${sofatracer.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

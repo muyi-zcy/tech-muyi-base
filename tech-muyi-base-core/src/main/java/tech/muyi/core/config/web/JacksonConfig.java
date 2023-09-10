@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import tech.muyi.core.config.web.jackson.core.bind.*;
+import tech.muyi.util.MyJson;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -16,12 +17,17 @@ import java.util.Date;
 
 @Configuration
 public class JacksonConfig  {
+
     @Autowired
     private ObjectMapper objectMapper;
 
     @Bean
-    @ConditionalOnClass({ObjectMapper.class})
-    public ObjectMapper objectMapper(ObjectMapper objectMapper) {
+    public ObjectMapper objectMapper() {
+
+        if(objectMapper == null){
+            objectMapper = new ObjectMapper();
+        }
+
         SimpleModule simpleModule = new SimpleModule();
         simpleModule
                 .addDeserializer(Enum.class, new EnumDeserializer())
@@ -34,6 +40,7 @@ public class JacksonConfig  {
 
         objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        MyJson.init(objectMapper);
         return objectMapper;
     }
 }

@@ -14,23 +14,23 @@ public @interface ErrorCodeInfoAnno {
      * 状态服务名称
      * @return
      */
-    public String name();
+    String name();
 
     /**
      * code
      * @return
      */
-    public String code();
+    String code();
 
     /**
      * 上级服务
      * @return
      */
-    public String parentCode() default "0";
+    String parentCode() default "0";
 
     /**
      * 描述
      * @return
      */
-    public String desc();
+    String desc();
 }

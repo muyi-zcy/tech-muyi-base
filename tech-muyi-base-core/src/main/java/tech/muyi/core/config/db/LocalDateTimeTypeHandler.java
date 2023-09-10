@@ -1,6 +1,5 @@
 package tech.muyi.core.config.db;
 
-
 import cn.hutool.core.convert.Convert;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;

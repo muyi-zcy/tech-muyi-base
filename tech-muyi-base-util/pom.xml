@@ -20,15 +20,6 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <gson.version>2.9.0</gson.version>
-        <hutool-all.version>5.7.22</hutool-all.version>
-        <commons-lang3.version>3.12.0</commons-lang3.version>
-        <commons-beanutils.version>1.9.4</commons-beanutils.version>
-        <transmittable-thread-local.version>2.12.6</transmittable-thread-local.version>
-        <spring-boot-starter-web.version>2.3.12.RELEASE</spring-boot-starter-web.version>
-        <freemarker.version>2.3.23</freemarker.version>
-        <reflections.version>0.9.11</reflections.version>
-        <orika-core.version>1.5.4</orika-core.version>
     </properties>
 
     <dependencies>
@@ -43,6 +34,7 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
 
+
         <dependency>
             <groupId>commons-beanutils</groupId>
             <artifactId>commons-beanutils</artifactId>
@@ -56,11 +48,6 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
         </dependency>
 
         <dependency>

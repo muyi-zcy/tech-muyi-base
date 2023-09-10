@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
-import tech.muyi.util.JsonUtil;
+import tech.muyi.util.MyJson;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -59,7 +59,7 @@ public class RestApiFilter {
                 if (parameterNames != null && parameterNames.length != 0) {
                     for (int i = 0; i < parameterNames.length; ++i) {
                         if (!(args[i] instanceof HttpServletResponse) && !(args[i] instanceof MultipartFile) && !(args[i] instanceof HttpServletRequest)) {
-                            logMsg.append(parameterNames[i]).append(":").append(JsonUtil.toJson(args[i])).append(",");
+                            logMsg.append(parameterNames[i]).append(":").append(MyJson.toJson(args[i])).append(",");
                         }
                     }
                 } else {
@@ -83,7 +83,7 @@ public class RestApiFilter {
                         .append(" result:{},")
                         .append("use time:{}");
 
-                logger.info(logMsg.toString(), JsonUtil.toJson(object), System.currentTimeMillis() - startTime);
+                logger.info(logMsg.toString(), MyJson.toJson(object), System.currentTimeMillis() - startTime);
             } catch (Exception e) {
                 logger.error("print REST log error", e);
             }

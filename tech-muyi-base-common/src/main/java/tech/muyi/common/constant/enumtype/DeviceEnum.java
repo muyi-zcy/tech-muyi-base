@@ -10,20 +10,24 @@ import lombok.Getter;
  * version: 1.0
  */
 @Getter
-public enum DeviceEnum implements CommonEnum<Integer>{
-    MOBILE(1,"MOBILE"),
-    TABLET(2,"TABLET"),
-    NORMAL(3,"NORMAL"),
-    OTHER(4,"OTHER");
+public enum DeviceEnum implements CommonEnum<Integer> {
+    MOBILE(1, "MOBILE"),
+    TABLET(2, "TABLET"),
+    NORMAL(3, "NORMAL"),
+    OTHER(4, "OTHER");
 
     @EnumValue
     private Integer code;
 
     private String name;
 
-    DeviceEnum(int code,String name) {
+    DeviceEnum(int code, String name) {
         this.code = code;
         this.name = name;
     }
 
+    static {
+        EnumCache.registerByName(DeviceEnum.class, DeviceEnum.values());
+        EnumCache.registerByValue(DeviceEnum.class, DeviceEnum.values(), DeviceEnum::getCode);
+    }
 }

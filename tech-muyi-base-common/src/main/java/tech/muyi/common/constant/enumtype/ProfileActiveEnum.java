@@ -2,9 +2,6 @@ package tech.muyi.common.constant.enumtype;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.Getter;
-import org.checkerframework.checker.units.qual.C;
-
-import java.util.Objects;
 
 /**
  * description: 系统环境枚举
@@ -27,5 +24,10 @@ public enum ProfileActiveEnum implements CommonEnum<String> {
     ProfileActiveEnum(String code,String name) {
         this.code = code;
         this.name = name;
+    }
+
+    static {
+        EnumCache.registerByName(ProfileActiveEnum.class, ProfileActiveEnum.values());
+        EnumCache.registerByValue(ProfileActiveEnum.class, ProfileActiveEnum.values(), ProfileActiveEnum::getCode);
     }
 }

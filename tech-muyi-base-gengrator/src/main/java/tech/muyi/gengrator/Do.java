@@ -35,7 +35,7 @@ public class Do {
                             .entityBuilder()
                             .versionColumnName("row_version")
                             .logicDeleteColumnName("row_status")
-                            .addSuperEntityColumns("id", "gmt_create", "gmt_modified", "row_version", "row_status","biz_type","ext_att","creator","operator")
+                            .addSuperEntityColumns("id", "gmt_create", "gmt_modified", "row_version", "row_status","biz_type","ext_att","creator","operator","tenant_id")
                             .formatFileName("%sDO")
                             .build(); // 设置过滤表前缀
                 })

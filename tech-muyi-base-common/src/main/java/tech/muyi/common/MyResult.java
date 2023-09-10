@@ -1,5 +1,6 @@
 package tech.muyi.common;
 
+
 import tech.muyi.common.query.MyBaseQuery;
 import tech.muyi.exception.MyException;
 
@@ -14,8 +15,8 @@ public class MyResult<T> implements Serializable {
     private boolean success;
     private T data;
     private MyBaseQuery query;
-    private String errCode;
-    private String errMsg;
+    private String code;
+    private String message;
 
     public MyResult() {
     }
@@ -26,7 +27,7 @@ public class MyResult<T> implements Serializable {
         result.setData(data);
         result.setQuery(query);
         result.isSuccess();
-        result.setErrCode("0");
+        result.setCode("0");
         return result;
     }
 
@@ -41,8 +42,8 @@ public class MyResult<T> implements Serializable {
     public static <T> MyResult<T> fail(String errCode, String errMsg) {
         MyResult result = new MyResult();
         result.isSuccess();
-        result.setErrCode(errCode);
-        result.setErrMsg(errMsg);
+        result.setCode(errCode);
+        result.setMessage(errMsg);
         return result;
     }
 
@@ -71,19 +72,19 @@ public class MyResult<T> implements Serializable {
         this.query = query;
     }
 
-    public String getErrCode() {
-        return this.errCode;
+    public String getCode() {
+        return this.code;
     }
 
-    public void setErrCode(String errCode) {
-        this.errCode = errCode;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    public String getErrMsg() {
-        return this.errMsg;
+    public String getMessage() {
+        return this.message;
     }
 
-    public void setErrMsg(String errMsg) {
-        this.errMsg = errMsg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

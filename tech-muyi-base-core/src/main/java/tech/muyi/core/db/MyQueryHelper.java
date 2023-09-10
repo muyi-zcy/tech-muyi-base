@@ -1,7 +1,5 @@
 package tech.muyi.core.db;
 
-import cn.hutool.core.collection.CollectionUtil;
-import cn.hutool.core.util.ArrayUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -10,21 +8,23 @@ import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import tech.muyi.common.DO.MyBaseDO;
 import tech.muyi.common.constant.enumtype.ConditionEnum;
-import tech.muyi.common.query.MyBaseQuery;
-import tech.muyi.common.query.QueryCondition;
+import tech.muyi.common.constant.enumtype.EnumCache;
+import tech.muyi.core.db.query.MyQuery;
+import tech.muyi.core.db.query.QueryCondition;
 import tech.muyi.exception.MyException;
 import tech.muyi.exception.enumtype.CommonErrorCodeEnum;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
- * description: PageQueryHelper
+ * 查询条件处理器，主要处理前端传入的条件，强调“不额外干涉后端逻辑”
  * date: 2022/1/9 20:06
  * author: muyi
- * version: 1.0
  */
 public class MyQueryHelper {
-    public static <T extends MyBaseDO> void queryPageConfig(IPage<T> page, MyBaseQuery baseQuery) {
+    public static <T extends MyBaseDO> void queryPageConfig(IPage<T> page, MyQuery baseQuery) {
         baseQuery.setSize(page.getSize());
         baseQuery.setCurrent(page.getCurrent());
         baseQuery.setTotal(page.getTotal());
@@ -37,17 +37,19 @@ public class MyQueryHelper {
      * @param <T>
      * @return
      */
-    public static <T extends MyBaseDO> LambdaQueryWrapper<T> createQueryWrapper(MyBaseQuery baseQuery) {
+    public static <T extends MyBaseDO> LambdaQueryWrapper<T> createQueryWrapper(MyQuery baseQuery) {
 
         if (baseQuery == null) {
             throw new MyException(CommonErrorCodeEnum.INVALID_PARAM);
         }
 
+        boolean isDescById = false;
         QueryWrapper<T> queryWrapper = new QueryWrapper<>();
         if (StringUtils.isNotEmpty(baseQuery.getSort())) {
             switch (baseQuery.getSort()) {
                 case "DESC":
                     queryWrapper.orderByDesc("ID");
+                    isDescById = true;
                     break;
                 case "ASC":
                     queryWrapper.orderByAsc("ID");
@@ -57,8 +59,8 @@ public class MyQueryHelper {
         }
 
         // 排序
-        if (MapUtils.isNotEmpty(baseQuery.getFieldSort())) {
-            Map<String, String> fieldSort = baseQuery.getFieldSort();
+        if (MapUtils.isNotEmpty(baseQuery.getSortField())) {
+            Map<String, String> fieldSort = baseQuery.getSortField();
             for (String field : fieldSort.keySet()) {
                 switch (fieldSort.get(field).toUpperCase()) {
                     case "DESC":
@@ -73,7 +75,7 @@ public class MyQueryHelper {
         }
 
         // 查询条件
-        if (CollectionUtil.isNotEmpty(baseQuery.getConditions())) {
+        if (CollectionUtils.isNotEmpty(baseQuery.getConditions())) {
             List<QueryCondition> conditions = baseQuery.getConditions();
             conditions.forEach(item -> {
                 convertConditions(queryWrapper, item);
@@ -82,13 +84,26 @@ public class MyQueryHelper {
 
         if (CollectionUtils.isNotEmpty(baseQuery.getSelectField())) {
             List<String> selecrColumn = baseQuery.getSelectField();
-            if (CollectionUtil.isNotEmpty(selecrColumn)) {
+            if (CollectionUtils.isNotEmpty(selecrColumn)) {
                 selecrColumn.forEach(queryWrapper::select);
             }
         }
+
         LambdaQueryWrapper<T> lambdaQueryWrapper = queryWrapper.lambda();
 
+        if (baseQuery.getLastId() != null) {
+            if(isDescById){
+                lambdaQueryWrapper.lt(T::getId, baseQuery.getLastId());
+            }else {
+                lambdaQueryWrapper.gt(T::getId, baseQuery.getLastId());
+            }
+        }
 
+        if(CollectionUtils.isNotEmpty(baseQuery.getNotIds())){
+            lambdaQueryWrapper.notIn(T::getId, baseQuery.getNotIds());
+        }
+
+        baseQuery.setLambdaQueryWrapper(lambdaQueryWrapper);
         return lambdaQueryWrapper;
     }
 
@@ -100,7 +115,7 @@ public class MyQueryHelper {
      * @param <T>
      */
     private static <T extends MyBaseDO> void convertConditions(QueryWrapper<T> queryWrapper, QueryCondition queryCondition) {
-        ConditionEnum conditionEnum = ConditionEnum.getConditionByCode(queryCondition.getOperator().toUpperCase());
+        ConditionEnum conditionEnum = EnumCache.findByValue(ConditionEnum.class,queryCondition.getOperator().toUpperCase());
         if (conditionEnum == null) {
             return;
         }
@@ -163,7 +178,7 @@ public class MyQueryHelper {
             case NOT_BETWEEN:
                 Object objBegin;
                 Object objEnd;
-                if (ArrayUtil.isArray(queryCondition.getValue())) {
+                if (queryCondition.getValue().getClass().isArray()) {
                     Object[] objects = (Object[]) queryCondition.getValue();
                     if (objects.length > 1) {
                         objBegin = objects[0];
@@ -189,7 +204,7 @@ public class MyQueryHelper {
                 queryWrapper.orderByDesc(Objects.toString(queryCondition.getValue()));
                 break;
             default:
-                throw new MyException(CommonErrorCodeEnum.INVALID_PARAM, "请规范查询条件！");
+                throw new MyException(CommonErrorCodeEnum.INVALID_PARAM);
         }
     }
 }

@@ -64,7 +64,7 @@ public class TokenBucketAspect {
                     return joinPoint.proceed();
                 }
                 log.error("限流[{}]", methodName);
-                return MyResult.fail(CommonErrorCodeEnum.FLOW_EXCEPTION.getResultCode(), CommonErrorCodeEnum.FLOW_EXCEPTION.getResultMsg());
+                return MyResult.fail(CommonErrorCodeEnum.CURRENT_LIMITING.getResultCode(), CommonErrorCodeEnum.CURRENT_LIMITING.getResultMsg());
             } else {
                 log.error("限流未知异常[{}]", methodName);
                 return MyResult.fail(CommonErrorCodeEnum.UNKNOWN_EXCEPTION.getResultCode(), CommonErrorCodeEnum.UNKNOWN_EXCEPTION.getResultMsg());
