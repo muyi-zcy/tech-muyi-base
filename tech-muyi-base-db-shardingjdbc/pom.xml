@@ -2,15 +2,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
     <parent>
-        <artifactId>tech-muyi-base</artifactId>
         <groupId>tech.muyi</groupId>
+        <artifactId>tech-muyi-base</artifactId>
         <version>${revision}</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>tech-muyi-base-core</artifactId>
     <version>${revision}</version>
-    <packaging>jar</packaging>
+
+    <artifactId>tech-muyi-base-db-shardingjdbc</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -23,6 +24,11 @@
             <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-on</artifactId>
         </dependency>
+        <!--shardingsphere最新版本-->
+        <dependency>
+            <groupId>org.apache.shardingsphere</groupId>
+            <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
@@ -30,41 +36,17 @@
         </dependency>
 
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>org.apache.shardingsphere</groupId>
+            <artifactId>sharding-jdbc-spring-namespace</artifactId>
         </dependency>
-
         <!--mybatis plus驱动-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
-
-        <!--druid数据源-->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>tech.muyi</groupId>
-            <artifactId>tech-muyi-base-util</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-common</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>tech.muyi</groupId>
-            <artifactId>tech-muyi-base-id</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>tech.muyi</groupId>
-            <artifactId>tech-muyi-base-db-shardingjdbc</artifactId>
-            <optional>true</optional>
         </dependency>
 
     </dependencies>

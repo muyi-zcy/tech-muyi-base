@@ -39,6 +39,7 @@
         <module>tech-muyi-base-okhttp</module>
         <module>my-log-plugins/my-log-okhttp-plugin</module>
         <module>tech-muyi-base-tracer</module>
+        <module>tech-muyi-base-db-shardingjdbc</module>
     </modules>
 
     <properties>
@@ -149,12 +150,6 @@
 
             <dependency>
                 <groupId>tech.muyi</groupId>
-                <artifactId>tech-muyi-base-gateway</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>tech.muyi</groupId>
                 <artifactId>tech-muyi-base-gengrator</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -252,6 +247,11 @@
             <dependency>
                 <groupId>tech.muyi</groupId>
                 <artifactId>tech-muyi-base-tracer</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-db-shardingjdbc</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -380,6 +380,11 @@
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>
             </dependency>
 

@@ -1,6 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 tech.muyi.core.config.AsyncConfiguration,\
 tech.muyi.core.config.web.JacksonConfig,\
-tech.muyi.core.config.db.DataSourceHealthConfig,\
-tech.muyi.core.config.db.LocalDateTimeTypeHandler,\
 tech.muyi.core.controller.GlobalExceptionHandle
