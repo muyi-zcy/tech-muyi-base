@@ -18,10 +18,11 @@
 /tech-muyi-base-redis/target/
 /tech-muyi-base-rpc/target/
 /tech-muyi-base-util/target/
-/.idea/
+/.idea/**
 /tech-muyi-base-core/target/
 /**/target/
 /**/**/target/
 /.flattened-pom.xml
 /**/.flattened-pom.xml
 /**/**/.flattened-pom.xml
+.flattened-pom.xml
