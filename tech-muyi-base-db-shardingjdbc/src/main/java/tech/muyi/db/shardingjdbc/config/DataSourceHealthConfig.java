@@ -1,4 +1,4 @@
-package tech.muyi.core.config.db;
+package tech.muyi.db.shardingjdbc.config;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.boot.jdbc.metadata.DataSourcePoolMetadata;

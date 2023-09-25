@@ -82,11 +82,6 @@
       <option name="url" value="https://maven.aliyun.com/nexus/content/groups/public" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="central" />
-      <option name="name" value="central" />
-      <option name="url" value="https://maven.aliyun.com/repository/public" />
-    </remote-repository>
-    <remote-repository>
       <option name="id" value="snapshots" />
       <option name="name" value="snapshots" />
       <option name="url" value="https://maven.aliyun.com/nexus/content/groups/public" />
@@ -95,6 +90,11 @@
       <option name="id" value="rdc-snapshots" />
       <option name="name" value="rdc-snapshots" />
       <option name="url" value="https://packages.aliyun.com/maven/repository/2054959-snapshot-HrRHjE/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="central" />
+      <option name="url" value="https://maven.aliyun.com/repository/public" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="rdc-releases" />

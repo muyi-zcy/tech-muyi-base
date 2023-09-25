@@ -31,6 +31,7 @@
         <module name="tech-muyi-base-on" />
         <module name="tech-muyi-base-gengrator" />
         <module name="tech-muyi-base-api" />
+        <module name="tech-muyi-base-db-shardingjdbc" />
         <module name="tech-muyi-base-message" />
         <module name="tech-muyi-base-log" />
         <module name="tech-muyi-base-job-easy" />

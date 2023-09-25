@@ -1,4 +1,4 @@
-package tech.muyi.core.config.db;
+package tech.muyi.db.shardingjdbc.config;
 
 import cn.hutool.core.convert.Convert;
 import org.apache.ibatis.type.BaseTypeHandler;
