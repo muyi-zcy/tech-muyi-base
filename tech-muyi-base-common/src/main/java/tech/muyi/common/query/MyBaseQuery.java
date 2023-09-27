@@ -60,7 +60,7 @@ public class MyBaseQuery implements Serializable {
     }
 
     public Long getOffset() {
-        return (this.current - 1) * this.getSize();
+        return (this.getCurrent() - 1) * this.getSize();
     }
 
 }

@@ -2,6 +2,8 @@ package tech.muyi.common.DTO;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import tech.muyi.common.DTO.helper.Operator;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -10,7 +12,7 @@ import java.time.LocalDateTime;
  * @Date: 2021/1/3 21:31
  */
 @Data
-public class MyBaseDTO implements Serializable{
+public class MyBaseDTO implements Serializable {
     private static final long serialVersionUID = 1L;
     @ApiModelProperty("id")
     protected Long id;
@@ -28,8 +30,10 @@ public class MyBaseDTO implements Serializable{
     protected String extAtt;
 
     @ApiModelProperty("创建人")
+    @Operator
     protected String creator;
 
     @ApiModelProperty("修改人")
+    @Operator
     protected String operator;
 }

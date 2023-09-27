@@ -83,6 +83,7 @@
         <hutool-all.version>5.7.22</hutool-all.version>
         <guava.version>30.0-jre</guava.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
+        <commons-colloction4.version>4.2</commons-colloction4.version>
         <commons-beanutils.version>1.9.4</commons-beanutils.version>
         <transmittable-thread-local.version>2.12.6</transmittable-thread-local.version>
         <spring-boot-starter-web.version>2.3.12.RELEASE</spring-boot-starter-web.version>
@@ -731,6 +732,12 @@
                 <groupId>com.alipay.sofa</groupId>
                 <artifactId>tracer-sofa-boot-starter</artifactId>
                 <version>${sofatracer.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-colloction4.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
