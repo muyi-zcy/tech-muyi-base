@@ -40,7 +40,7 @@ public class MyQueryHelper {
     public static <T extends MyBaseDO> LambdaQueryWrapper<T> createQueryWrapper(MyQuery baseQuery) {
 
         if (baseQuery == null) {
-            throw new MyException(CommonErrorCodeEnum.INVALID_PARAM);
+            throw new MyException(CommonErrorCodeEnum.QUERY_PARAM_ERROR);
         }
 
         boolean isDescById = false;
@@ -83,9 +83,9 @@ public class MyQueryHelper {
         }
 
         if (CollectionUtils.isNotEmpty(baseQuery.getSelectField())) {
-            List<String> selecrColumn = baseQuery.getSelectField();
-            if (CollectionUtils.isNotEmpty(selecrColumn)) {
-                selecrColumn.forEach(queryWrapper::select);
+            List<String> selectColumn = baseQuery.getSelectField();
+            if (CollectionUtils.isNotEmpty(selectColumn)) {
+                queryWrapper.select(selectColumn);
             }
         }
 
@@ -117,7 +117,7 @@ public class MyQueryHelper {
     private static <T extends MyBaseDO> void convertConditions(QueryWrapper<T> queryWrapper, QueryCondition queryCondition) {
         ConditionEnum conditionEnum = ConditionEnum.findCondition(queryCondition.getOperator().toUpperCase());
         if (conditionEnum == null) {
-            return;
+            throw new MyException(CommonErrorCodeEnum.QUERY_PARAM_ERROR);
         }
         switch (conditionEnum) {
             case AND:
@@ -204,7 +204,7 @@ public class MyQueryHelper {
                 queryWrapper.orderByDesc(Objects.toString(queryCondition.getValue()));
                 break;
             default:
-                throw new MyException(CommonErrorCodeEnum.INVALID_PARAM);
+                throw new MyException(CommonErrorCodeEnum.QUERY_PARAM_ERROR);
         }
     }
 }

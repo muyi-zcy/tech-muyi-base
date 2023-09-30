@@ -113,6 +113,7 @@ public enum CommonErrorCodeEnum implements BaseErrorInfoInterface {
     CURRENT_LIMITING("10003", "Current Limiting"),
     SERIALIZATION_FAIL("10004","Serialization Fail"),
     DESERIALIZATION_FAIL("10005","Deserialization Fail"),
+    QUERY_PARAM_ERROR("10006","The query parameters do not meet requirements"),
     ;
 
     /** 错误码 */
