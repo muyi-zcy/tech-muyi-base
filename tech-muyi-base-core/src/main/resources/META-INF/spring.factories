@@ -1,4 +1,6 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 tech.muyi.core.config.AsyncConfiguration,\
 tech.muyi.core.config.web.JacksonConfig,\
+tech.muyi.core.config.db.PageConfig,\
+tech.muyi.core.transaction.TransactionManager,\
 tech.muyi.core.controller.GlobalExceptionHandle
