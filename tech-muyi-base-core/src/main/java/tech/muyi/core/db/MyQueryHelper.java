@@ -92,14 +92,14 @@ public class MyQueryHelper {
         LambdaQueryWrapper<T> lambdaQueryWrapper = queryWrapper.lambda();
 
         if (baseQuery.getLastId() != null) {
-            if(isDescById){
+            if (isDescById) {
                 lambdaQueryWrapper.lt(T::getId, baseQuery.getLastId());
-            }else {
+            } else {
                 lambdaQueryWrapper.gt(T::getId, baseQuery.getLastId());
             }
         }
 
-        if(CollectionUtils.isNotEmpty(baseQuery.getNotIds())){
+        if (CollectionUtils.isNotEmpty(baseQuery.getNotIds())) {
             lambdaQueryWrapper.notIn(T::getId, baseQuery.getNotIds());
         }
 
@@ -115,7 +115,7 @@ public class MyQueryHelper {
      * @param <T>
      */
     private static <T extends MyBaseDO> void convertConditions(QueryWrapper<T> queryWrapper, QueryCondition queryCondition) {
-        ConditionEnum conditionEnum = EnumCache.findByValue(ConditionEnum.class,queryCondition.getOperator().toUpperCase());
+        ConditionEnum conditionEnum = ConditionEnum.findCondition(queryCondition.getOperator().toUpperCase());
         if (conditionEnum == null) {
             return;
         }

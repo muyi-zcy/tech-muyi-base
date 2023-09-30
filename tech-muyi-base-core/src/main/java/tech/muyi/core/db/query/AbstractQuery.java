@@ -21,26 +21,21 @@ import java.util.*;
 public class AbstractQuery<T extends MyBaseDTO> extends MyBaseQuery implements Wrapper<T> {
 
     @JsonIgnore
-    public LambdaQueryWrapper<T> lambdaQueryWrapper;
+    public transient LambdaQueryWrapper<T> lambdaQueryWrapper;
 
     // 查询条件
-    @JsonIgnore
     private List<QueryCondition> conditions;
 
     // 查询字段
-    @JsonIgnore
     private List<String> selectField;
 
     // 排序字段
-    @JsonIgnore
     private Map<String, String> sortField;
 
     // 分组
-    @JsonIgnore
     protected Set<String> groupBy;
 
     // 排除ID
-    @JsonIgnore
     private List<Long> notIds;
 
 
