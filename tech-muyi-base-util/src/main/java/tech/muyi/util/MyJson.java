@@ -2,6 +2,9 @@ package tech.muyi.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.List;
 
 /**
  * @Author: muyi
@@ -29,4 +32,7 @@ public class MyJson {
         return GSON.fromJson(json, classOfT);
     }
 
+    public static <T> List<T> fromJsonToList(String jsonString, Class<T> elementType) {
+        return GSON.fromJson(jsonString, TypeToken.getParameterized(List.class, elementType).getType());
+    }
 }
