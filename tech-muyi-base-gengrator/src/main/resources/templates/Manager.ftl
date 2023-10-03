@@ -42,10 +42,10 @@ public class ${entity}Manager extends MyServiceImpl<${entity}DAO, ${entity}DO>{
     }
 
     public List<${entity}DO> query(${entity}Query ${entity?uncap_first}Query) {
-        QueryWrapper<${entity}DO> queryWrapper = new QueryWrapper<>();
+        LambdaQueryWrapper<${entity}DO> lambdaQueryWrapper = MyQueryHelper.createQueryWrapper(${entity?uncap_first}Query);
         ${entity}DO ${entity?uncap_first}DO = MapperUtils.ORIKA.map(${entity}DO.class, ${entity?uncap_first}Query);
-        queryWrapper.setEntity(${entity?uncap_first}DO);
-        return this.list(queryWrapper);
+        lambdaQueryWrapper.setEntity(${entity?uncap_first}DO);
+        return this.list(lambdaQueryWrapper);
     }
 
     public List<${entity}DO> pageQuery(${entity}Query ${entity?uncap_first}Query){
