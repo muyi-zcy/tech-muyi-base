@@ -56,7 +56,7 @@ public class ${entity}Manager extends MyServiceImpl<${entity}DAO, ${entity}DO>{
     }
 
     public Long queryCount(${entity}Query ${entity?uncap_first}Query) {
-        LambdaQueryWrapper<${entity}DO> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        LambdaQueryWrapper<${entity}DO> lambdaQueryWrapper = MyQueryHelper.createQueryWrapper(${entity?uncap_first}Query);
         ${entity}DO ${entity?uncap_first}DO = MapperUtils.ORIKA.map(${entity}DO.class, ${entity?uncap_first}Query);
         lambdaQueryWrapper.setEntity(${entity?uncap_first}DO);
         return this.count(lambdaQueryWrapper);
