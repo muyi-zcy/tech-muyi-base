@@ -40,6 +40,7 @@
         <module>my-log-plugins/my-log-okhttp-plugin</module>
         <module>tech-muyi-base-tracer</module>
         <module>tech-muyi-base-db-shardingjdbc</module>
+        <module>tech-muyi-base-feign</module>
     </modules>
 
     <properties>
@@ -108,15 +109,12 @@
         <opentracing.version>0.33.0</opentracing.version>
         <opentracing.contrib.version>0.1.16</opentracing.contrib.version>
         <sofatracer.version>3.1.1</sofatracer.version>
+        <openfeign.version>2.2.9.RELEASE</openfeign.version>
+        <feign.version>10.12</feign.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>tech.muyi</groupId>
-                <artifactId>tech-muyi-base-context</artifactId>
-                <version>${project.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>tech.muyi</groupId>
@@ -253,6 +251,12 @@
             <dependency>
                 <groupId>tech.muyi</groupId>
                 <artifactId>tech-muyi-base-db-shardingjdbc</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-feign</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -743,6 +747,31 @@
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
                 <version>${gson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${openfeign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-core</artifactId>
+                <version>${feign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-slf4j</artifactId>
+                <version>${feign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-hystrix</artifactId>
+                <version>${feign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-jackson</artifactId>
+                <version>${feign.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

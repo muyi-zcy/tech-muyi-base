@@ -4,7 +4,11 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.BeanProperty;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.ContextualDeserializer;
+import com.fasterxml.jackson.databind.node.IntNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.TextNode;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,18 +24,27 @@ import java.io.IOException;
 @Slf4j
 @Data
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
-@AllArgsConstructor
 public class EnumDeserializer extends JsonDeserializer<Enum<?>> implements ContextualDeserializer {
     private Class<?> target;
 
     @SuppressWarnings("all")
     @Override
     public Enum<?> deserialize(JsonParser jsonParser, DeserializationContext ctx) throws IOException {
-        if (jsonParser == null || StringUtils.isEmpty(jsonParser.getText())){
+        if(jsonParser == null){
             return null;
         }
-        return defaultEnumTransform(target, jsonParser.getText());
+        String value = null;
+        JsonNode node = jsonParser.getCodec().readTree(jsonParser);
+
+        if (node instanceof ObjectNode){
+            value = node.get("code").asText();
+        }else if (node != null) {
+            value = node.asText();
+        }
+        if (StringUtils.isEmpty(value)){
+            return null;
+        }
+        return defaultEnumTransform(target,value);
     }
 
 
@@ -57,7 +70,7 @@ public class EnumDeserializer extends JsonDeserializer<Enum<?>> implements Conte
                     return enumConstant;
                 }
             }
-            throw new MyException(CommonErrorCodeEnum.INVALID_PARAM);
+            throw new MyException(CommonErrorCodeEnum.DESERIALIZATION_FAIL);
         } catch (Throwable e) {
             log.error("EnumDeserializer error:", e);
             throw new MyException(CommonErrorCodeEnum.DESERIALIZATION_FAIL);
