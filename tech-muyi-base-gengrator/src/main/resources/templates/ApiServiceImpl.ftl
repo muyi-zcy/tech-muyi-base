@@ -11,8 +11,7 @@ import tech.muyi.exception.UnknownException;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.muyi.exception.MyException;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 /**
 * <p>
@@ -22,10 +21,9 @@ import org.slf4j.LoggerFactory;
 * @author ${author}
 * @since ${date}
 */
+@Slf4j
 @DubboService(version = "1.0.0", timeout = 5000)
 public class ${entity}ApiServiceImpl implements ${entity}ApiService {
-
-    private static Logger LOGGER = LoggerFactory.getLogger(${entity}ApiServiceImpl.class);
 
     @Autowired
     private ${entity}Service ${entity?uncap_first}Service;
@@ -41,10 +39,10 @@ public class ${entity}ApiServiceImpl implements ${entity}ApiService {
             Boolean cnt = ${entity?uncap_first}Service.save(${entity?uncap_first}DTO);
             return MyResult.ok(cnt);
         }catch (MyException e){
-            LOGGER.error("save${entity} MyException,{}",${entity?uncap_first}DTO,e);
+            log.error("save${entity} MyException,{}",${entity?uncap_first}DTO,e);
             return MyResult.fail(e);
         }catch (Exception e){
-            LOGGER.error("save${entity} exception,{}",${entity?uncap_first}DTO,e);
+            log.error("save${entity} exception,{}",${entity?uncap_first}DTO,e);
             return MyResult.fail(new UnknownException(e));
         }
     }
@@ -60,10 +58,10 @@ public class ${entity}ApiServiceImpl implements ${entity}ApiService {
             Boolean cnt = ${entity?uncap_first}Service.delete(id);
             return MyResult.ok(cnt);
         }catch (MyException e){
-            LOGGER.error("delete${entity} MyException,{}",id,e);
+            log.error("delete${entity} MyException,{}",id,e);
             return MyResult.fail(e);
         }catch (Exception e){
-            LOGGER.error("delete${entity} exception,{}",id,e);
+            log.error("delete${entity} exception,{}",id,e);
             return MyResult.fail(new UnknownException(e));
         }
     }
@@ -79,10 +77,10 @@ public class ${entity}ApiServiceImpl implements ${entity}ApiService {
             Boolean cnt = ${entity?uncap_first}Service.update(${entity?uncap_first}DTO);
             return MyResult.ok(cnt);
         }catch (MyException e){
-            LOGGER.error("update${entity} MyException,{}",${entity?uncap_first}DTO,e);
+            log.error("update${entity} MyException,{}",${entity?uncap_first}DTO,e);
             return MyResult.fail(e);
         }catch (Exception e){
-            LOGGER.error("update${entity} exception,{}",${entity?uncap_first}DTO,e);
+            log.error("update${entity} exception,{}",${entity?uncap_first}DTO,e);
             return MyResult.fail(new UnknownException(e));
         }
     }
@@ -98,17 +96,17 @@ public class ${entity}ApiServiceImpl implements ${entity}ApiService {
             ${entity}DTO ${entity?uncap_first}DTO = ${entity?uncap_first}Service.getById(id);
             return MyResult.ok(${entity?uncap_first}DTO);
         }catch (MyException e){
-            LOGGER.error("get${entity}ById MyException,{}",id,e);
+            log.error("get${entity}ById MyException,{}",id,e);
             return MyResult.fail(e);
         }catch (Exception e){
-            LOGGER.error("get${entity}ById exception,{}",id,e);
+            log.error("get${entity}ById exception,{}",id,e);
             return MyResult.fail(new UnknownException(e));
         }
     }
 
     /**
     *
-    * @param ${entity?uncap_first}Query 查询条件，如需分页则自行设置pageSize和currentPageNo
+    * @param ${entity?uncap_first}Query 查询条件
     * @return
     */
     @Override
@@ -118,10 +116,10 @@ public class ${entity}ApiServiceImpl implements ${entity}ApiService {
             return MyResult.ok(list, ${entity?uncap_first}Query);
 
         } catch (MyException e){
-            LOGGER.error("query${entity} MyException,{}",${entity?uncap_first}Query,e);
+            log.error("query${entity} MyException,{}",${entity?uncap_first}Query,e);
             return MyResult.fail(e);
         } catch (Exception e){
-            LOGGER.error("query${entity} exception,{}",${entity?uncap_first}Query,e);
+            log.error("query${entity} exception,{}",${entity?uncap_first}Query,e);
             return MyResult.fail(new UnknownException(e));
         }
     }
