@@ -1,6 +1,7 @@
 package tech.muyi.core.transaction;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.TransactionDefinition;
@@ -10,6 +11,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 import javax.annotation.Nullable;
+import javax.annotation.Resource;
 
 /**
  * 手动粗细粒度事务管理器
@@ -19,10 +21,10 @@ import javax.annotation.Nullable;
 @Component
 public class TransactionManager {
 
-    @Autowired
+    @Resource
     private DataSourceTransactionManager transactionManager;
 
-    @Autowired
+    @Resource
     private TransactionTemplate transactionTemplate;
 
     public TransactionStatus begin() {
