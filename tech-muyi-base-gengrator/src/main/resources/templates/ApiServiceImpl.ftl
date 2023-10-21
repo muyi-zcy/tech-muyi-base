@@ -11,7 +11,9 @@ import tech.muyi.exception.UnknownException;
 import org.springframework.beans.factory.annotation.Autowired;
 import tech.muyi.exception.MyException;
 import java.util.List;
+import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+
 
 /**
 * <p>
@@ -22,10 +24,10 @@ import lombok.extern.slf4j.Slf4j;
 * @since ${date}
 */
 @Slf4j
-@DubboService(version = "1.0.0", timeout = 5000)
+@DubboService(version = "${dubbo.application.version}", timeout = 5000)
 public class ${entity}ApiServiceImpl implements ${entity}ApiService {
 
-    @Autowired
+    @Resource
     private ${entity}Service ${entity?uncap_first}Service;
 
     /**
