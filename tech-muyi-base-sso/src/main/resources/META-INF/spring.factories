@@ -1,0 +1,6 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+tech.muyi.sso.config.WebMvcConfiguration,\
+tech.muyi.sso.MySsoManager,\
+tech.muyi.sso.interceptor.SsoInterceptor,\
+tech.muyi.sso.interceptor.hook.SsoInfoHookFactory,\
+tech.muyi.sso.properties.MySsoProperties

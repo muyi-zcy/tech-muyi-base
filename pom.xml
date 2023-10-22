@@ -41,6 +41,8 @@
         <module>tech-muyi-base-tracer</module>
         <module>tech-muyi-base-db-shardingjdbc</module>
         <module>tech-muyi-base-feign</module>
+        <module>tech-muyi-base-dmask</module>
+        <module>tech-muyi-base-sso</module>
     </modules>
 
     <properties>
@@ -294,6 +296,20 @@
             <dependency>
                 <groupId>tech.muyi</groupId>
                 <artifactId>my-log-springmvc-plugin</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-dmask</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>tech.muyi</groupId>
+                <artifactId>tech-muyi-base-sso</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

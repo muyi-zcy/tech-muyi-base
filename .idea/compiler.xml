@@ -21,6 +21,7 @@
         <module name="tech-muyi-base-sentinel" />
         <module name="tech-muyi-base-common" />
         <module name="tech-muyi-base-oss" />
+        <module name="tech-muyi-base-sso" />
         <module name="my-log-dubbo-plugin" />
         <module name="my-log-redis-plugin" />
         <module name="tech-muyi-base-tracer" />
@@ -36,6 +37,7 @@
         <module name="tech-muyi-base-log" />
         <module name="tech-muyi-base-feign" />
         <module name="tech-muyi-base-job-easy" />
+        <module name="tech-muyi-base-dmask" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

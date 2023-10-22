@@ -38,6 +38,8 @@
     <file url="file://$PROJECT_DIR$/tech-muyi-base-db/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-dependencies/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-dependencies/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tech-muyi-base-dmask/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tech-muyi-base-dmask/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-exception/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-exception/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-feign/src/main/java" charset="UTF-8" />
@@ -69,6 +71,8 @@
     <file url="file://$PROJECT_DIR$/tech-muyi-base-registry/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-registry/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-rpc/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tech-muyi-base-sso/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tech-muyi-base-sso/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-tm/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-tm/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-tracer/src/main/java" charset="UTF-8" />
