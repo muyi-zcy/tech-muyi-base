@@ -9,8 +9,11 @@ import org.springframework.stereotype.Service;
 import tech.muyi.redis.RedissonManage;
 import tech.muyi.sso.dto.MySsoInfo;
 import tech.muyi.sso.properties.MySsoProperties;
+import tech.muyi.util.MyJson;
 
 import javax.annotation.Resource;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 /**
  * @author: muyi
@@ -19,7 +22,6 @@ import javax.annotation.Resource;
 @Configuration
 @ConditionalOnProperty(name = {"muyi.sso.enable"}, havingValue = "true")
 public class MySsoManager<T extends MySsoInfo> {
-
     @Resource
     private MySsoProperties mySsoProperties;
 
@@ -75,19 +77,35 @@ public class MySsoManager<T extends MySsoInfo> {
 
 
     public T getCache(String token) {
-        RBucket<T> rBucket = redissonManage.getRedissonClient().getBucket(mySsoProperties.getTokenKey() + token);
-        return rBucket.get();
+        return getCache(token, mySsoProperties.getSsoInfoClass());
+    }
+
+    private T getCache(String token, Class classT) {
+        RBucket<String> rBucket = redissonManage.getRedissonClient().getBucket(mySsoProperties.getTokenKey() + token);
+        String info = rBucket.get();
+        if (StringUtils.isEmpty(info)) {
+            return null;
+        }
+
+        return (T) MyJson.fromJson(info, classT);
+    }
+
+
+    public T getCache() {
+        String token = this.getToken();
+        return getCache(token);
     }
 
     public T cache(T mySsoInfo) {
-        RBucket<T> rBucket = redissonManage.getRedissonClient().getBucket(mySsoProperties.getTokenKey() + mySsoInfo.getToken());
-        rBucket.set(mySsoInfo);
+        RBucket<String> rBucket = redissonManage.getRedissonClient().getBucket(mySsoProperties.getTokenKey() + mySsoInfo.getToken());
+        rBucket.set(MyJson.toJson(mySsoInfo));
         rBucket.expireAt(mySsoInfo.getExpirationTime());
         return mySsoInfo;
     }
 
     public Boolean cleanCache(String token) {
-        RBucket<T> rBucket = redissonManage.getRedissonClient().getBucket(mySsoProperties.getTokenKey() + token);
+        RBucket<String> rBucket = redissonManage.getRedissonClient().getBucket(mySsoProperties.getTokenKey() + token);
         return rBucket.delete();
     }
+
 }
