@@ -6,19 +6,20 @@ import org.apache.dubbo.common.extension.Activate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import tech.muyi.util.MyJson;
+import tech.muyi.util.ttl.MyTtlContextManager;
 
 /**
- * description: RpcProviderContextFilter
  * date: 2021/11/14 2:31
  * author: muyi
- * version: 1.0
  */
 @Activate(group = {CommonConstants.PROVIDER})
 public class RpcProviderContextFilter implements Filter {
+
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
-        if (org.apache.dubbo.rpc.RpcContext.getContext().isProviderSide()) {
-
+        if (RpcContext.getContext().isProviderSide()) {
+            RpcContext rpcContext = RpcContext.getContext();
+            MyTtlContextManager.upAllData(rpcContext.getAttachments());
         }
         Object target = invocation.getInvoker().getInterface();
         Logger logger = LoggerFactory.getLogger(target.getClass());

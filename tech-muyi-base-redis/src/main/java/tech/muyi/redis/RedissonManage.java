@@ -2,15 +2,11 @@ package tech.muyi.redis;
 
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Service;
 import tech.muyi.exception.MyException;
 import tech.muyi.redis.exception.RedisErrorCodeEnum;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -22,7 +18,7 @@ import java.util.concurrent.TimeUnit;
  */
 
 @Slf4j
-@Service
+@Configuration
 public class RedissonManage {
 
     private String PREFIX;

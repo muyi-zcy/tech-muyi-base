@@ -6,17 +6,17 @@ public class MyGeneratorCode {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        String projectName = "my-ideaistudio-taiyi";
+        String projectName = "my-ideaistudio-ecologapp";
         System.out.println("请输入项目名："+projectName);
 
-        String tableName = "t_tts_job";
+        String tableName = "t_resource_file";
         System.out.println("表名："+tableName);
 
-        String path = "/home/muyi/ideai/code/";
+        String path = "J:\\ideai\\code\\";
         System.out.println("项目地址："+path);
 
-        String url= "192.168.1.10:3306";
-        url = "jdbc:mysql://"+ url +"/my-ideaistudio-taiyi?autoReconnect=true&useUnicode=true&characterEncoding=UTF8&serverTimezone=GMT%2B8";
+        String url= "192.168.1.101:3306";
+        url = "jdbc:mysql://"+ url +"/my-ideaistudio-ecologapp?autoReconnect=true&useUnicode=true&characterEncoding=UTF8&serverTimezone=GMT%2B8";
         System.out.println("数据库地址："+url);
 
         String username= "root";

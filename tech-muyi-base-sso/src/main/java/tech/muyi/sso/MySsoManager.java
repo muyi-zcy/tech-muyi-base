@@ -3,6 +3,8 @@ package tech.muyi.sso;
 import com.alibaba.ttl.TransmittableThreadLocal;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.api.RBucket;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
@@ -10,6 +12,7 @@ import tech.muyi.redis.RedissonManage;
 import tech.muyi.sso.dto.MySsoInfo;
 import tech.muyi.sso.properties.MySsoProperties;
 import tech.muyi.util.MyJson;
+import tech.muyi.util.ttl.MyTransmittableThreadLocal;
 
 import javax.annotation.Resource;
 import java.lang.reflect.ParameterizedType;
@@ -19,16 +22,19 @@ import java.lang.reflect.Type;
  * @author: muyi
  * @date: 2023/9/24
  **/
-@Configuration
-@ConditionalOnProperty(name = {"muyi.sso.enable"}, havingValue = "true")
+
 public class MySsoManager<T extends MySsoInfo> {
-    @Resource
     private MySsoProperties mySsoProperties;
 
     @Resource
     private RedissonManage redissonManage;
 
-    private TransmittableThreadLocal<T> mySsoInfoTransmittableThreadLocal = new TransmittableThreadLocal<>();
+    private MyTransmittableThreadLocal<T> mySsoInfoTransmittableThreadLocal;
+
+    public MySsoManager(MySsoProperties mySsoProperties) {
+        this.mySsoProperties = mySsoProperties;
+        mySsoInfoTransmittableThreadLocal = new MyTransmittableThreadLocal<>("sso", mySsoProperties.getSsoInfoClass());
+    }
 
     public void set(T ssoInfoDTO) {
         mySsoInfoTransmittableThreadLocal.set(ssoInfoDTO);
