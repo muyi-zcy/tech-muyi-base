@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 * @since ${date}
 */
 @Slf4j
-@DubboService(version = "${dubbo.application.version}", timeout = 5000)
+@DubboService(version = "<#noparse>${dubbo.application.version}</#noparse>", timeout = 5000)
 public class ${entity}ApiServiceImpl implements ${entity}ApiService {
 
     @Resource
