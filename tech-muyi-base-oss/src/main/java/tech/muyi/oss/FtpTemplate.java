@@ -64,34 +64,49 @@ public class FtpTemplate {
             ftp.setBackToPwd(Boolean.TRUE);
             return ftp;
         } catch (Exception e) {
-            log.error("获取FTP连接失败！异常原因：", e);
+            log.error("获取FTP连接失败！异常原因:", e);
             throw new MyException(OssErrorCodeEnum.FTP_CONN_ERROR, e);
         }
     }
 
-    public String upload(String path, MultipartFile file) {
+    public String upload(MultipartFile file, String... path) {
         try {
-            String originalFileName = file.getOriginalFilename();
-            return upload(path, originalFileName,file.getInputStream());
+            return upload(file.getOriginalFilename(), file.getInputStream(), path);
         } catch (IOException e) {
-            log.error("FTP上传【{}】-【{}】失败！异常原因：{}", path, file, e);
+            log.error("FTP上传【{}】-【{}】失败！异常原因:", path, file, e);
             throw new MyException(OssErrorCodeEnum.FTP_UPLOAD_ERROR, e);
         }
     }
 
-    public String upload(String path, File file) {
+    public String upload(String fileName, MultipartFile file, String... path) {
         try {
-            return upload(path, file.getName(), Files.newInputStream(file.toPath()));
+            return upload(fileName, file.getInputStream(), path);
         } catch (IOException e) {
-            log.error("FTP上传【{}】-【{}】失败！异常原因：{}", path, file, e);
+            log.error("FTP上传【{}】-【{}】失败！异常原因:", path, fileName, e);
             throw new MyException(OssErrorCodeEnum.FTP_UPLOAD_ERROR, e);
         }
     }
 
-    public String upload(String path, String fileName, InputStream is) {
+    public String upload(String fileName, File file, String... path) {
+        try {
+            return upload(fileName, Files.newInputStream(file.toPath()), path);
+        } catch (IOException e) {
+            log.error("FTP上传【{}】-【{}】失败！异常原因:", path, file, e);
+            throw new MyException(OssErrorCodeEnum.FTP_UPLOAD_ERROR, e);
+        }
+    }
+
+    public String upload(String fileName, InputStream is, String... path) {
         Ftp ftp = getFtp();
+        String finalPath;
+        if (path != null && path.length > 0) {
+            finalPath = ftpProperties.getPath() + File.separator +  String.join(File.separator, path);
+
+        } else {
+            finalPath = ftpProperties.getPath();
+        }
         try {
-            return ftp.upload(path, fileName, is) ? ftpProperties.getUrlPrefix() + path + File.separator + fileName : null;
+            return ftp.upload(finalPath, fileName, is) ? ftpProperties.getUrlPrefix() + finalPath + File.separator + fileName : null;
         } finally {
             ftp.close();
             if (ftpProperties.isPoolCatch()) {
@@ -106,7 +121,7 @@ public class FtpTemplate {
         try {
             return ftp.download(path, fileName);
         } catch (Exception e) {
-            log.error("FTP下载【{}】-【{}】失败！异常原因：{}", path, fileName, e);
+            log.error("FTP下载【{}】-【{}】失败！异常原因:", path, fileName, e);
             throw new MyException(OssErrorCodeEnum.FTP_DOWNLOAD_ERROR, e);
         } finally {
             ftp.close();
@@ -121,7 +136,7 @@ public class FtpTemplate {
         try {
             ftp.delFile(fileName);
         } catch (Exception e) {
-            log.error("FTP删除【{}】失败！异常原因：{}", fileName, e);
+            log.error("FTP删除【{}】失败！异常原因:", fileName, e);
             throw new MyException(OssErrorCodeEnum.FTP_DEL_ERROR, e);
         } finally {
             ftp.close();
