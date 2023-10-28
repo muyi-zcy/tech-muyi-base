@@ -31,7 +31,6 @@ public class MySsoProperties {
     // 不需要进行拦截的接口
     private List<String> exclude = new ArrayList<>();
 
-
     private Class<? extends MySsoInfo> ssoInfoClass = MySsoInfo.class;
 
 }

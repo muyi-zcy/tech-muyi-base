@@ -17,6 +17,7 @@
         <module name="my-log-core" />
         <module name="my-log-okhttp-plugin" />
         <module name="tech-muyi-base-exception" />
+        <module name="tech-muyi-base-flyway" />
         <module name="my-log-rocketmq-plugin" />
         <module name="tech-muyi-base-sentinel" />
         <module name="tech-muyi-base-common" />

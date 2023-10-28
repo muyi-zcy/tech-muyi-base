@@ -43,6 +43,7 @@
         <module>tech-muyi-base-feign</module>
         <module>tech-muyi-base-dmask</module>
         <module>tech-muyi-base-sso</module>
+        <module>tech-muyi-base-flyway</module>
     </modules>
 
     <properties>
