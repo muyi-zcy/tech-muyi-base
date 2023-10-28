@@ -34,7 +34,7 @@ public class FlywayAutoConfiguration {
                 .url(flywayDataSourceProperties.getUrl())
                 .password(flywayDataSourceProperties.getPassword())
                 .username(flywayDataSourceProperties.getUsername())
-                .driverClassName("com.mysql.cj.jdbc.Driver")
+                .driverClassName(flywayDataSourceProperties.getDriverClassName())
                 .build();
 
         Flyway flyway = Flyway.configure()

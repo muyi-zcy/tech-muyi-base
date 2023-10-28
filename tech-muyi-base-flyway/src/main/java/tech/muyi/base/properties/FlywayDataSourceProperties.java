@@ -18,5 +18,7 @@ public class FlywayDataSourceProperties {
 
     private String password;
 
+    private String driverClassName;
+
 
 }
