@@ -109,8 +109,9 @@ public class AbstractQuery<T extends MyBaseDTO> extends MyBaseQuery implements W
 
     private String parseColumn(SFunction<T, ?> column){
         LambdaMeta meta = LambdaUtils.extract(column);
-        return PropertyNamer.methodToProperty(meta.getImplMethodName());
+        String camelCaseString =  PropertyNamer.methodToProperty(meta.getImplMethodName());
+        String underscoreString = camelCaseString.replaceAll("([a-z])([A-Z])", "$1_$2").toLowerCase();
+        return underscoreString;
     }
-
 
 }
