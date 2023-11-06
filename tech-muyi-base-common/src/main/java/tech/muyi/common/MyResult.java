@@ -41,7 +41,7 @@ public class MyResult<T> implements Serializable {
 
     public static <T> MyResult<T> fail(String errCode, String errMsg) {
         MyResult<T> result = new MyResult<>();
-        result.success = true;
+        result.success = false;
         result.setCode(errCode);
         result.setMessage(errMsg);
         return result;
