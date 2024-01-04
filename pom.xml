@@ -14,8 +14,8 @@
         <module>tech-muyi-base-oss</module>
         <module>tech-muyi-base-exception</module>
         <module>tech-muyi-base-redis</module>
-        <module>tech-muyi-base-job-elastic</module>
-        <module>tech-muyi-base-job-easy</module>
+        <module>tech-muyi-base-elasticjob</module>
+        <module>tech-muyi-base-easyjob</module>
         <module>tech-muyi-base-on</module>
         <module>tech-muyi-base-log</module>
         <module>tech-muyi-base-api</module>
@@ -164,13 +164,13 @@
 
             <dependency>
                 <groupId>tech.muyi</groupId>
-                <artifactId>tech-muyi-base-job-easy</artifactId>
+                <artifactId>tech-muyi-base-easyjob</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>tech.muyi</groupId>
-                <artifactId>tech-muyi-base-job-elastic</artifactId>
+                <artifactId>tech-muyi-base-elasticjob</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

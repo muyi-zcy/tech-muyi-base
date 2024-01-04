@@ -5,7 +5,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>tech.muyi</groupId>
-    <artifactId>tech-muyi-base-job-elastic</artifactId>
+    <artifactId>tech-muyi-base-elasticjob</artifactId>
 
     <parent>
         <groupId>tech.muyi</groupId>
