@@ -20,7 +20,6 @@ import tech.muyi.sso.properties.MySsoProperties;
  */
 @Slf4j
 @Configuration
-@EnableConfigurationProperties({MySsoProperties.class})
 @ConditionalOnProperty(name = {"muyi.sso.enable"}, havingValue = "true")
 public class MySsoManageAutoConfiguration {
 

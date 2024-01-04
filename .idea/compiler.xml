@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="tech-muyi-base-util" />
+        <module name="tech-muyi-base-easyjob" />
         <module name="tech-muyi-base-config" />
         <module name="my-log-db-plugin" />
         <module name="tech-muyi-base-redis" />
@@ -18,6 +19,7 @@
         <module name="my-log-okhttp-plugin" />
         <module name="tech-muyi-base-exception" />
         <module name="tech-muyi-base-flyway" />
+        <module name="tech-muyi-base-elasticjob" />
         <module name="my-log-rocketmq-plugin" />
         <module name="tech-muyi-base-sentinel" />
         <module name="tech-muyi-base-common" />
@@ -26,7 +28,6 @@
         <module name="my-log-dubbo-plugin" />
         <module name="my-log-redis-plugin" />
         <module name="tech-muyi-base-tracer" />
-        <module name="tech-muyi-base-job-elastic" />
         <module name="tech-muyi-base-core" />
         <module name="tech-muyi-base-okhttp" />
         <module name="tech-muyi-base-id" />
@@ -37,7 +38,6 @@
         <module name="tech-muyi-base-message" />
         <module name="tech-muyi-base-log" />
         <module name="tech-muyi-base-feign" />
-        <module name="tech-muyi-base-job-easy" />
         <module name="tech-muyi-base-dmask" />
       </profile>
     </annotationProcessing>

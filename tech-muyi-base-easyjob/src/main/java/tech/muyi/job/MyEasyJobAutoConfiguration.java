@@ -1,9 +1,6 @@
 package tech.muyi.job;
 
 import lombok.extern.slf4j.Slf4j;
-import org.redisson.api.RBucket;
-import org.redisson.api.RLock;
-import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
@@ -15,8 +12,6 @@ import org.springframework.scheduling.support.CronTrigger;
 import tech.muyi.job.annotation.MyEasyJob;
 import tech.muyi.job.base.BaseTask;
 import tech.muyi.redis.RedissonManage;
-
-import javax.annotation.Resource;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
@@ -55,7 +50,7 @@ public class MyEasyJobAutoConfiguration implements SchedulingConfigurer {
             Map.Entry<String, BaseTask> entry = (Map.Entry) iterator.next();
             BaseTask baseTask = entry.getValue();
             if (null != baseTask.getClass().getAnnotation(MyEasyJob.class)) {
-                this.buildTask(scheduledTaskRegistrar, baseTask);
+                    this.buildTask(scheduledTaskRegistrar, baseTask);
             }
         }
     }

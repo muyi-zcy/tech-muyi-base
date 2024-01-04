@@ -1,9 +1,12 @@
 package tech.muyi.util;
 
+import cn.hutool.core.net.Ipv4Util;
 import lombok.extern.slf4j.Slf4j;
+import sun.net.util.IPAddressUtil;
 
 import javax.servlet.http.HttpServletRequest;
-import java.net.*;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.util.Enumeration;
 
 /**
@@ -48,7 +51,6 @@ public class IpUtil {
     }
 
 
-
     public static String getIP() {
         try {
             Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
@@ -64,7 +66,8 @@ public class IpUtil {
                 }
             }
             return null;
-        } catch (Throwable t) {
+        } catch (Exception e) {
+            log.error("IpUtil#getIP", e);
             return null;
         }
     }
