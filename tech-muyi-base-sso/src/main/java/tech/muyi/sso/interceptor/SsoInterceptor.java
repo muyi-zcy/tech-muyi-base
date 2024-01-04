@@ -52,7 +52,7 @@ public class SsoInterceptor implements HandlerInterceptor {
 
         // 判断是否过期
         long currentTimeMillis = System.currentTimeMillis();
-        if (currentTimeMillis > mySsoInfo.getExpirationTime()) {
+        if (mySsoInfo.getExpirationTime() != null && currentTimeMillis > mySsoInfo.getExpirationTime()) {
             throw new MyException(CommonErrorCodeEnum.UNAUTHORIZED.getResultCode(), mySsoProperties.getTag() + "已失效");
         }
 
@@ -61,13 +61,14 @@ public class SsoInterceptor implements HandlerInterceptor {
 
         // 判断是否延期
         // 计算时间差（毫秒级别）
-        long timeDifference = System.currentTimeMillis() - mySsoInfo.getExpirationTime();
-        if (timeDifference < mySsoProperties.getEffectiveTime() / 2) {
-            long expirationTime = System.currentTimeMillis() + mySsoProperties.getEffectiveTime();
-            mySsoInfo.setExpirationTime(expirationTime);
-            mySsoManager.cache(mySsoInfo);
+        if(mySsoInfo.getExpirationTime() != null) {
+            long timeDifference = System.currentTimeMillis() - mySsoInfo.getExpirationTime();
+            if (timeDifference < mySsoProperties.getEffectiveTime() / 2) {
+                long expirationTime = System.currentTimeMillis() + mySsoProperties.getEffectiveTime();
+                mySsoInfo.setExpirationTime(expirationTime);
+                mySsoManager.cache(mySsoInfo);
+            }
         }
-
         mySsoManager.set(mySsoInfo);
 
         return true;
