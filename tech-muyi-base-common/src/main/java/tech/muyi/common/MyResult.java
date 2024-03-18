@@ -20,6 +20,7 @@ public class MyResult<T> implements Serializable {
     private MyBaseQuery query;
     private String code;
     private String message;
+    private String requestId;
 
 
     public static <T> MyResult<T> ok(T data, MyBaseQuery query) {

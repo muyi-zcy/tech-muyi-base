@@ -46,6 +46,8 @@
       <module name="tech-muyi-base-context" target="1.8" />
       <module name="tech-muyi-base-db" target="1.8" />
       <module name="tech-muyi-base-gateway" target="1.8" />
+      <module name="tech-muyi-base-job-easy" target="1.8" />
+      <module name="tech-muyi-base-job-elastic" target="1.8" />
       <module name="tech-muyi-base-job-quartz" target="8" />
       <module name="tech-muyi-base-mq-client" target="1.8" />
       <module name="tech-muyi-base-mq-server" target="1.8" />

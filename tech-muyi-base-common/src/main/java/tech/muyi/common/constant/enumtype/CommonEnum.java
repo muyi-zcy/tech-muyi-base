@@ -9,7 +9,7 @@ import java.util.Objects;
  * @author: muyi
  * @date: 2023/2/28
  **/
-public interface CommonEnum<T> {
+public interface CommonEnum<T>{
     T getCode();
 
     String getName();

@@ -16,7 +16,7 @@ public class MyBaseQuery implements Serializable {
 
     private static final Long MAX_PAGE_SIZE = 2000L;
 
-    private static final Long DEFAULT_PAGE_SIZE = 200L;
+    private static final Long DEFAULT_PAGE_SIZE = 20L;
 
     // 分页步长
     private Long size;
