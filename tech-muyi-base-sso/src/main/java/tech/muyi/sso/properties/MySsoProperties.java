@@ -22,7 +22,7 @@ public class MySsoProperties {
 
     private boolean enable = true;
 
-    private String tokenKey = "my-oss:";
+    private String tokenKey = "my-sso:";
 
     private String tag = "token";
 

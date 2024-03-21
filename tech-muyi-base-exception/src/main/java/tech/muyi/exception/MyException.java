@@ -1,5 +1,6 @@
 package tech.muyi.exception;
 
+import lombok.extern.slf4j.Slf4j;
 import tech.muyi.exception.enumtype.CommonErrorCodeEnum;
 
 /**
@@ -8,6 +9,7 @@ import tech.muyi.exception.enumtype.CommonErrorCodeEnum;
  * @Author: muyi
  * @Date: 2021/1/3 21:25
  */
+@Slf4j
 public class MyException extends RuntimeException {
     /**
      * 错误码
