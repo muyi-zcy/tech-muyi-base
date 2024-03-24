@@ -20,7 +20,11 @@ public enum OssErrorCodeEnum implements BaseErrorInfoInterface {
     FOLDER_NOT_FOUND("6012", "文件夹不存在"),
     FOLDER_MKDIR_ERROR("6013", "文件夹创建失败"),
     FILE_DELETE_ERROR("6014", "文件删除失败"),
-    UPLOAD_FILE_ERROR("6215", "上传文件失败"),
+    UPLOAD_FILE_ERROR("6015", "上传文件失败"),
+    UPLOAD_FILE_SIZE_OVERSIZE("6016", "超出文件上传上限"),
+    UPLOAD_FILE_IS_EXIST("6017", "上传文件已存在"),
+    UPLOAD_FILE_NOT_MEET_THE_RULES("6018", "上传文件名不满足规则"),
+    FILE_QUERY_ERROR("6019", "文件查询失败"),
 
     OSS_CONN_ERROR("6211", "Oss服务器连接失败"),
     OSS_EXIST_BUCKET("6220", "令牌桶不存在"),
