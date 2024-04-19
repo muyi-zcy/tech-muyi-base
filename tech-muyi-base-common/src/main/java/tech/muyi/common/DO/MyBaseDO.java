@@ -29,8 +29,6 @@ public class MyBaseDO implements Serializable {
     @TableLogic
     protected Integer rowStatus;
 
-    protected Integer bizType;
-
     protected String extAtt;
     @TableField(fill = FieldFill.INSERT)
     protected String creator;

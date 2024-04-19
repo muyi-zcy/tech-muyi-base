@@ -23,9 +23,6 @@ public class MyBaseDTO implements Serializable {
     @ApiModelProperty("修改时间")
     protected LocalDateTime gmtModified;
 
-    @ApiModelProperty("业务类型")
-    protected Integer bizType;
-
     @ApiModelProperty("拓展内容")
     protected String extAtt;
 
