@@ -1,9 +1,6 @@
 package tech.muyi.core.config;
 
-import com.alibaba.ttl.TtlRunnable;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.aop.interceptor.SimpleAsyncUncaughtExceptionHandler;
 import org.springframework.boot.autoconfigure.task.TaskExecutionProperties;
@@ -14,10 +11,7 @@ import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
 import tech.muyi.core.async.MyTaskDecorator;
-
 import java.util.concurrent.Executor;
 
 /**

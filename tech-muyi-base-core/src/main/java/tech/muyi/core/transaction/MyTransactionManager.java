@@ -1,7 +1,5 @@
 package tech.muyi.core.transaction;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.TransactionDefinition;
@@ -19,7 +17,7 @@ import javax.annotation.Resource;
  * @date: 2023/5/30
  **/
 @Component
-public class TransactionManager {
+public class MyTransactionManager {
 
     @Resource
     private DataSourceTransactionManager transactionManager;

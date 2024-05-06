@@ -1,5 +1,7 @@
 package tech.muyi.sso;
 
+
+import com.google.gson.reflect.TypeToken;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.api.RBucket;
 import tech.muyi.redis.RedissonManage;
@@ -9,6 +11,8 @@ import tech.muyi.util.MyJson;
 import tech.muyi.util.ttl.MyTransmittableThreadLocal;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author: muyi
@@ -85,7 +89,9 @@ public class MySsoManager<T extends MySsoInfo> {
             return null;
         }
 
-        return (T) MyJson.fromJson(info, classT);
+        T data = (T) MyJson.fromJson(info, classT);
+        data.setCacheValue(info);
+        return data;
     }
 
 
@@ -100,7 +106,14 @@ public class MySsoManager<T extends MySsoInfo> {
 
     public T cache(T mySsoInfo, Long expireAt) {
         RBucket<String> rBucket = redissonManage.getRedissonClient().getBucket(mySsoProperties.getTokenKey() + mySsoInfo.getToken());
-        rBucket.set(MyJson.toJson(mySsoInfo));
+        if (StringUtils.isNotEmpty(mySsoInfo.getCacheValue())) {
+            Map<String, Object> cacheValue = MyJson.getGson().fromJson(mySsoInfo.getCacheValue(), new TypeToken<HashMap<String, Object>>() {
+            }.getType());
+            cacheValue.put("expirationTime", mySsoInfo.getExpirationTime());
+            rBucket.set(MyJson.toJson(cacheValue));
+        }else {
+            rBucket.set(MyJson.toJson(mySsoInfo));
+        }
         if (expireAt != null) {
             rBucket.expireAt(expireAt);
         }

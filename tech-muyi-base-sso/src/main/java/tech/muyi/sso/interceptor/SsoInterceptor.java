@@ -27,6 +27,7 @@ public class SsoInterceptor implements HandlerInterceptor {
     private MySsoManager mySsoManager;
     @Resource
     private SsoInfoHookFactory ssoInfoHookFactory;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (!(handler instanceof HandlerMethod)) {
@@ -61,8 +62,12 @@ public class SsoInterceptor implements HandlerInterceptor {
 
         // 判断是否延期
         // 计算时间差（毫秒级别）
-        if(mySsoInfo.getExpirationTime() != null) {
-            long timeDifference = System.currentTimeMillis() - mySsoInfo.getExpirationTime();
+        if (mySsoInfo.getExpirationTime() != null) {
+            long timeDifference = mySsoInfo.getExpirationTime() - System.currentTimeMillis();
+            if (timeDifference < 0) {
+                mySsoManager.remove();
+                throw new MyException(CommonErrorCodeEnum.UNAUTHORIZED.getResultCode(), mySsoProperties.getTag() + "不存在或已失效");
+            }
             if (timeDifference < mySsoProperties.getEffectiveTime() / 2) {
                 long expirationTime = System.currentTimeMillis() + mySsoProperties.getEffectiveTime();
                 mySsoInfo.setExpirationTime(expirationTime);
@@ -70,7 +75,6 @@ public class SsoInterceptor implements HandlerInterceptor {
             }
         }
         mySsoManager.set(mySsoInfo);
-
         return true;
     }
 

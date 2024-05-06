@@ -1,6 +1,7 @@
 package tech.muyi.sso.dto;
 
 import lombok.Data;
+
 import java.io.Serializable;
 
 @Data
@@ -16,4 +17,6 @@ public class MySsoInfo implements Serializable {
     private Long loginTime;
 
     private Long expirationTime;
+
+    private String cacheValue;
 }

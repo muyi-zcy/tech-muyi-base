@@ -28,18 +28,24 @@ public enum MapperUtils {
     /**
      * 默认字段工厂
      */
-    private static final MapperFactory ORIKA_MAPPER_FACTORY = new DefaultMapperFactory.Builder().build();
+    private static final MapperFactory ORIKA_MAPPER_FACTORY;
 
     /**
      * 默认字段实例
      */
-    private static final MapperFacade ORIKA_MAPPER_FACADE = ORIKA_MAPPER_FACTORY.getMapperFacade();
+    private static final MapperFacade ORIKA_MAPPER_FACADE;
 
     /**
      * 默认字段实例集合
      */
-    private static final Map<String, MapperFacade> ORIKA_CACHE_MAPPER_FACADE_MAP = new ConcurrentHashMap<>();
+    private static final Map<String, MapperFacade> ORIKA_CACHE_MAPPER_FACADE_MAP;
 
+    static {
+        ORIKA_MAPPER_FACTORY = new DefaultMapperFactory.Builder().build();
+        ORIKA_MAPPER_FACTORY.getConverterFactory().registerConverter(new JSONObjectConverter());
+        ORIKA_MAPPER_FACADE = ORIKA_MAPPER_FACTORY.getMapperFacade();
+        ORIKA_CACHE_MAPPER_FACADE_MAP = new ConcurrentHashMap<>();
+    }
 
     /**
      * 映射实体（默认字段）
