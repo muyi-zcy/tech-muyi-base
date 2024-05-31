@@ -13,4 +13,9 @@ import java.lang.annotation.Target;
 @JacksonAnnotationsInside
 @JsonSerialize(using = OperatorSerializer.class)
 public @interface Operator {
+    /**
+     * 额外添加的字段名
+     *
+     */
+    String extraFieldName() default "";
 }
