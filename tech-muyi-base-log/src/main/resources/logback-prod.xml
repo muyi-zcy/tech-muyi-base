@@ -1,10 +1,19 @@
-<included>
+<?xml version="1.0" encoding="UTF-8"?>
 
-    <springProperty scope="context" name="APP" source="spring.application.name" />
+<configuration>
+
+    <springProperty scope="context" name="APP" source="spring.application.name"/>
 
     <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} ${APP:-default}, [%X{traceId}] [%X{spanId}] [%thread] %-5level %logger{50} - %msg%n"/>
 
-    <!--    本地调试控制台输出-->
+    <!-- 活动文件的大小 -->
+    <property name="max.file.size" value="50MB"/>
+    <!-- 保留的归档文件的最大数量 -->
+    <property name="max.history" value="30"/>
+    <!-- 控制所有归档日志文件的总大小 -->
+    <property name="total.size.cap" value="10GB"/>
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener"/>
+
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>${LOG_PATTERN}</pattern>
@@ -14,20 +23,41 @@
     <!--    全量日志记录-->
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>./logs/app-info.%d.%i.log</fileNamePattern>
-            <maxHistory>30</maxHistory>
+            <fileNamePattern>/home/app/logs/app-info.%d.%i.log</fileNamePattern>
+            <maxHistory>${max.history}</maxHistory>
+            <totalSizeCap>${total.size.cap}</totalSizeCap>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>50MB</maxFileSize>
+                <maxFileSize>${max.file.size}</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
         <encoder>
             <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
 
+    <!--ERROR日志文件-->
+    <appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>error</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/home/app/logs/app-error.%d.%i.log</fileNamePattern>
+            <maxHistory>${max.history}</maxHistory>
+            <totalSizeCap>${total.size.cap}</totalSizeCap>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${max.file.size}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
             <charset>UTF-8</charset>
         </encoder>
     </appender>
 
     <root level="info">
-        <appender-ref ref="FILE" />
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="FILE_ERROR"/>
     </root>
-</included>
+</configuration>
