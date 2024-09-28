@@ -15,11 +15,12 @@ import tech.muyi.id.properties.MyIdSnowflakeProperties;
 public class DefaultSnowflakeImpl implements MyIdGenerator {
 
 
+    // 基准时间
     public static long DEFAULT_TWEPOCH = 1672502400000L;
 
 
     /**
-     * 默认回拨时间，2S
+     * 时间偏移量、默认回拨时间，2S
      */
     public static long DEFAULT_TIME_OFFSET = 2000L;
 

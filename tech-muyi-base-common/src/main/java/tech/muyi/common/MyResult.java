@@ -1,6 +1,8 @@
 package tech.muyi.common;
 
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import tech.muyi.common.query.MyBaseQuery;
 import tech.muyi.exception.MyException;
 import tech.muyi.exception.enumtype.CommonErrorCodeEnum;
@@ -15,10 +17,15 @@ import java.io.Serializable;
 public class MyResult<T> implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    private static Integer SUCCESS_STATUS = NumberUtils.INTEGER_ZERO;
+    private static String SUCCESS_CODE = String.valueOf(SUCCESS_STATUS);
+    private static Integer UNKNOWN_ERROR_STATUS = NumberUtils.createInteger(CommonErrorCodeEnum.UNKNOWN_EXCEPTION.getResultCode());
+
     private boolean success;
     private T data;
     private MyBaseQuery query;
     private String code;
+    private Integer status;
     private String message;
     private String requestId;
 
@@ -28,7 +35,8 @@ public class MyResult<T> implements Serializable {
         result.setData(data);
         result.setQuery(query);
         result.success = true;
-        result.setCode("0");
+        result.setCode(SUCCESS_CODE);
+        result.setStatus(SUCCESS_STATUS);
         return result;
     }
 
@@ -45,6 +53,11 @@ public class MyResult<T> implements Serializable {
         result.success = false;
         result.setCode(errCode);
         result.setMessage(errMsg);
+        if (NumberUtils.isCreatable(errCode)) {
+            result.setStatus(NumberUtils.createInteger(errCode));
+        } else {
+            result.setStatus(UNKNOWN_ERROR_STATUS);
+        }
         return result;
     }
 
