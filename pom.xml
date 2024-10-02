@@ -59,6 +59,8 @@
         <spring-boot-starter-parent.version>2.3.12.RELEASE</spring-boot-starter-parent.version>
         <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.7.RELEASE</spring-cloud-alibaba.version>
+        <dubbo.version>3.3.0</dubbo.version>
+        <nacos.version>2.0.3</nacos.version>
         <spring-context-support.version>1.0.11</spring-context-support.version>
 
         <javax.mail.version>1.6.2</javax.mail.version>
@@ -188,23 +190,6 @@
                 <version>${project.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>tech.muyi</groupId>
-                <artifactId>tech-muyi-base-mq-client</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>tech.muyi</groupId>
-                <artifactId>tech-muyi-base-mq-common</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>tech.muyi</groupId>
-                <artifactId>tech-muyi-base-mq-server</artifactId>
-                <version>${project.version}</version>
-            </dependency>
 
             <dependency>
                 <groupId>tech.muyi</groupId>
@@ -358,12 +343,37 @@
                 <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
                 <version>${spring-cloud-alibaba.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-starter-dubbo</artifactId>
                 <version>${spring-cloud-alibaba.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-dependencies-bom</artifactId>
+                <version>${dubbo.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-client</artifactId>
+                <version>${nacos.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>com.sun.mail</groupId>
