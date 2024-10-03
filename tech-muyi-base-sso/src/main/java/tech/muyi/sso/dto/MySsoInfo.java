@@ -3,6 +3,8 @@ package tech.muyi.sso.dto;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class MySsoInfo implements Serializable {
@@ -19,4 +21,8 @@ public class MySsoInfo implements Serializable {
     private Long expirationTime;
 
     private String cacheValue;
+
+    private List<String> includeRoute;
+
+    private List<String> excludeRoute;
 }
