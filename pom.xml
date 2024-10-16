@@ -44,6 +44,7 @@
         <module>tech-muyi-base-dmask</module>
         <module>tech-muyi-base-sso</module>
         <module>tech-muyi-base-flyway</module>
+        <module>tech-muyi-base-boot</module>
     </modules>
 
     <properties>

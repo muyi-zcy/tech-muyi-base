@@ -8,8 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import tech.muyi.config.constant.Constants;
-import tech.muyi.util.IpUtil;
-import tech.muyi.util.constant.GlobalConstants;
 
 /**
  *
