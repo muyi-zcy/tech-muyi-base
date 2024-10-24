@@ -22,6 +22,8 @@ public class MySsoInfo implements Serializable {
 
     private String cacheValue;
 
+    private String source;
+
     private List<String> includeRoute;
 
     private List<String> excludeRoute;
