@@ -40,12 +40,6 @@
 
         <dependency>
             <groupId>tech.muyi</groupId>
-            <artifactId>tech-muyi-base-redis</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-log</artifactId>
             <version>${project.version}</version>
         </dependency>

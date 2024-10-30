@@ -3,6 +3,7 @@ package tech.muyi.sso.dto;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class MySsoInfo implements Serializable {
 
     private String token;
 
-    private Long loginTime;
+    private LocalDateTime loginTime;
 
     private Long expirationTime;
 
