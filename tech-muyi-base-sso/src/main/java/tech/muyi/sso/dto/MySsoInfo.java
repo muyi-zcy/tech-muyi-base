@@ -19,7 +19,7 @@ public class MySsoInfo implements Serializable {
 
     private LocalDateTime loginTime;
 
-    private Long expirationTime;
+    private LocalDateTime expirationTime;
 
     private String cacheValue;
 

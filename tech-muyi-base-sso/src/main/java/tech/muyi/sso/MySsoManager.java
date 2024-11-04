@@ -11,6 +11,8 @@ import tech.muyi.util.MyJson;
 import tech.muyi.util.ttl.MyTransmittableThreadLocal;
 
 import javax.annotation.Resource;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -104,18 +106,18 @@ public class MySsoManager<T extends MySsoInfo> {
         return this.cache(mySsoInfo, mySsoInfo.getExpirationTime());
     }
 
-    public T cache(T mySsoInfo, Long expireAt) {
+    public T cache(T mySsoInfo, LocalDateTime expireAt) {
         RBucket<String> rBucket = redissonManage.getRedissonClient().getBucket(mySsoProperties.getTokenKey() + mySsoInfo.getToken());
         if (StringUtils.isNotEmpty(mySsoInfo.getCacheValue())) {
             Map<String, Object> cacheValue = MyJson.getGson().fromJson(mySsoInfo.getCacheValue(), new TypeToken<HashMap<String, Object>>() {
             }.getType());
             cacheValue.put("expirationTime", mySsoInfo.getExpirationTime());
             rBucket.set(MyJson.toJson(cacheValue));
-        }else {
+        } else {
             rBucket.set(MyJson.toJson(mySsoInfo));
         }
         if (expireAt != null) {
-            rBucket.expireAt(expireAt);
+            rBucket.expireAt(expireAt.toEpochSecond(ZoneOffset.UTC) * 1000L);
         }
         return mySsoInfo;
     }

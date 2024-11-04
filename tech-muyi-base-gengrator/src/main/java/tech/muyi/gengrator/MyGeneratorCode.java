@@ -6,17 +6,17 @@ public class MyGeneratorCode {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
 
-        String projectName = "my-ideaistudio-ups";
+        String projectName = "my-nk-applet";
         System.out.println("请输入项目名："+projectName);
 
-        String tableName = "t_access";
+        String tableName = "t_winning_record";
         System.out.println("表名："+tableName);
 
-        String path = "/home/muyi/ideai/code/";
+        String path = "J:\\ideai\\project\\nk\\";
         System.out.println("项目地址："+path);
 
-        String url= "192.168.1.8:3306";
-        url = "jdbc:mysql://"+ url +"/my-ideaistudio-ups?autoReconnect=true&useUnicode=true&characterEncoding=UTF8&serverTimezone=GMT%2B8";
+        String url= "192.168.1.100:3306";
+        url = "jdbc:mysql://"+ url +"/nk-applet?autoReconnect=true&useUnicode=true&characterEncoding=UTF8&serverTimezone=GMT%2B8";
         System.out.println("数据库地址："+url);
 
         String username= "root";
@@ -25,7 +25,7 @@ public class MyGeneratorCode {
         String password= "devMysqlPasswd";
         System.out.println("数据库密码："+password);
 
-        String groupId = "com.ideaistudio";
+        String groupId = "com.nk";
         System.out.println("系统GroupId："+groupId );
         Controller.deal(projectName,tableName,path,url,username,password,groupId);
         Query.deal(projectName,tableName,path,url,username,password,groupId);

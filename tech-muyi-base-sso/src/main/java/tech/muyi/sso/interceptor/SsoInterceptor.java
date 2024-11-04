@@ -1,6 +1,7 @@
 package tech.muyi.sso.interceptor;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.tomcat.jni.Local;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import org.springframework.web.method.HandlerMethod;
@@ -17,6 +18,8 @@ import tech.muyi.util.request.CookieUtils;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 @Service
 @ConditionalOnProperty(name = {"muyi.sso.enable"}, havingValue = "true")
@@ -52,8 +55,8 @@ public class SsoInterceptor implements HandlerInterceptor {
         }
 
         // 判断是否过期
-        long currentTimeMillis = System.currentTimeMillis();
-        if (mySsoInfo.getExpirationTime() != null && currentTimeMillis > mySsoInfo.getExpirationTime()) {
+        LocalDateTime currentTime = LocalDateTime.now();
+        if (mySsoInfo.getExpirationTime() != null && currentTime.isAfter(mySsoInfo.getExpirationTime())) {
             throw new MyException(CommonErrorCodeEnum.UNAUTHORIZED.getResultCode(), mySsoProperties.getTag() + "已失效");
         }
 
@@ -63,14 +66,13 @@ public class SsoInterceptor implements HandlerInterceptor {
         // 判断是否延期
         // 计算时间差（毫秒级别）
         if (mySsoInfo.getExpirationTime() != null) {
-            long timeDifference = mySsoInfo.getExpirationTime() - System.currentTimeMillis();
-            if (timeDifference < 0) {
+            long secondsLeft = ChronoUnit.SECONDS.between(currentTime, mySsoInfo.getExpirationTime());
+            if (secondsLeft < 0) {
                 mySsoManager.remove();
                 throw new MyException(CommonErrorCodeEnum.UNAUTHORIZED.getResultCode(), mySsoProperties.getTag() + "不存在或已失效");
             }
-            if (timeDifference < mySsoProperties.getEffectiveTime() / 2) {
-                long expirationTime = System.currentTimeMillis() + mySsoProperties.getEffectiveTime();
-                mySsoInfo.setExpirationTime(expirationTime);
+            if (secondsLeft < mySsoProperties.getEffectiveTime() / 2) {
+                mySsoInfo.setExpirationTime(LocalDateTime.now().plusSeconds(mySsoProperties.getEffectiveTime()));
                 mySsoManager.cache(mySsoInfo);
             }
         }

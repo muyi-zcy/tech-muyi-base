@@ -10,7 +10,6 @@
         <module name="tech-muyi-base-util" />
         <module name="tech-muyi-base-easyjob" />
         <module name="tech-muyi-base-config" />
-        <module name="tech-muyi-base-boot" />
         <module name="my-log-db-plugin" />
         <module name="tech-muyi-base-redis" />
         <module name="tech-muyi-base-mq" />

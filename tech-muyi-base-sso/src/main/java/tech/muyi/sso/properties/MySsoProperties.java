@@ -26,7 +26,7 @@ public class MySsoProperties {
 
     private String tag = "token";
 
-    private Long effectiveTime = 60 * 60 * 1000L;
+    private Long effectiveTime = 60 * 60L;
 
     // 不需要进行拦截的接口
     private List<String> exclude = new ArrayList<>();
