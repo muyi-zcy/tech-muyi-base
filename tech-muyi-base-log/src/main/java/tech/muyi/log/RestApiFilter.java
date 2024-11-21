@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import tech.muyi.common.MyResult;
 import tech.muyi.util.MyJson;
 
 import javax.servlet.http.HttpServletRequest;
@@ -76,14 +77,17 @@ public class RestApiFilter {
             Object object = joinPoint.proceed();
 
             try {
-                logMsg = new StringBuilder();
-                logMsg.append("Exit REST method ")
-                        .append(joinPoint.getSignature().getName())
-                        .append("()")
-                        .append(" result:{},")
-                        .append("use time:{}");
+                // 判断object是否支持toJson
+                if(object.getClass() == MyResult.class) {
+                    logMsg = new StringBuilder();
+                    logMsg.append("Exit REST method ")
+                            .append(joinPoint.getSignature().getName())
+                            .append("()")
+                            .append(" result:{},")
+                            .append("use time:{}");
 
-                logger.info(logMsg.toString(), MyJson.toJson(object), System.currentTimeMillis() - startTime);
+                    logger.info(logMsg.toString(), MyJson.toJson(object), System.currentTimeMillis() - startTime);
+                }
             } catch (Exception e) {
                 logger.error("print REST log error", e);
             }
