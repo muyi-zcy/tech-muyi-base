@@ -26,7 +26,7 @@ public class MyBaseDO implements Serializable {
     @Version
     protected Integer rowVersion;
 
-    @TableLogic
+    @TableLogic(delval="-1",value="0")
     protected Integer rowStatus;
 
     protected String extAtt;

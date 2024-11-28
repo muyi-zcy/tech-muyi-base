@@ -32,7 +32,7 @@ public class ${entity}Manager extends MyServiceImpl<${entity}DAO, ${entity}DO>{
     private ${entity}DAO ${entity?uncap_first}DAO;
 
     public Boolean deleteById(Long id){
-        return this.update(Wrappers.<${entity}DO>lambdaUpdate().set(${entity}DO::getRowStatus, RowStatusEnum.DELETE.getCode()).eq(${entity}DO::getId,id));
+        return this.removeById(id);
     }
 
     public Boolean update(${entity}DO ${entity?uncap_first}DO) {

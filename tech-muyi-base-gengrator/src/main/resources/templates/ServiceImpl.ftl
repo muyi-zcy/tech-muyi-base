@@ -35,7 +35,6 @@ public class ${entity}ServiceImpl implements ${entity}Service {
     private MyIdGenerator myIdGenerator;
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public Boolean save(${entity}DTO ${entity?uncap_first}DTO) {
         ${entity}DO ${entity?uncap_first}DO = MapperUtils.ORIKA.map(${entity}DO.class, ${entity?uncap_first}DTO);
         ${entity?uncap_first}DO.setId(myIdGenerator.nextId());
@@ -43,7 +42,6 @@ public class ${entity}ServiceImpl implements ${entity}Service {
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public Boolean update(${entity}DTO ${entity?uncap_first}DTO) {
         ${entity}DO ${entity?uncap_first}DO;
         if(${entity?uncap_first}Manager.getById(${entity?uncap_first}DTO.getId()) == null){
@@ -54,7 +52,6 @@ public class ${entity}ServiceImpl implements ${entity}Service {
     }
 
     @Override
-    @Transactional(rollbackFor = Exception.class)
     public Boolean delete(Long id) {
         return ${entity?uncap_first}Manager.deleteById(id);
     }
