@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="EntryPointsManager">
     <list size="1">
@@ -22,6 +23,7 @@
         <option value="$PROJECT_DIR$/tech-muyi-base-mq-client/pom.xml" />
         <option value="$PROJECT_DIR$/tech-muyi-base-mq-server/pom.xml" />
         <option value="$PROJECT_DIR$/tech-muyi-base-registry/pom.xml" />
+        <option value="$PROJECT_DIR$/tech-muyi-base-tenant/pom.xml" />
         <option value="$PROJECT_DIR$/tech-muyi-base-tm/pom.xml" />
       </set>
     </option>

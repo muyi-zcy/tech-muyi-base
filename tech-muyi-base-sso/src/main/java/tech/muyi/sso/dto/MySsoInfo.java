@@ -27,6 +27,8 @@ public class MySsoInfo implements Serializable {
 
     private String tenantId;
 
+    private String currentTenantId;
+
     private List<String> includeRoute;
 
     private List<String> excludeRoute;

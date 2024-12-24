@@ -2,11 +2,13 @@ package tech.muyi.sso;
 
 
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.api.RBucket;
 import tech.muyi.redis.RedissonManage;
 import tech.muyi.sso.dto.MySsoInfo;
 import tech.muyi.sso.properties.MySsoProperties;
+import tech.muyi.sso.properties.MyTenantProperties;
 import tech.muyi.util.MyJson;
 import tech.muyi.util.ttl.MyTransmittableThreadLocal;
 
@@ -24,13 +26,17 @@ import java.util.Map;
 public class MySsoManager<T extends MySsoInfo> {
     private MySsoProperties mySsoProperties;
 
+    private MyTenantProperties myTenantProperties;
+
     @Resource
     private RedissonManage redissonManage;
 
+
     private final MyTransmittableThreadLocal<T> mySsoInfoTransmittableThreadLocal;
 
-    public MySsoManager(MySsoProperties mySsoProperties) {
+    public MySsoManager(MySsoProperties mySsoProperties, MyTenantProperties myTenantProperties) {
         this.mySsoProperties = mySsoProperties;
+        this.myTenantProperties = myTenantProperties;
         mySsoInfoTransmittableThreadLocal = new MyTransmittableThreadLocal<>("sso", mySsoProperties.getSsoInfoClass());
     }
 
@@ -125,6 +131,25 @@ public class MySsoManager<T extends MySsoInfo> {
     public Boolean cleanCache(String token) {
         RBucket<String> rBucket = redissonManage.getRedissonClient().getBucket(mySsoProperties.getTokenKey() + token);
         return rBucket.delete();
+    }
+
+    public Boolean isSuperTenant() {
+        T mySsoInfo = getSsoInfo();
+        if (mySsoInfo == null) {
+            return false;
+        }
+
+        if (myTenantProperties == null) {
+            return true;
+        }
+
+        if (myTenantProperties.getSuperTenantId() == null) {
+            return false;
+        }
+        if (CollectionUtils.isEmpty(myTenantProperties.getSuperTenantId())) {
+            return false;
+        }
+        return myTenantProperties.getSuperTenantId().contains(mySsoInfo.getTenantId());
     }
 
 }

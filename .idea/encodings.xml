@@ -77,6 +77,8 @@
     <file url="file://$PROJECT_DIR$/tech-muyi-base-rpc/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-sso/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-sso/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tech-muyi-base-tenant/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tech-muyi-base-tenant/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-tm/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-tm/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tech-muyi-base-tracer/src/main/java" charset="UTF-8" />

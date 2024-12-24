@@ -52,12 +52,14 @@
       <module name="tech-muyi-base-mq-client" target="1.8" />
       <module name="tech-muyi-base-mq-server" target="1.8" />
       <module name="tech-muyi-base-registry" target="8" />
+      <module name="tech-muyi-base-tenant" target="1.8" />
       <module name="tech-muyi-base-tm" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="tech-muyi-base-api" options="" />
+      <module name="tech-muyi-base-boot" options="-parameters" />
       <module name="tech-muyi-base-dependencies" options="-parameters" />
     </option>
   </component>
