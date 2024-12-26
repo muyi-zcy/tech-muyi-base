@@ -3,7 +3,7 @@ package tech.muyi.sso.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
 @ConfigurationProperties(
         prefix = "muyi.tenant"
 )
-@Configuration
+@Component
 @Data
 public class MyTenantProperties {
     //    是否启动
@@ -22,7 +22,6 @@ public class MyTenantProperties {
 
     //      忽略租户的表名
     private List<String> ignoreTable = new ArrayList<>();
-
 
     //    超级租户,可以查看所有租户的数据,可以删除所有租户的数据,可以修改所有租户的数据,不可以新增租户数据
     private List<String> superTenantId = new ArrayList<>();

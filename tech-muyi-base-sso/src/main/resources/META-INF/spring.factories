@@ -4,4 +4,5 @@ tech.muyi.sso.config.WebMvcConfiguration,\
 tech.muyi.sso.interceptor.SsoInterceptor,\
 tech.muyi.sso.interceptor.hook.SsoInfoHookFactory,\
 tech.muyi.sso.properties.MySsoProperties,\
+tech.muyi.sso.properties.MyTenantProperties,\
 tech.muyi.sso.config.TenantConfiguration

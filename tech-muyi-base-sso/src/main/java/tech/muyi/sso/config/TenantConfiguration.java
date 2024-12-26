@@ -14,7 +14,6 @@ import tech.muyi.sso.properties.MyTenantProperties;
 import javax.annotation.Resource;
 
 @Configuration
-@EnableConfigurationProperties({MyTenantProperties.class})
 @ConditionalOnProperty(name = "muyi.tenant.enable", havingValue = "true", matchIfMissing = false)
 public class TenantConfiguration {
 

@@ -3,6 +3,7 @@ package tech.muyi.sso.properties;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import tech.muyi.sso.dto.MySsoInfo;
 
 import java.util.ArrayList;
@@ -16,11 +17,11 @@ import java.util.List;
 @ConfigurationProperties(
         prefix = "muyi.sso"
 )
-@Configuration
+@Component
 @Data
 public class MySsoProperties {
 
-    private boolean enable = true;
+    private boolean enable = false;
 
     private String tokenKey = "my-sso:";
 
