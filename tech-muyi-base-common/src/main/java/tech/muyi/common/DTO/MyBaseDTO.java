@@ -1,5 +1,6 @@
 package tech.muyi.common.DTO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import tech.muyi.common.DTO.helper.Operator;
@@ -33,4 +34,8 @@ public class MyBaseDTO implements Serializable {
     @ApiModelProperty("修改人")
     @Operator
     protected String operator;
+
+    @ApiModelProperty("租户ID")
+    @JsonIgnore
+    private String tenantId;
 }
