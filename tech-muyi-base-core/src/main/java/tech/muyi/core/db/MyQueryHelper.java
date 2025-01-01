@@ -14,6 +14,7 @@ import tech.muyi.core.db.query.QueryCondition;
 import tech.muyi.exception.MyException;
 import tech.muyi.exception.enumtype.CommonErrorCodeEnum;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -139,10 +140,22 @@ public class MyQueryHelper {
                 }
                 break;
             case IN:
-                queryWrapper.in(queryCondition.getDbColumn(), queryCondition.getValue());
+                if (queryCondition.getValue().getClass().isArray()) {
+                    queryWrapper.in(queryCondition.getDbColumn(), (Object[]) queryCondition.getValue());
+                } else if (queryCondition.getValue() instanceof Collection) {
+                    queryWrapper.in(queryCondition.getDbColumn(), ((Collection<?>) queryCondition.getValue()).toArray());
+                }else {
+                    queryWrapper.in(queryCondition.getDbColumn(), queryCondition.getValue());
+                }
                 break;
             case NOT:
-                queryWrapper.notIn(queryCondition.getDbColumn(), queryCondition.getValue());
+                if (queryCondition.getValue().getClass().isArray()) {
+                    queryWrapper.notIn(queryCondition.getDbColumn(), (Object[]) queryCondition.getValue());
+                } else if (queryCondition.getValue() instanceof Collection) {
+                    queryWrapper.notIn(queryCondition.getDbColumn(), ((Collection<?>) queryCondition.getValue()).toArray());
+                }else {
+                    queryWrapper.notIn(queryCondition.getDbColumn(), queryCondition.getValue());
+                }
                 break;
             case LIKE:
                 queryWrapper.like(queryCondition.getDbColumn(), queryCondition.getValue());
