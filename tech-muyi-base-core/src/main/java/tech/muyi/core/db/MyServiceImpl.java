@@ -1,5 +1,6 @@
 package tech.muyi.core.db;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -15,14 +16,20 @@ import java.util.List;
  * @date: 2023/7/3
  **/
 @Slf4j
-public class MyServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M, T> {
+public abstract class MyServiceImpl<M extends BaseMapper<T>, T> extends ServiceImpl<M, T> {
 
-    public List<T> pageQuery(MyQuery myBaseQuery){
+
+    public  abstract T createEntity();
+
+    public List<T> pageQuery(MyQuery myBaseQuery) {
         LambdaQueryWrapper<T> lambdaQueryWrapper = myBaseQuery.getLambdaQueryWrapper();
-        IPage page = new Page<>(myBaseQuery.getCurrent(),myBaseQuery.getSize(), myBaseQuery.getIsSearchCount());
+        IPage page = new Page<>(myBaseQuery.getCurrent(), myBaseQuery.getSize(), myBaseQuery.getIsSearchCount());
         this.page(page, lambdaQueryWrapper);
-        MyQueryHelper.queryPageConfig(page,myBaseQuery);
+        MyQueryHelper.queryPageConfig(page, myBaseQuery);
         return page.getRecords();
     }
 
+    public boolean update(Wrapper<T> updateWrapper) {
+        return update(createEntity(), updateWrapper);
+    }
 }
