@@ -14,7 +14,7 @@
         <relativePath/>
     </parent>
 
-    <version>1.0-SNAPSHOT</version>
+    <version>${revision}</version>
 
     <packaging>pom</packaging>
 
@@ -22,7 +22,7 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <revision>1.0-SNAPSHOT</revision>
+        <revision>1.0.0</revision>
     </properties>
 
     <dependencies>
