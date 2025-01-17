@@ -105,7 +105,7 @@ public enum CommonErrorCodeEnum implements BaseErrorInfoInterface {
     NETWORK_AUTHENTICATION_REQUIRED("511", "Network Authentication Required"),
 
 
-    UNKNOWN_EXCEPTION( "600", "Unknown Exception"),
+    UNKNOWN_EXCEPTION( "600", "天啦噜~我好像出错了_(:3 」∠ )_"),
 
     INVALID_PARAM( "10000", "Invalid Param"),
     DB_EXCEPTION("10001", "Db Exception"),
