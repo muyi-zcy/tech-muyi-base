@@ -152,4 +152,24 @@ public class MySsoManager<T extends MySsoInfo> {
         return myTenantProperties.getSuperTenantId().contains(mySsoInfo.getTenantId());
     }
 
+
+    public Boolean isCommonTenant() {
+        T mySsoInfo = getSsoInfo();
+        if (mySsoInfo == null) {
+            return false;
+        }
+
+        if (myTenantProperties == null) {
+            return true;
+        }
+
+        if (myTenantProperties.getCommonTenantId() == null) {
+            return false;
+        }
+        if (CollectionUtils.isEmpty(myTenantProperties.getCommonTenantId())) {
+            return false;
+        }
+        return myTenantProperties.getCommonTenantId().contains(mySsoInfo.getTenantId());
+    }
+
 }
