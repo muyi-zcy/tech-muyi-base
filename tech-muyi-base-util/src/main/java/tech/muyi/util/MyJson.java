@@ -2,6 +2,7 @@ package tech.muyi.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.LongSerializationPolicy;
 import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class MyJson {
     static {
         GSON = new GsonBuilder().enableComplexMapKeySerialization()
                 .serializeNulls()
+                .setLongSerializationPolicy(LongSerializationPolicy.STRING)
                 .disableHtmlEscaping()
                 .create();
     }
