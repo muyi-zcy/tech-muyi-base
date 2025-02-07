@@ -36,6 +36,5 @@ public class MyBaseDTO implements Serializable {
     protected String operator;
 
     @ApiModelProperty("租户ID")
-    @JsonIgnore
     private String tenantId;
 }
