@@ -7,7 +7,7 @@
     <groupId>tech.muyi</groupId>
     <artifactId>tech-muyi-base</artifactId>
     <packaging>pom</packaging>
-    <version>${revision}</version>
+    <version>${baseversion}</version>
 
     <modules>
         <module>tech-muyi-base-dependencies</module>
@@ -50,7 +50,7 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <revision>1.0.0</revision>
+        <baseversion>1.0.0</baseversion>
 
         <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
 

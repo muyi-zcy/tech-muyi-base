@@ -11,5 +11,5 @@
 author:muyi
 mail:muyi_zcy@163.com
 project:${spring.application.name}
-version:1.0-SNAPSHOT
+version:1.0.0
 ---------------------------------------------------------------

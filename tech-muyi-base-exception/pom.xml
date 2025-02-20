@@ -8,13 +8,13 @@
     <parent>
         <groupId>tech.muyi</groupId>
         <artifactId>tech-muyi-base</artifactId>
-        <version>${revision}</version>
+        <version>${baseversion}</version>
     </parent>
 
     <groupId>tech.muyi</groupId>
     <artifactId>tech-muyi-base-exception</artifactId>
 
-    <version>${revision}</version>
+    <version>${baseversion}</version>
 
     <packaging>jar</packaging>
 

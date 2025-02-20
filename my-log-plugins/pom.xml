@@ -6,12 +6,12 @@
     <parent>
         <groupId>tech.muyi</groupId>
         <artifactId>tech-muyi-base</artifactId>
-        <version>${revision}</version>
+        <version>${baseversion}</version>
     </parent>
     <groupId>tech.muyi</groupId>
 
     <artifactId>my-log-plugins</artifactId>
-    <version>${revision}</version>
+    <version>${baseversion}</version>
     <packaging>pom</packaging>
 
     <properties>

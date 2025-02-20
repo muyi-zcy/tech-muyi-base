@@ -6,13 +6,13 @@
     <parent>
         <groupId>tech.muyi</groupId>
         <artifactId>tech-muyi-base</artifactId>
-        <version>${revision}</version>
+        <version>${baseversion}</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>tech-muyi-base-common</artifactId>
 
-    <version>${revision}</version>
+    <version>${baseversion}</version>
     <packaging>jar</packaging>
 
     <properties>
