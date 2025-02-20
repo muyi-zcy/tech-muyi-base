@@ -29,37 +29,37 @@
         <dependency>
             <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-core</artifactId>
-            <version>${project.version}</version>
+            <version>${baseversion}</version>
         </dependency>
 
         <dependency>
             <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-api</artifactId>
-            <version>${project.version}</version>
+            <version>${baseversion}</version>
         </dependency>
 
         <dependency>
             <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-log</artifactId>
-            <version>${project.version}</version>
+            <version>${baseversion}</version>
         </dependency>
 
         <dependency>
             <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-config</artifactId>
-            <version>${project.version}</version>
+            <version>${baseversion}</version>
         </dependency>
 
         <dependency>
             <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-util</artifactId>
-            <version>${project.version}</version>
+            <version>${baseversion}</version>
         </dependency>
 
         <dependency>
             <groupId>tech.muyi</groupId>
             <artifactId>tech-muyi-base-id</artifactId>
-            <version>${project.version}</version>
+            <version>${baseversion}</version>
         </dependency>
     </dependencies>
 
