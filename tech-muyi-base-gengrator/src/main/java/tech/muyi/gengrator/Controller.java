@@ -9,7 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Controller {
-    public static void deal(String projectName,String tableName,String path,String url,String username,String password,String groupId){
+    public static void deal(String projectName,String tableName,String path,String url,String username,String password,String groupId,
+                             boolean disableOpenDir,
+                             boolean fileOverride){
         Map<String,Object> custom = new HashMap<>();
         custom.put("groupId",groupId);
         custom.put("apiName",projectName);
@@ -19,6 +21,12 @@ public class Controller {
                             .enableSwagger() // 开启 swagger 模式
                             .dateType(DateType.TIME_PACK)
                             .outputDir(path +"/"+projectName + "/" +projectName+"-web"+"/src/main/java"); // 指定输出目录
+                    if (fileOverride) {
+                        builder.fileOverride();
+                    }
+                    if (disableOpenDir) {
+                        builder.disableOpenDir();
+                    }
                 })
                 .packageConfig(builder -> {
                     builder.parent(groupId) // 设置父包名
