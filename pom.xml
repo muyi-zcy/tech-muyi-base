@@ -25,7 +25,7 @@
         <module>tech-muyi-base-message</module>
         <module>tech-muyi-base-mq</module>
         <module>tech-muyi-base-rpc</module>
-        <module>tech-muyi-base-gengrator</module>
+        <module>tech-muyi-base-generator</module>
         <module>tech-muyi-base-sentinel</module>
         <module>tech-muyi-base-core</module>
         <module>my-log-plugins</module>
@@ -157,7 +157,7 @@
 
             <dependency>
                 <groupId>tech.muyi</groupId>
-                <artifactId>tech-muyi-base-gengrator</artifactId>
+                <artifactId>tech-muyi-base-generator</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
