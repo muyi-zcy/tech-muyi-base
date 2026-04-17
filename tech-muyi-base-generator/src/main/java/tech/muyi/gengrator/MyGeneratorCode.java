@@ -583,6 +583,10 @@ public class MyGeneratorCode {
     }
 
     private static class GeneratorConfig {
+        private static final String DEFAULT_PROJECT_NAME = "tech-muyi-base";
+        private static final String DEFAULT_DB_NAME = "tech_muyi_base";
+        private static final String DEFAULT_GROUP_ID = "tech.muyi";
+
         private String projectName;
         private String path;
         private String dbHost;
@@ -610,15 +614,15 @@ public class MyGeneratorCode {
 
         private static GeneratorConfig defaultConfig() {
             GeneratorConfig config = new GeneratorConfig();
-            config.projectName = "my-nk-procamp";
-            config.path = "J:\\ideai\\project\\nk\\";
+            config.projectName = DEFAULT_PROJECT_NAME;
+            config.path = Paths.get(System.getProperty("user.dir")).toAbsolutePath().normalize().toString();
             config.dbHost = "127.0.0.1";
             config.dbPort = "3306";
-            config.dbName = "my-nk-procamp";
+            config.dbName = DEFAULT_DB_NAME;
             config.url = buildJdbcUrl(config.dbHost, config.dbPort, config.dbName);
             config.username = "root";
-            config.password = "devMysqlPasswd";
-            config.groupId = "cn.ideaistudio";
+            config.password = "";
+            config.groupId = DEFAULT_GROUP_ID;
             config.overwrite = false;
             config.disableOpenDir = true;
             config.multiSelect = true;

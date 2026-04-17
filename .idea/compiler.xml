@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="tech-muyi-base-util" />
+        <module name="tech-muyi-base-generator" />
         <module name="tech-muyi-base-easyjob" />
         <module name="tech-muyi-base-config" />
         <module name="my-log-db-plugin" />
@@ -32,7 +33,6 @@
         <module name="tech-muyi-base-okhttp" />
         <module name="tech-muyi-base-id" />
         <module name="tech-muyi-base-on" />
-        <module name="tech-muyi-base-gengrator" />
         <module name="tech-muyi-base-api" />
         <module name="tech-muyi-base-db-shardingjdbc" />
         <module name="tech-muyi-base-message" />
