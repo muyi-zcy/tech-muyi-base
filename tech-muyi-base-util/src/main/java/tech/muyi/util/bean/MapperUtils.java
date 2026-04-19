@@ -6,6 +6,7 @@ import ma.glasnost.orika.impl.DefaultMapperFactory;
 import ma.glasnost.orika.metadata.ClassMapBuilder;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -67,6 +68,12 @@ public enum MapperUtils {
      * @return 映射类对象
      */
     public <E, T> E map(Class<E> toClass, T data, Map<String, String> configMap) {
+        if (toClass == null || data == null) {
+            throw new IllegalArgumentException("映射对象和目标类型不能为空");
+        }
+        if (configMap == null || configMap.isEmpty()) {
+            return ORIKA_MAPPER_FACADE.map(data, toClass);
+        }
         MapperFacade mapperFacade = this.getMapperFacade(toClass, data.getClass(), configMap);
         return mapperFacade.map(data, toClass);
     }
@@ -92,12 +99,16 @@ public enum MapperUtils {
      * @return 映射类对象
      */
     public <E, T> List<E> mapAsList(Class<E> toClass, Collection<T> data, Map<String, String> configMap) {
-        T t = null;
-        try {
-            t = data.stream().findFirst().orElseThrow(() -> new Exception("映射集合，数据集合为空"));
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (toClass == null) {
+            throw new IllegalArgumentException("目标类型不能为空");
         }
+        if (data == null || data.isEmpty()) {
+            return Collections.emptyList();
+        }
+        if (configMap == null || configMap.isEmpty()) {
+            return ORIKA_MAPPER_FACADE.mapAsList(data, toClass);
+        }
+        T t = data.iterator().next();
         MapperFacade mapperFacade = this.getMapperFacade(toClass, t.getClass(), configMap);
         return mapperFacade.mapAsList(data, toClass);
     }
@@ -111,6 +122,12 @@ public enum MapperUtils {
      * @return 映射类对象
      */
     private <E, T> MapperFacade getMapperFacade(Class<E> toClass, Class<T> dataClass, Map<String, String> configMap) {
+        if (toClass == null || dataClass == null) {
+            throw new IllegalArgumentException("映射源类型和目标类型不能为空");
+        }
+        if (configMap == null || configMap.isEmpty()) {
+            throw new IllegalArgumentException("自定义映射配置不能为空");
+        }
         String mapKey = dataClass.getCanonicalName() + "_" + toClass.getCanonicalName();
         MapperFacade mapperFacade = ORIKA_CACHE_MAPPER_FACADE_MAP.get(mapKey);
         if (Objects.isNull(mapperFacade)) {
