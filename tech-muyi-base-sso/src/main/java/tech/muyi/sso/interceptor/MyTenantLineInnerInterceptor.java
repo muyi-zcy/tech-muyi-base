@@ -37,6 +37,11 @@ import java.util.Properties;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
+/**
+ * MyBatis-Plus 多租户拦截器扩展。
+ *
+ * <p>在查询/更新/删除 SQL 中自动注入租户条件，并支持公共租户与超级租户策略。</p>
+ */
 public class MyTenantLineInnerInterceptor extends BaseMultiTableInnerInterceptor implements InnerInterceptor {
 
 
@@ -269,6 +274,7 @@ public class MyTenantLineInnerInterceptor extends BaseMultiTableInnerInterceptor
             return null;
         }
         if(myTenantProperties.getSuperTenantId().contains(tenantLineHandler.getTenantId().toString())){
+            // 超级租户允许访问公共数据与本租户数据。
             return buildTableExpression(table, where, whereSegment);
         }
         return new EqualsTo(getAliasColumn(table), tenantLineHandler.getTenantId());

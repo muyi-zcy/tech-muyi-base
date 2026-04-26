@@ -19,6 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * FTP 操作对象。
+ *
+ * <p>封装目录切换、上传下载、删除等基础命令，并统一转换异常码。</p>
+ *
  * @author: muyi
  * @date: 2022/11/29
  **/
@@ -199,6 +203,7 @@ public class Ftp {
             throw new MyException(OssErrorCodeEnum.FTP_UPLOAD_ERROR, path + fileName, e);
         } finally {
             if (this.backToPwd) {
+                // 按需恢复调用前目录，减少多次操作时的上下文污染。
                 cd(pwd);
             }
         }

@@ -8,6 +8,9 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * DAO 接口模板生成器。
+ */
 public class Dao {
 
     public static void deal(String projectName,String tableName,String path,String url,String username,String password,String groupId,

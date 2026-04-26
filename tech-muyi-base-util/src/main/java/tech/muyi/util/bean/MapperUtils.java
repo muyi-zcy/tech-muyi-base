@@ -14,6 +14,16 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * description: MapperUtils
+ *
+ * <p>Orika 映射工具单例，提供：
+ * <ul>
+ *   <li>默认同名字段映射</li>
+ *   <li>按字段配置的自定义映射（带缓存）</li>
+ * </ul>
+ *
+ * <p>注意：自定义映射缓存 key 当前仅由“源类型+目标类型”组成，
+ * 若同一类型对使用不同 configMap，后注册配置会复用既有缓存，存在行为覆盖风险。</p>
+ *
  * date: 2022/7/14 21:39
  * author: muyi
  * version: 1.0
@@ -43,6 +53,7 @@ public enum MapperUtils {
 
     static {
         ORIKA_MAPPER_FACTORY = new DefaultMapperFactory.Builder().build();
+        // 注册 fastjson JSONObject 转换器，避免该类型在深拷贝时被错误拆解。
         ORIKA_MAPPER_FACTORY.getConverterFactory().registerConverter(new JSONObjectConverter());
         ORIKA_MAPPER_FACADE = ORIKA_MAPPER_FACTORY.getMapperFacade();
         ORIKA_CACHE_MAPPER_FACADE_MAP = new ConcurrentHashMap<>();
@@ -133,6 +144,7 @@ public enum MapperUtils {
         if (Objects.isNull(mapperFacade)) {
             MapperFactory factory = new DefaultMapperFactory.Builder().build();
             ClassMapBuilder<T, E> classMapBuilder = factory.classMap(dataClass, toClass);
+            // configMap: key=源字段，value=目标字段。
             configMap.forEach(classMapBuilder::field);
             classMapBuilder.byDefault().register();
             mapperFacade = factory.getMapperFacade();

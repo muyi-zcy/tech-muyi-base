@@ -5,6 +5,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * ElasticJob 任务声明注解。
+ *
+ * <p>描述分片、cron、参数、数据源与启停覆盖策略，用于自动注册 ElasticJob。</p>
+ */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MyElasticJob {

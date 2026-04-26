@@ -8,6 +8,11 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 多租户配置项。
+ *
+ * <p>绑定 `muyi.tenant`，定义租户列、忽略表、超级租户与公共租户集合。</p>
+ */
 @ConfigurationProperties(
         prefix = "muyi.tenant"
 )

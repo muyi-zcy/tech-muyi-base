@@ -10,7 +10,11 @@ import tech.muyi.sso.properties.MySsoProperties;
 import javax.annotation.Resource;
 import java.util.List;
 
-
+/**
+ * Web 拦截器注册配置。
+ *
+ * <p>注册 SSO 拦截器，并默认放行健康检查与文档相关路径。</p>
+ */
 @Configuration
 @ConditionalOnProperty(name = {"muyi.sso.enable"}, havingValue = "true")
 public class WebMvcConfiguration implements WebMvcConfigurer {

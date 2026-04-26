@@ -7,6 +7,10 @@ import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.IColumnType;
 
 /**
+ * 自定义字段类型转换器。
+ *
+ * <p>基于 MyBatis-Plus MySQL 转换器扩展，可按 dateType 策略映射时间类型。</p>
+ *
  * @author: muyi
  * @date: 2023/3/2
  **/

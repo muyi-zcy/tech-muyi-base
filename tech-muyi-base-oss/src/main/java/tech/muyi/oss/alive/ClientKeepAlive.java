@@ -16,6 +16,10 @@ import javax.annotation.PostConstruct;
 import java.util.concurrent.BlockingQueue;
 
 /**
+ * FTP 连接保活任务。
+ *
+ * <p>按配置周期对池中连接发送 NOOP，失败连接立即剔除。</p>
+ *
  * @author: muyi
  * @date: 2022/11/29
  **/
@@ -44,6 +48,7 @@ public class ClientKeepAlive {
             ftpKeepAlive = new FtpKeepAlive();
             String THREAD_NAME = "oss-client-alive-thread";
             Thread thread = new Thread(ftpKeepAlive, THREAD_NAME);
+            // 保持历史行为：前台线程持续运行；应用退出由进程生命周期统一管理。
             thread.start();
         }
     }

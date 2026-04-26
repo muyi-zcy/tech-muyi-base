@@ -16,6 +16,10 @@ import tech.muyi.util.MyJson;
 import java.util.*;
 
 /**
+ * Span 实体实现。
+ *
+ * <p>承载 trace/span 标识、标签、日志与父子引用关系，并在 finish 后刷新 MDC。</p>
+ *
  * @author: muyi
  * @date: 2022/12/20
  **/
@@ -161,6 +165,7 @@ public class MySpan implements Span {
         this.setFinishMicros(finishMicros);
 //        this.myTracer.appendFinishedSpan(this);
         this.finished = true;
+        // 保留历史行为：直接输出 span JSON，便于本地调试。
         System.out.println(MyJson.toJson(this));
         mdc();
     }

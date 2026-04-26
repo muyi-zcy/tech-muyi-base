@@ -25,6 +25,11 @@ import java.io.InputStream;
 import java.nio.file.Files;
 
 /**
+ * FTP 高层模板封装。
+ *
+ * <p>对外统一上传/下载/删除接口，内部复用 {@link FtpClientPool} 并做异常码映射。
+ * 开启 poolCatch 时会缓存 Ftp 包装对象，减少短周期对象创建开销。</p>
+ *
  * @author: muyi
  * @date: 2022/11/29
  **/
@@ -45,6 +50,7 @@ public class FtpTemplate {
     @PostConstruct
     public void init() {
         if (ftpProperties.isPoolCatch()) {
+            // 仅缓存包装对象，底层连接仍来自连接池。
             this.ftpCache = new SynchronizedQueue<>(ftpProperties.getPoolCatchSize());
         }
     }
@@ -108,6 +114,7 @@ public class FtpTemplate {
         try {
             return ftp.upload(finalPath, fileName, is) ? ftpProperties.getUrlPrefix() + finalPath + File.separator + fileName : null;
         } finally {
+            // 无论成功失败都归还资源，避免连接泄漏。
             ftp.close();
             if (ftpProperties.isPoolCatch()) {
                 ftpCache.offer(ftp);

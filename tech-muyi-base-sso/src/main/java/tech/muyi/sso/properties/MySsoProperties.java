@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * SSO 配置项。
+ *
+ * <p>绑定 `muyi.sso`，包含 token 键前缀、有效期和拦截排除路径。</p>
+ *
  * @author: muyi
  * @date: 2023/9/22
  **/

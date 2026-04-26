@@ -9,6 +9,14 @@ import tech.muyi.id.properties.MyIdSnowflakeProperties;
 /**
  * 默认雪花ID，使用hutool的雪花算法，方便定义初始化时间，直接拷贝重写
  *
+ * <p>实现特性：
+ * <ul>
+ *   <li>支持可配置 epoch、workerId、dataCenterId。</li>
+ *   <li>允许小幅时钟回拨（timeOffset）以提高容错性。</li>
+ *   <li>同毫秒内通过 sequence 自增，溢出后阻塞到下一毫秒。</li>
+ * </ul>
+ * </p>
+ *
  * @author: muyi
  * @date: 2023/1/11
  **/
@@ -206,6 +214,7 @@ public class DefaultSnowflakeImpl implements MyIdGenerator {
         long id = 1L;
         byte[] mac = NetUtil.getLocalHardwareAddress();
         if (null != mac) {
+            // 根据 MAC 片段推导机房号，尽量降低人工配置成本。
             id = (255L & (long) mac[mac.length - 2] | 65280L & (long) mac[mac.length - 1] << 8) >> 6;
             id %= maxDatacenterId + 1L;
         }
@@ -214,6 +223,7 @@ public class DefaultSnowflakeImpl implements MyIdGenerator {
     }
 
     public long initWorkerId(long datacenterId, long maxWorkerId) {
+        // 结合进程号生成 workerId，减少同机多进程碰撞概率。
         String mpid = String.valueOf(datacenterId) + RuntimeUtil.getPid();
         return (mpid.hashCode() & 0xffff) % (maxWorkerId + 1);
     }

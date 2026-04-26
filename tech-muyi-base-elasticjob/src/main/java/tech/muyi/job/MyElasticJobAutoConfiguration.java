@@ -24,6 +24,10 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
+ * ElasticJob 自动装配。
+ *
+ * <p>基于 ZK 配置初始化注册中心，扫描 `SimpleJob + @MyElasticJob` 并动态注册任务。</p>
+ *
  * @Author: muyi
  * @Date: 2021/2/1 20:12
  */
@@ -87,10 +91,12 @@ public class MyElasticJobAutoConfiguration {
             }
 
             DataSource dataSource = (DataSource)this.applicationContext.getBean(dataSourceRef);
+            // 配置事件追踪库，记录任务执行事件到关系库。
             JobEventRdbConfiguration jobEventRdbConfiguration = new JobEventRdbConfiguration(dataSource);
             SpringJobScheduler jobScheduler = new SpringJobScheduler(elasticJob, regCenter, liteJobConfiguration, jobEventRdbConfiguration);
             jobScheduler.init();
         } else {
+            // 未指定事件库时按基础模式启动任务。
             SpringJobScheduler jobScheduler = new SpringJobScheduler(elasticJob, regCenter, liteJobConfiguration);
             jobScheduler.init();
         }

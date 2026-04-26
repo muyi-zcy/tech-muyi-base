@@ -21,6 +21,11 @@ import java.io.IOException;
 import java.util.Objects;
 
 /**
+ * Redisson 自动配置入口。
+ *
+ * <p>仅在容器中缺少 {@link RedissonManage} 时注册默认实现，
+ * 方便业务方通过自定义 Bean 覆盖默认行为。</p>
+ *
  * @Author: muyi
  * @Date: 2021/1/3 22:57
  */
@@ -39,6 +44,7 @@ public class RedissonManageAutoConfiguration {
         try {
             return new RedissonManage(redissonClient);
         }finally {
+            // 保留启动期可观测性，便于排查自动配置是否生效。
             log.info("配置Redisson 客户端 结束...");
         }
     }

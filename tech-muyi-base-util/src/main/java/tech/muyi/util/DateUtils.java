@@ -17,7 +17,15 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
- * 日期工具类
+ * 日期工具类。
+ *
+ * <p>说明：
+ * <ul>
+ *   <li>该类混合了“格式化、时间差计算、类型转换”能力，调用方需明确输入输出契约。</li>
+ *   <li>多数转换失败会抛出 {@link RuntimeException}，少数方法（如 convert）会吞异常并返回空字符串。</li>
+ *   <li>日期运算基于毫秒值直接加减，不处理夏令时跳变等复杂时区语义。</li>
+ * </ul>
+ * </p>
  *
  * @Author: muyi
  * @Date: 2021/1/3 22:38
@@ -72,6 +80,7 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
      */
     public static DateFormat formatDate(String pattern) {
         DateFormat df = new SimpleDateFormat(pattern);
+        // 关闭宽松解析，避免 2026-02-31 之类非法日期被自动纠正后悄悄通过。
         df.setLenient(false);
         return df;
     }
@@ -98,6 +107,7 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
     public static Date formatDate(Date date, DateFormat format) {
         String dateString = format.format(date);
         ParsePosition pos = new ParsePosition(0);
+        // 先格式化再解析，用于“按指定 pattern 截断精度”（例如去掉毫秒）。
         return format.parse(dateString, pos);
     }
 
@@ -171,6 +181,7 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
      */
 
     public static Date addSeconds(Date date, long secs) {
+        // 采用时间戳加法，不依赖 Calendar，性能更直接。
         return new Date(date.getTime() + (secs * 1000));
     }
 
@@ -293,6 +304,7 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
             Date date = formatIn.parse(dateString);
             return formatOut.format(date);
         } catch (ParseException e) {
+            // 历史行为：失败返回空串而不是抛异常，适用于“展示转换”而非强校验链路。
             return "";
         }
     }
@@ -342,6 +354,7 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
             return new java.sql.Date(((Calendar) value).getTime().getTime());
         }
         if (value instanceof String) {
+            // 仅接受 java.sql.Date.valueOf 支持的格式：yyyy-[m]m-[d]d。
             return java.sql.Date.valueOf((String) value);
         }
         if (value instanceof Number) {
@@ -374,6 +387,7 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
             return new Timestamp(((Calendar) value).getTime().getTime());
         }
         if (value instanceof String) {
+            // 依赖 LocalDateTime.parse 默认 ISO-8601 解析器，非标准格式会抛异常。
             LocalDateTime date = LocalDateTime.parse((String) value);
             return Timestamp.valueOf(date);
         } else if (value instanceof LocalDateTime) {
@@ -433,6 +447,7 @@ public final class DateUtils extends org.apache.commons.lang3.time.DateUtils {
             return ((Calendar) value).getTime();
         }
         if (value instanceof String) {
+            // 依赖 Timestamp.valueOf，要求格式为 yyyy-[m]m-[d]d hh:mm:ss[.f...]
             return new Date(Timestamp.valueOf((String) value).getTime());
         }
         if (value instanceof Number) {

@@ -17,6 +17,10 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
+ * 轻量任务调度自动配置。
+ *
+ * <p>扫描 `BaseTask + @MyEasyJob` 并注册 cron 触发任务；若存在 Redisson，则启用分布式互斥执行。</p>
+ *
  * @Author: muyi
  * @Date: 2021/2/1 20:12
  */
@@ -35,8 +39,10 @@ public class MyEasyJobAutoConfiguration implements SchedulingConfigurer {
         if (easyJob.cron() != null) {
             log.info("添加定时任务：{},id:{},corn：{}", easyJob.jobName(), easyJob.id(), easyJob.cron());
             if(redissonManage == null){
+                // 单机模式：不加分布式锁，按本地调度执行。
                 scheduledTaskRegistrar.addTriggerTask(() -> process(baseTask), triggerContext -> new CronTrigger(easyJob.cron()).nextExecutionTime(triggerContext));
             }else {
+                // 集群模式：通过 Redis 锁 + once 记录防止重复执行。
                 scheduledTaskRegistrar.addTriggerTask(() -> lockProcess(baseTask), triggerContext -> new CronTrigger(easyJob.cron()).nextExecutionTime(triggerContext));
             }
         }
@@ -101,6 +107,7 @@ public class MyEasyJobAutoConfiguration implements SchedulingConfigurer {
         Date nextNextTime = cronSequenceGenerator.next(nextTime);
         Date nextNextNextTime = cronSequenceGenerator.next(nextNextTime);
 
+        // 通过周期反推“当前应执行时间点”，用于跨节点幂等判断。
         return cronSequenceGenerator.next(new Date()).getTime() - (nextNextNextTime.getTime() - nextNextTime.getTime());
     }
 }

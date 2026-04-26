@@ -4,6 +4,10 @@ import tech.muyi.exception.BaseErrorInfoInterface;
 import tech.muyi.exception.sdk.anno.ErrorCodeInfoAnno;
 
 /**
+ * SSO 领域错误码定义。
+ *
+ * <p>当前预留枚举位，后续按鉴权、租户、会话等场景补充具体 code。</p>
+ *
  * @author: muyi
  * @date: 2022/6/26
  **/

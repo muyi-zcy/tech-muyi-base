@@ -8,6 +8,17 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 /**
+ * Cookie 读写工具。
+ *
+ * <p>默认行为：
+ * <ul>
+ *   <li>path 固定为 "/"，覆盖整个站点路径。</li>
+ *   <li>cookieMaxage <= 0 时不主动设置 Max-Age，通常表现为会话级 cookie。</li>
+ *   <li>根据 request URL 推导 domain，localhost 场景不设置 domain。</li>
+ * </ul>
+ *
+ * <p>注意：该工具未统一设置 HttpOnly/Secure/SameSite，安全属性需在调用侧或网关层补齐。</p>
+ *
  * @author: muyi
  * @date: 2022/11/20
  **/
@@ -42,6 +53,7 @@ public class CookieUtils {
             for (Cookie cookie : cookieList) {
                 if (cookie.getName().equals(cookieName)) {
                     if (isDecoder) {
+                        // 历史兼容：默认 UTF-8 解码。
                         retValue = URLDecoder.decode(cookie.getValue(), "UTF-8");
                     } else {
                         retValue = cookie.getValue();
@@ -156,6 +168,7 @@ public class CookieUtils {
      * @param cookieName Cookie名称
      */
     public static void deleteCookie(HttpServletRequest request, HttpServletResponse response, String cookieName) {
+        // 延续现有行为：写空值并沿用默认过期策略，不显式置 0。
         doSetCookie(request, response, cookieName, "", -1, false);
     }
 
@@ -184,6 +197,7 @@ public class CookieUtils {
                 // 设置域名的cookie
                 String domainName = getDomainName(request);
                 if (!"localhost".equals(domainName)) {
+                    // 跨子域共享 cookie（例如 a.example.com / b.example.com）。
                     cookie.setDomain(domainName);
                 }
             }
@@ -242,6 +256,7 @@ public class CookieUtils {
             domainName = "";
         } else {
             serverName = serverName.toLowerCase();
+            // 假定协议前缀长度为 7（http://），对 https 场景会多保留一个字符；保留历史行为以避免兼容性变化。
             serverName = serverName.substring(7);
             final int end = serverName.indexOf("/");
             serverName = serverName.substring(0, end);

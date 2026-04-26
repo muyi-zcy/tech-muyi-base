@@ -17,6 +17,10 @@ import tech.muyi.oss.properties.FtpProperties;
 
 import java.io.IOException;
 /**
+ * FTPClient 工厂。
+ *
+ * <p>负责连接建立、登录、销毁和可用性校验，供连接池统一复用。</p>
+ *
  * @author: muyi
  * @date: 2022/11/29
  **/
@@ -49,6 +53,7 @@ public class FtpClientFactory extends BasePooledObjectFactory<FTPClient> {
             } catch (IOException e) {
                 throw new MyException(OssErrorCodeEnum.FTP_LOGIN_ERROR, ftpProperties.getName());
             }
+            // 登录失败后主动断连，避免半连接对象进入连接池。
             throw new MyException(OssErrorCodeEnum.FTP_LOGIN_ERROR, ftpProperties.getName());
         }
         ftpClient.setBufferSize(ftpProperties.getBufferSize());

@@ -16,6 +16,10 @@ import tech.muyi.core.config.properties.MyLogProperties;
 import tech.muyi.core.tracer.MyTracerBuilder;
 
 /**
+ * MyLog 核心自动配置。
+ *
+ * <p>注册全局 Tracer，并为异步执行器注入 trace 传播能力。</p>
+ *
  * @author: muyi
  * @date: 2023/1/5
  **/

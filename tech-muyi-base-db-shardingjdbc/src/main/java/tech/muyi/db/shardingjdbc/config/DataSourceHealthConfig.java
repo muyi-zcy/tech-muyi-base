@@ -8,6 +8,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * ShardingJDBC 健康检查兼容配置。
+ *
+ * <p>对非 Hikari 数据源返回“不可用元数据”占位实现，避免 Spring Actuator 健康探针报错。</p>
+ *
  * @author: muyi
  * @date: 2022/7/10
  **/

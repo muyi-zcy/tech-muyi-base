@@ -4,6 +4,11 @@ import tech.muyi.exception.BaseErrorInfoInterface;
 import tech.muyi.exception.sdk.anno.ErrorCodeInfoAnno;
 
 /**
+ * 缓存中间件通用错误码。
+ *
+ * <p>作为 cache 领域父级错误码分组，供 redis 等子模块继承扩展。
+ * code 发布后应保持稳定，避免影响调用方告警与统计口径。</p>
+ *
  * @author: muyi
  * @date: 2022/6/26
  **/

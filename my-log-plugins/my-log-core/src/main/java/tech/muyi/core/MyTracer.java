@@ -16,6 +16,10 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * 自定义 Tracer 实现。
+ *
+ * <p>维护 active span 生命周期，并提供 SpanContext 注入/提取能力。</p>
+ *
  * @author: muyi
  * @date: 2022/12/20
  **/
@@ -93,6 +97,7 @@ public class MyTracer implements Tracer {
         if (isClosed) {
             return;
         }
+        // 记录已完成 span，便于测试或诊断回放。
         this.finishedSpans.add(mySpan);
         this.onSpanFinished(mySpan);
     }

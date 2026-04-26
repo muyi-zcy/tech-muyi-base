@@ -19,6 +19,10 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 /**
+ * FTP 连接池实现。
+ *
+ * <p>基于阻塞队列管理连接，支持预热与借还时健康检查。</p>
+ *
  * @author: muyi
  * @date: 2022/11/29
  **/
@@ -56,6 +60,7 @@ public class FtpClientPool extends BaseObjectPool<FTPClient> {
         if (ObjectUtils.isEmpty(client)) {
             client = ftpClientFactory.create();
         } else if (ftpProperties.isTestOnBorrow() && !ftpClientFactory.validateObject(ftpClientFactory.wrap(client))) {
+            // 借出前失败则销毁重建，避免把坏连接返回给调用方。
             invalidateObject(client);
             client = ftpClientFactory.create();
         }
@@ -65,6 +70,7 @@ public class FtpClientPool extends BaseObjectPool<FTPClient> {
     @Override
     public void returnObject(FTPClient client) {
         if (client != null && !ftpBlockingQueue.offer(client)) {
+            // 队列满时直接销毁，防止连接泄漏。
             ftpClientFactory.destroyObject(ftpClientFactory.wrap(client));
         }
     }

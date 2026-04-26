@@ -9,6 +9,10 @@ import tech.muyi.sso.properties.MySsoProperties;
 import tech.muyi.sso.properties.MyTenantProperties;
 
 /**
+ * SSO 自动配置入口。
+ *
+ * <p>在 `muyi.sso.enable=true` 时注册 `MySsoManager`。</p>
+ *
  * @Author: muyi
  * @Date: 2021/1/3 22:57
  */

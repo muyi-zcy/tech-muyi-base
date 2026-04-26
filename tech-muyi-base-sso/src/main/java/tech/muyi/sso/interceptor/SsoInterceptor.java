@@ -23,6 +23,11 @@ import java.time.temporal.ChronoUnit;
 
 @Service
 @ConditionalOnProperty(name = {"muyi.sso.enable"}, havingValue = "true")
+/**
+ * SSO 请求拦截器。
+ *
+ * <p>负责 token 提取、缓存校验、过期续期，并把 SSO 信息写入线程上下文。</p>
+ */
 public class SsoInterceptor implements HandlerInterceptor {
     @Resource
     private MySsoProperties mySsoProperties;
@@ -72,6 +77,7 @@ public class SsoInterceptor implements HandlerInterceptor {
                 throw new MyException(CommonErrorCodeEnum.UNAUTHORIZED.getResultCode(), mySsoProperties.getTag() + "不存在或已失效");
             }
             if (secondsLeft < mySsoProperties.getEffectiveTime() / 2) {
+                // 续期策略：剩余不足一半时自动延长，兼顾安全与体验。
                 mySsoInfo.setExpirationTime(LocalDateTime.now().plusSeconds(mySsoProperties.getEffectiveTime()));
                 mySsoManager.cache(mySsoInfo);
             }

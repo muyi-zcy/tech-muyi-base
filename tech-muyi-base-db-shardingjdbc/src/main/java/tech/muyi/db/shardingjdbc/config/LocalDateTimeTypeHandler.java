@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
 /**
  * 重写LocalDateTimeTypeHandler ，解决sharding_jdbc + ibatis LocalDateTime转换问题
  *
+ * <p>通过 `Convert.toLocalDateTime` 兼容多种 JDBC 返回类型，避免驱动差异导致转换失败。</p>
+ *
  * @author: muyi
  * @date: 2023/3/6
  **/

@@ -21,6 +21,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * 代码生成器桌面入口。
+ *
+ * <p>提供可视化配置、数据库表加载与多模板批量生成能力，并把用户配置持久化到本地文件。</p>
+ */
 public class MyGeneratorCode {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final Path CONFIG_PATH = Paths.get(System.getProperty("user.home"), ".tech-muyi-generator-config.json");

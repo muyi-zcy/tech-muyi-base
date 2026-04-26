@@ -4,6 +4,10 @@ import tech.muyi.exception.BaseErrorInfoInterface;
 import tech.muyi.exception.sdk.anno.ErrorCodeInfoAnno;
 
 /**
+ * 文件存储领域错误码。
+ *
+ * <p>覆盖通用文件操作、MinIO 与 FTP 三类子域错误，便于告警分组与问题定位。</p>
+ *
  * @author: muyi
  * @date: 2022/6/26
  **/

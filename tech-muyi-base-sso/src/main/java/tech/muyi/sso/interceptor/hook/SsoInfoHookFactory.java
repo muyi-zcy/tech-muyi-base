@@ -10,6 +10,11 @@ import tech.muyi.sso.dto.MySsoInfo;
 import java.util.LinkedList;
 import java.util.Map;
 
+/**
+ * SSO Hook 组装与执行器。
+ *
+ * <p>启动时收集容器内全部 `SsoInfoHook`，按注册顺序串行执行。</p>
+ */
 @Component
 @ConditionalOnProperty(name = {"muyi.sso.enable"}, havingValue = "true")
 public class SsoInfoHookFactory<T extends MySsoInfo> implements ApplicationContextAware {

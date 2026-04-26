@@ -5,6 +5,11 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * FTP 客户端配置。
+ *
+ * <p>绑定 `muyi.file.ftp`，包含连接、连接池、对象缓存与保活策略参数。</p>
+ */
 @ConfigurationProperties(
         prefix = "muyi.file.ftp"
 )

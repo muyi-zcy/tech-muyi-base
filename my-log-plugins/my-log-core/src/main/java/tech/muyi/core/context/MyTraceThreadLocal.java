@@ -8,6 +8,10 @@ import tech.muyi.core.tracer.MyTracerBuilder;
 import tech.muyi.util.ApplicationContextUtil;
 
 /**
+ * Trace 上下文 TTL 容器。
+ *
+ * <p>在线程切换时自动创建子 span，并在任务结束后收敛资源。</p>
+ *
  * @author: muyi
  * @date: 2023/1/12
  **/
@@ -39,6 +43,7 @@ public class MyTraceThreadLocal<T> extends TransmittableThreadLocal<MyTtlScope> 
 
         MySpan newSpan = newTracer.buildSpan().asChildOf(parentSpan).start();
 
+        // 子线程默认激活 child span，保证链路连续。
         return newTracer.scopeManager().activate(newSpan);
     }
 

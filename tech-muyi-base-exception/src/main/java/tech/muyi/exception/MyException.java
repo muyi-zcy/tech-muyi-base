@@ -4,7 +4,17 @@ import lombok.extern.slf4j.Slf4j;
 import tech.muyi.exception.enumtype.CommonErrorCodeEnum;
 
 /**
- * 自定义异常
+ * 统一业务异常。
+ *
+ * <p>约定：
+ * <ul>
+ *   <li>errorCode/errorMsg 为核心返回字段，优先保证 errorCode 稳定。</li>
+ *   <li>构造器支持“错误码 + 详情/cause”拼接，便于日志追踪。</li>
+ *   <li>{@link #fillInStackTrace()} 返回 this，降低高频业务异常抛出开销。</li>
+ * </ul>
+ *
+ * <p>注意：关闭堆栈填充会减少定位上下文，关键链路建议同时记录完整日志。</p>
+ *
  *
  * @Author: muyi
  * @Date: 2021/1/3 21:25
@@ -97,6 +107,7 @@ public class MyException extends RuntimeException {
 
     @Override
     public Throwable fillInStackTrace() {
+        // 性能优化：不重新填充堆栈，避免在参数校验类异常场景产生大量开销。
         return this;
     }
 
@@ -106,6 +117,7 @@ public class MyException extends RuntimeException {
 
     private String joinError(String errorMsg, Throwable cause) {
         if (cause != null && cause.getMessage() != null && !"".equals(cause.getMessage())) {
+            // 兼容历史协议：错误详情通过分号拼接到主 message 中。
             return errorMsg.concat(";错误详情:").concat(cause.getMessage());
         }
         return errorMsg;

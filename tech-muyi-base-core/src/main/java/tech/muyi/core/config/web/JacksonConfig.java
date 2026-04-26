@@ -37,6 +37,8 @@ public class JacksonConfig implements Jackson2ObjectMapperBuilderCustomizer, Ord
 
     @Override
     public void customize(Jackson2ObjectMapperBuilder builder) {
+        // 统一全局序列化/反序列化行为：服务端输出与入参解析保持一致，避免各模块各写一套导致兼容性问题。
+
         // 设置java.util.Date时间类的序列化以及反序列化的格式
         builder.simpleDateFormat(dateTimeFormat);
 
@@ -55,17 +57,24 @@ public class JacksonConfig implements Jackson2ObjectMapperBuilderCustomizer, Ord
         javaTimeModule.addSerializer(LocalTime.class, new LocalTimeSerializer(timeFormatter));
         javaTimeModule.addDeserializer(LocalTime.class, new LocalTimeDeserializer(timeFormatter));
 
+        // 枚举反序列化：
+        // - 支持前端/调用方以 code/name/枚举常量名等多种形式传入（见 EnumDeserializer 实现约束）
+        // - 对外接口中枚举入参通常需要“更宽松的兼容解析”，避免升级/多端差异造成反序列化失败
         javaTimeModule.addDeserializer(Enum.class, new EnumDeserializer());
 
+        // 将模块注册到全局 ObjectMapper 构建器，影响整个应用的 JSON 读写行为。
         builder.modules(javaTimeModule);
 
         // 全局转化Long类型为String，解决序列化后传入前端Long类型精度丢失问题
+        // - 兼容 JS Number 精度上限（2^53-1）；Long/BigInteger 以字符串输出避免前端误差
+        // - 代价：前端需要按字符串处理或自行转 BigInt
         builder.serializerByType(BigInteger.class, ToStringSerializer.instance);
         builder.serializerByType(Long.class, ToStringSerializer.instance);
     }
 
     @Override
     public int getOrder() {
+        // 明确顺序，避免在存在其它 Jackson2ObjectMapperBuilderCustomizer 时出现覆盖冲突。
         return 1;
     }
 }

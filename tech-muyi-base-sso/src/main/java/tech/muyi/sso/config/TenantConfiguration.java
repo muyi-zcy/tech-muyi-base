@@ -13,6 +13,11 @@ import tech.muyi.sso.properties.MyTenantProperties;
 
 import javax.annotation.Resource;
 
+/**
+ * 多租户 MyBatis 拦截器配置。
+ *
+ * <p>在 `muyi.tenant.enable=true` 时启用租户 SQL 注入能力。</p>
+ */
 @Configuration
 @ConditionalOnProperty(name = "muyi.tenant.enable", havingValue = "true", matchIfMissing = false)
 public class TenantConfiguration {

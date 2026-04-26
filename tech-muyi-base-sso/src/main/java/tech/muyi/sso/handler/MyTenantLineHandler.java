@@ -9,6 +9,11 @@ import tech.muyi.sso.MySsoManager;
 import tech.muyi.sso.properties.MyTenantProperties;
 
 @Slf4j
+/**
+ * 多租户字段处理器。
+ *
+ * <p>根据当前 SSO 上下文提供 tenantId 条件，并决定是否忽略租户拦截。</p>
+ */
 public class MyTenantLineHandler implements TenantLineHandler {
 
     private MySsoManager mySsoManager;
@@ -23,6 +28,7 @@ public class MyTenantLineHandler implements TenantLineHandler {
     @Override
     public Expression getTenantId() {
         if (mySsoManager.getSsoInfo() == null) {
+            // 无登录上下文时返回占位值，防止生成无约束 SQL。
             return new StringValue(getTenantIdColumn());
         }
         return new StringValue(mySsoManager.getSsoInfo().getTenantId());

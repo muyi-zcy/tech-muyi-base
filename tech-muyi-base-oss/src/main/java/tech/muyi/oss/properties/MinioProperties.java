@@ -5,6 +5,11 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * MinIO 连接配置。
+ *
+ * <p>绑定 `muyi.file.minio`，提供 endpoint、鉴权与 OkHttp 连接池参数。</p>
+ */
 @ConfigurationProperties(
         prefix = "muyi.file.minio"
 )

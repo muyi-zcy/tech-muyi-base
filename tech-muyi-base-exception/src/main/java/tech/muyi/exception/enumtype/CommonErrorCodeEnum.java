@@ -6,6 +6,15 @@ import tech.muyi.exception.sdk.anno.ErrorCodeInfoAnno;
 
 /**
  * 公共错误码
+ *
+ * <p>维护原则：
+ * <ul>
+ *   <li>resultCode 一经发布即视为外部契约，不可随意复用或变更语义。</li>
+ *   <li>resultMsg 可按产品文案调整，但应保持同 code 的基本语义一致。</li>
+ *   <li>HTTP 语义码与业务扩展码共存时，调用方应优先以 code 做程序分支。</li>
+ * </ul>
+ * </p>
+ *
  * @Author: muyi
  * @Date: 2021/1/3 21:38
  */

@@ -19,6 +19,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * SSO 上下文与缓存管理器。
+ *
+ * <p>职责：线程上下文存取、Redis token 缓存读写、租户角色判断。</p>
+ *
  * @author: muyi
  * @date: 2023/9/24
  **/
@@ -123,6 +127,7 @@ public class MySsoManager<T extends MySsoInfo> {
             rBucket.set(MyJson.toJson(mySsoInfo));
         }
         if (expireAt != null) {
+            // 以 UTC epoch 毫秒写入过期时间，避免不同时区实例产生偏差。
             rBucket.expireAt(expireAt.toEpochSecond(ZoneOffset.UTC) * 1000L);
         }
         return mySsoInfo;

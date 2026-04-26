@@ -5,6 +5,10 @@ import io.opentracing.Span;
 import tech.muyi.core.MySpan;
 
 /**
+ * ScopeManager 实现。
+ *
+ * <p>使用线程本地变量维护当前活跃 scope，并在激活时同步 MDC。</p>
+ *
  * @author: muyi
  * @date: 2023/1/12
  **/

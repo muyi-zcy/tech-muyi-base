@@ -4,6 +4,10 @@ import tech.muyi.exception.BaseErrorInfoInterface;
 import tech.muyi.exception.sdk.anno.ErrorCodeInfoAnno;
 
 /**
+ * Redis 子域错误码。
+ *
+ * <p>当前仅定义 key 为空场景，后续可继续扩展连接、命令执行与序列化相关错误码。</p>
+ *
  * @author: muyi
  * @date: 2022/6/26
  **/

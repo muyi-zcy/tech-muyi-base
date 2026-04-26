@@ -13,6 +13,11 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * Redisson 常用能力封装。
+ *
+ * <p>提供统一的 key 前缀、分布式锁、KV/List/原子计数与布隆过滤器操作。
+ * 所有 key 默认追加应用名前缀，降低多服务共用 Redis 时的命名冲突风险。</p>
+ *
  * @Author: muyi
  * @Date: 2021/1/3 10:14
  */
@@ -48,6 +53,7 @@ public class RedissonManage {
 
     public String getKey(String key){
         if(this.PREFIX == null){
+            // 延迟初始化前缀，避免构造阶段依赖环境变量。
             this.PREFIX = Objects.requireNonNull(environment.getProperty("spring.application.name")).concat(":");
         }
         if(key == null || "".equals(key)){
@@ -104,6 +110,7 @@ public class RedissonManage {
         RLock lock = this.redissonClient.getLock(getKey(lockKey));
 
         try {
+            // 历史行为：未校验 tryLock 返回值，调用方需自行判断锁状态再执行业务。
             lock.tryLock(waitTime, leaseTime, unit);
             return lock;
         } catch (InterruptedException e) {
@@ -331,6 +338,7 @@ public class RedissonManage {
     public Long incrby(String key, Long delta, Long expire) {
         RAtomicLong rAtomicLong = this.redissonClient.getAtomicLong(getKey(key));
         long value = rAtomicLong.addAndGet(delta);
+        // 这里使用毫秒单位，区别于其他默认秒单位接口，调用时需特别注意。
         rAtomicLong.expire(expire, TimeUnit.MILLISECONDS);
         return value;
     }
@@ -357,6 +365,7 @@ public class RedissonManage {
      * @return 结果
      */
     public boolean initBloomFilter(String key, Long expectedInsertions, double falseProbability){
+        // 布隆过滤器初始化通常只需执行一次，重复调用可能返回 false。
         RBloomFilter<Object> bloomFilter = this.redissonClient.getBloomFilter(key);
         return bloomFilter.tryInit(expectedInsertions,falseProbability);
     }

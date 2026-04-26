@@ -4,6 +4,11 @@ import tech.muyi.exception.BaseErrorInfoInterface;
 import tech.muyi.exception.sdk.anno.ErrorCodeInfoAnno;
 
 /**
+ * MQ 领域错误码。
+ *
+ * <p>覆盖生产者/消费者启动与多种消息发送模式失败场景，
+ * 便于按错误码维度进行告警分流与问题归因。</p>
+ *
  * @author: muyi
  * @date: 2022/6/26
  **/

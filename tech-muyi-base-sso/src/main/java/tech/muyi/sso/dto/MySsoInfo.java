@@ -7,6 +7,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * SSO 会话信息 DTO。
+ *
+ * <p>既用于请求线程上下文，也用于 Redis 缓存序列化持久化。</p>
+ */
 @Data
 public class MySsoInfo implements Serializable {
     private static final long serialVersionUID = 1L;

@@ -30,6 +30,11 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * MinIO 模板封装。
+ *
+ * <p>统一桶管理、对象上传下载、预签名 URL 等操作，
+ * 并把底层异常转换为业务错误码，保持上层调用语义一致。</p>
+ *
  * @author: muyi
  * @date: 2022/5/2
  **/
@@ -245,6 +250,7 @@ public class MinioTemplate {
             if (path != null && path.length > 0) {
                 objectName = String.join("/", path) + "/" + objectName;
             }
+            // stream.available() 仅作为当前可读字节估计，超大流场景建议调用方控制输入源。
             PutObjectOptions putObjectOptions = new PutObjectOptions(stream.available(), PutObjectOptions.MIN_MULTIPART_SIZE);
             if (metadata != null) {
                 putObjectOptions.setHeaders(metadata);
@@ -259,6 +265,7 @@ public class MinioTemplate {
             throw new MyException(OssErrorCodeEnum.OSS_PUT_OBJECTS_ERROR, e);
         } finally {
             try {
+                // 统一在模板层关闭输入流，调用方无需二次关闭。
                 stream.close();
             } catch (IOException e) {
                 log.error("存储桶【{}】上传对象【{}】失败！异常原因:", bucketName, objectName, e);

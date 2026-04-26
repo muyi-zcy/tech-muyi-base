@@ -19,6 +19,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * REST 接口日志切面。
+ *
+ * <p>在控制器方法前后记录请求参数、返回结果与耗时，便于线上问题排查。
+ * 会主动跳过健康检查路径 `/ok`，减少无意义日志噪音。</p>
+ *
  * @Author: muyi
  * @Date: 2021/1/4 23:15
  */
@@ -59,6 +64,7 @@ public class RestApiFilter {
                 Object[] args = joinPoint.getArgs();
                 if (parameterNames != null && parameterNames.length != 0) {
                     for (int i = 0; i < parameterNames.length; ++i) {
+                        // 跳过 request/response/文件对象，避免日志体积过大或序列化失败。
                         if (!(args[i] instanceof HttpServletResponse) && !(args[i] instanceof MultipartFile) && !(args[i] instanceof HttpServletRequest)) {
                             logMsg.append(parameterNames[i]).append(":").append(MyJson.toJson(args[i])).append(",");
                         }

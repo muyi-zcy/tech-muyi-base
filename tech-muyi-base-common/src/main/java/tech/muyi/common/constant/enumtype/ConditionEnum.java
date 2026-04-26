@@ -6,6 +6,15 @@ import lombok.Getter;
 
 /**
  * description: ConditionEnum
+ *
+ * <p>查询条件操作符枚举：
+ * <ul>
+ *   <li>code：用于协议值（以及 MyBatis-Plus 的 {@link EnumValue} 持久化/映射）</li>
+ *   <li>operator：用于某些场景下与实际 SQL 运算符/关键字对齐</li>
+ * </ul>
+ *
+ * <p>本枚举会在 static 块中注册到 {@link EnumCache}，支持按 name/value 快速反查，供查询条件解析使用。</p>
+ *
  * date: 2022/1/9 17:56
  * author: muyi
  * version: 1.0
@@ -43,12 +52,14 @@ public enum ConditionEnum implements CommonEnum<String> {
     }
 
     static {
+        // 预热缓存：提升运行期反查性能，减少每次遍历 values() 的开销。
         EnumCache.registerByName(ConditionEnum.class, ConditionEnum.values());
         EnumCache.registerByValue(ConditionEnum.class, ConditionEnum.values(), ConditionEnum::getCode);
     }
 
 
     public static ConditionEnum findCondition(String condition) {
+        // 先按 code 反查（最稳定的协议值），找不到再尝试 operator 兼容。
         ConditionEnum result = EnumCache.findByValue(ConditionEnum.class, condition.toUpperCase());
         if (result != null) {
             return result;
