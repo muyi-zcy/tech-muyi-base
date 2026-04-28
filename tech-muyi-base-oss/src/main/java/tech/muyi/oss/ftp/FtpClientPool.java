@@ -7,10 +7,11 @@ import org.apache.commons.pool2.BaseObjectPool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import tech.muyi.oss.condition.FtpStorageEnabledCondition;
 import tech.muyi.oss.properties.FtpProperties;
 
 import javax.annotation.PostConstruct;
@@ -31,7 +32,7 @@ import java.util.concurrent.BlockingQueue;
 @ConditionalOnClass(FTPClient.class)
 @AutoConfigureBefore(FtpClientFactory.class)
 @EnableConfigurationProperties({FtpProperties.class})
-@ConditionalOnProperty(name = {"muyi.file.ftp.enable"}, havingValue = "true")
+@Conditional(FtpStorageEnabledCondition.class)
 @Import({FtpClientFactory.class})
 public class FtpClientPool extends BaseObjectPool<FTPClient> {
 

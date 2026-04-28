@@ -1,5 +1,5 @@
 FROM ubuntu:20.04
-MAINTAINER muyi zcy_nemo@aliyun.com
+MAINTAINER muyi muyi_zcy@163.com
 LABEL Description="Ubuntu base image 1.0 <路漫漫其修远兮，吾将上下而求索>"
 
 ENV LANG C.UTF-8

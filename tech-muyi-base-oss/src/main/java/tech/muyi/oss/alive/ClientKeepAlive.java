@@ -5,11 +5,12 @@ import org.apache.commons.net.ftp.FTPClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import tech.muyi.oss.ftp.FtpClientFactory;
 import tech.muyi.oss.ftp.FtpClientPool;
+import tech.muyi.oss.condition.FtpStorageEnabledCondition;
 import tech.muyi.oss.properties.FtpProperties;
 
 import javax.annotation.PostConstruct;
@@ -28,7 +29,7 @@ import java.util.concurrent.BlockingQueue;
 @ConditionalOnClass(FTPClient.class)
 @AutoConfigureBefore(FtpClientFactory.class)
 @EnableConfigurationProperties({FtpProperties.class})
-@ConditionalOnProperty(name = {"muyi.file.ftp.enable"}, havingValue = "true")
+@Conditional(FtpStorageEnabledCondition.class)
 public class ClientKeepAlive {
 
     private FtpKeepAlive ftpKeepAlive;

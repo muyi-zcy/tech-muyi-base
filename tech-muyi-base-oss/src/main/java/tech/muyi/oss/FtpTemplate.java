@@ -7,12 +7,13 @@ import org.apache.tomcat.util.collections.SynchronizedQueue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.multipart.MultipartFile;
 import tech.muyi.exception.MyException;
+import tech.muyi.oss.condition.FtpStorageEnabledCondition;
 import tech.muyi.oss.exception.OssErrorCodeEnum;
 import tech.muyi.oss.ftp.Ftp;
 import tech.muyi.oss.ftp.FtpClientPool;
@@ -38,7 +39,7 @@ import java.nio.file.Files;
 @ConditionalOnClass(FTPClient.class)
 @AutoConfigureBefore(FtpClientPool.class)
 @EnableConfigurationProperties({FtpProperties.class})
-@ConditionalOnProperty(name = {"muyi.file.ftp.enable"}, havingValue = "true")
+@Conditional(FtpStorageEnabledCondition.class)
 @Import({FtpClientPool.class})
 public class FtpTemplate {
     @Autowired

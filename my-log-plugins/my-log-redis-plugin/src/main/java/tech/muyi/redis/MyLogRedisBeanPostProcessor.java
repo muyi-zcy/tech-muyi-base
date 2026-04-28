@@ -4,10 +4,8 @@ import io.opentracing.contrib.redis.common.TracingConfiguration;
 import io.opentracing.contrib.redis.redisson.TracingRedissonClient;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import tech.muyi.core.MyTracer;
-import tech.muyi.core.tracer.MyTracerBuilder;
 
 /**
  * @author: muyi

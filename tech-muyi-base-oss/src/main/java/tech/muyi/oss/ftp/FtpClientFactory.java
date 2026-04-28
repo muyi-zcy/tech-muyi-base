@@ -8,11 +8,12 @@ import org.apache.commons.pool2.PooledObject;
 import org.apache.commons.pool2.impl.DefaultPooledObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import tech.muyi.exception.MyException;
 import tech.muyi.oss.exception.OssErrorCodeEnum;
+import tech.muyi.oss.condition.FtpStorageEnabledCondition;
 import tech.muyi.oss.properties.FtpProperties;
 
 import java.io.IOException;
@@ -28,7 +29,7 @@ import java.io.IOException;
 @Configuration
 @ConditionalOnClass(FTPClient.class)
 @EnableConfigurationProperties({FtpProperties.class})
-@ConditionalOnProperty(name = {"muyi.file.ftp.enable"}, havingValue = "true")
+@Conditional(FtpStorageEnabledCondition.class)
 public class FtpClientFactory extends BasePooledObjectFactory<FTPClient> {
 
     @Autowired

@@ -13,11 +13,12 @@ import okhttp3.ConnectionPool;
 import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.MultipartFile;
 import tech.muyi.exception.MyException;
+import tech.muyi.oss.condition.MinioStorageEnabledCondition;
 import tech.muyi.oss.exception.OssErrorCodeEnum;
 import tech.muyi.oss.properties.MinioProperties;
 
@@ -42,7 +43,7 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 @EnableConfigurationProperties({MinioProperties.class})
 @ConditionalOnClass({MinioClient.class})
-@ConditionalOnProperty(name = {"muyi.file.minio.enable"}, havingValue = "true")
+@Conditional(MinioStorageEnabledCondition.class)
 public class MinioTemplate {
 
     private MinioClient minioClient;
