@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-tech.muyi.redis.config.MyLogRedisAutoConfiguration
+tech.muyi.redis.config.RedisTracerAutoConfiguration

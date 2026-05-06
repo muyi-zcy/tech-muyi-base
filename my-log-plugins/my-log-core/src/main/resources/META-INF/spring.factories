@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-tech.muyi.core.config.MyLogAutoConfiguration
+tech.muyi.core.config.MyLogTracerAutoConfiguration

@@ -8,11 +8,19 @@
         <artifactId>tech-muyi-base</artifactId>
         <version>${baseversion}</version>
     </parent>
-    <groupId>tech.muyi</groupId>
 
     <artifactId>my-log-plugins</artifactId>
     <version>${baseversion}</version>
     <packaging>pom</packaging>
+
+    <modules>
+        <module>my-log-core</module>
+        <module>my-log-springmvc-plugin</module>
+        <module>my-log-dubbo-plugin</module>
+        <module>my-log-okhttp-plugin</module>
+        <module>my-log-db-plugin</module>
+        <module>my-log-redis-plugin</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

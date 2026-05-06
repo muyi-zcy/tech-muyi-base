@@ -123,6 +123,11 @@ public enum CommonErrorCodeEnum implements BaseErrorInfoInterface {
     SERIALIZATION_FAIL("10004","Serialization Fail"),
     DESERIALIZATION_FAIL("10005","Deserialization Fail"),
     QUERY_PARAM_ERROR("10006","The query parameters do not meet requirements"),
+    PARAM_IS_INVALID("10007", "Parameter is invalid"),
+    RESULE_DATA_NONE("10008", "Result data not found"),
+    DATA_ALREADY_EXISTED("10009", "Data already exists"),
+    INTERFACE_OUTER_INVOKE_ERROR("10010", "External interface invocation error"),
+    PERMISSION_NO_ACCESS("10011", "Permission denied"),
     ;
 
     /** 错误码 */

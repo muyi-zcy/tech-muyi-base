@@ -18,4 +18,27 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <dependencies>
+        <!-- my-log-core -->
+        <dependency>
+            <groupId>tech.muyi</groupId>
+            <artifactId>my-log-core</artifactId>
+        </dependency>
+
+        <!-- SOFATracer Dubbo 官方插件 -->
+        <dependency>
+            <groupId>com.alipay.sofa</groupId>
+            <artifactId>sofa-tracer-dubbo-plugin</artifactId>
+        </dependency>
+
+        <!-- Spring Boot AutoConfiguration（通过 my-log-core -> base-on 传递） -->
+        <!-- 不需要显式声明，已通过依赖传递获得 -->
+
+        <!-- Dubbo -->
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
 </project>

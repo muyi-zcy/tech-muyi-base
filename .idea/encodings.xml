@@ -8,12 +8,16 @@
     <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-db-plugin/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-dubbo-plugin/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-dubbo-plugin/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-feign-plugin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-feign-plugin/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-okhttp-plugin/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-okhttp-plugin/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-redis-plugin/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-redis-plugin/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-rocketmq-plugin/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-rocketmq-plugin/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-shardingsphere-plugin/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-shardingsphere-plugin/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-springmvc-plugin/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/my-log-plugins/my-log-springmvc-plugin/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/my-log-plugins/src/main/java" charset="UTF-8" />

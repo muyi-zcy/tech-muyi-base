@@ -19,21 +19,40 @@
     </properties>
 
     <dependencies>
-
-        <dependency>
-            <groupId>io.opentracing.contrib</groupId>
-            <artifactId>opentracing-redis-redisson</artifactId>
-        </dependency>
-
+        <!-- my-log-core -->
         <dependency>
             <groupId>tech.muyi</groupId>
             <artifactId>my-log-core</artifactId>
         </dependency>
 
+        <!-- SOFATracer Redis 官方插件（支持 Jedis/Lettuce） -->
+        <dependency>
+            <groupId>com.alipay.sofa</groupId>
+            <artifactId>sofa-tracer-redis-plugin</artifactId>
+        </dependency>
+
+        <!-- Jedis（可选） -->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Lettuce（可选） -->
+        <dependency>
+            <groupId>io.lettuce</groupId>
+            <artifactId>lettuce-core</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Redisson（可选，需要自定义追踪） -->
         <dependency>
             <groupId>org.redisson</groupId>
             <artifactId>redisson</artifactId>
+            <optional>true</optional>
         </dependency>
 
+        <!-- Spring Boot AutoConfiguration（通过 my-log-core -> base-on 传递） -->
+        <!-- 不需要显式声明，已通过依赖传递获得 -->
     </dependencies>
 </project>

@@ -19,15 +19,22 @@
     </properties>
 
     <dependencies>
-
+        <!-- my-log-core -->
         <dependency>
             <groupId>tech.muyi</groupId>
             <artifactId>my-log-core</artifactId>
         </dependency>
 
+        <!-- SOFATracer DataSource 官方插件 -->
         <dependency>
-            <groupId>org.apache.shardingsphere</groupId>
-            <artifactId>shardingsphere-pluggable</artifactId>
+            <groupId>com.alipay.sofa</groupId>
+            <artifactId>sofa-tracer-datasource-plugin</artifactId>
+        </dependency>
+        <!-- JDBC -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 </project>

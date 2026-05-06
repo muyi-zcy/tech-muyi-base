@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="EntryPointsManager">
     <list size="1">
@@ -14,6 +15,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/my-log-plugins/my-log-rocketmq-plugin/pom.xml" />
         <option value="$PROJECT_DIR$/tech-muyi-base-auth/pom.xml" />
         <option value="$PROJECT_DIR$/tech-muyi-base-context/pom.xml" />
         <option value="$PROJECT_DIR$/tech-muyi-base-db/pom.xml" />
@@ -24,6 +26,7 @@
         <option value="$PROJECT_DIR$/tech-muyi-base-registry/pom.xml" />
         <option value="$PROJECT_DIR$/tech-muyi-base-tenant/pom.xml" />
         <option value="$PROJECT_DIR$/tech-muyi-base-tm/pom.xml" />
+        <option value="$PROJECT_DIR$/tech-muyi-base-tracer/pom.xml" />
       </set>
     </option>
   </component>

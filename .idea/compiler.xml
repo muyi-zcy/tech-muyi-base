@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="tech-muyi-base-util" />
+        <module name="my-log-feign-plugin" />
         <module name="tech-muyi-base-generator" />
         <module name="tech-muyi-base-easyjob" />
         <module name="tech-muyi-base-config" />
@@ -21,14 +22,12 @@
         <module name="tech-muyi-base-exception" />
         <module name="tech-muyi-base-flyway" />
         <module name="tech-muyi-base-elasticjob" />
-        <module name="my-log-rocketmq-plugin" />
         <module name="tech-muyi-base-sentinel" />
         <module name="tech-muyi-base-common" />
         <module name="tech-muyi-base-oss" />
         <module name="tech-muyi-base-sso" />
         <module name="my-log-dubbo-plugin" />
         <module name="my-log-redis-plugin" />
-        <module name="tech-muyi-base-tracer" />
         <module name="tech-muyi-base-core" />
         <module name="tech-muyi-base-okhttp" />
         <module name="tech-muyi-base-id" />
@@ -42,6 +41,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="my-log-rocketmq-plugin" target="1.8" />
+      <module name="my-log-shardingsphere-plugin" target="1.8" />
       <module name="tech-muyi-base-auth" target="1.8" />
       <module name="tech-muyi-base-context" target="1.8" />
       <module name="tech-muyi-base-db" target="1.8" />
@@ -54,6 +55,7 @@
       <module name="tech-muyi-base-registry" target="8" />
       <module name="tech-muyi-base-tenant" target="1.8" />
       <module name="tech-muyi-base-tm" target="1.8" />
+      <module name="tech-muyi-base-tracer" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

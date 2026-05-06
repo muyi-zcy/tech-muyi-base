@@ -144,8 +144,8 @@ public class DefaultSnowflakeImpl implements MyIdGenerator {
         long timestamp = genTime();
         if (timestamp < this.lastTimestamp) {
             if (this.lastTimestamp - timestamp < timeOffset) {
-                // 容忍指定的回拨，避免NTP校时造成的异常
-                timestamp = lastTimestamp;
+                // 容忍指定的回拨，等待时钟追上
+                timestamp = tilNextMillis(lastTimestamp);
             } else {
                 // 如果服务器时间有问题(时钟后退) 报错。
                 throw new IllegalStateException(String.format("Clock moved backwards. Refusing to generate id for %s ms", lastTimestamp - timestamp));

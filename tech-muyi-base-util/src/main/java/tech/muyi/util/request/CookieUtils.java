@@ -1,5 +1,7 @@
 package tech.muyi.util.request;
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +24,7 @@ import java.net.URLEncoder;
  * @author: muyi
  * @date: 2022/11/20
  **/
+@Slf4j
 public class CookieUtils {
 
     /**
@@ -62,7 +65,7 @@ public class CookieUtils {
                 }
             }
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            log.error("Cookie解码失败: cookieName={}", cookieName, e);
         }
         return retValue;
     }
@@ -89,7 +92,7 @@ public class CookieUtils {
                 }
             }
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            log.error("Cookie解码失败: cookieName={}", cookieName, e);
         }
         return retValue;
     }
@@ -202,9 +205,13 @@ public class CookieUtils {
                 }
             }
             cookie.setPath("/");
+            // 设置安全属性
+            cookie.setHttpOnly(true);
+            // 注意: Secure 属性应该根据实际环境判断，HTTPS 环境下才设置
+            // cookie.setSecure(request.isSecure());
             response.addCookie(cookie);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("设置Cookie失败: cookieName={}", cookieName, e);
         }
     }
 
@@ -237,9 +244,11 @@ public class CookieUtils {
                 }
             }
             cookie.setPath("/");
+            // 设置安全属性
+            cookie.setHttpOnly(true);
             response.addCookie(cookie);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("设置Cookie失败: cookieName={}", cookieName, e);
         }
     }
 
@@ -256,8 +265,12 @@ public class CookieUtils {
             domainName = "";
         } else {
             serverName = serverName.toLowerCase();
-            // 假定协议前缀长度为 7（http://），对 https 场景会多保留一个字符；保留历史行为以避免兼容性变化。
-            serverName = serverName.substring(7);
+            // 移除协议前缀（http:// 或 https://）
+            if (serverName.startsWith("https://")) {
+                serverName = serverName.substring(8);
+            } else if (serverName.startsWith("http://")) {
+                serverName = serverName.substring(7);
+            }
             final int end = serverName.indexOf("/");
             serverName = serverName.substring(0, end);
             final String[] domains = serverName.split("\\.");

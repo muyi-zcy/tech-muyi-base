@@ -10,7 +10,6 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-
     <artifactId>my-log-okhttp-plugin</artifactId>
 
     <properties>
@@ -19,17 +18,27 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-
     <dependencies>
+        <!-- my-log-core -->
         <dependency>
             <groupId>tech.muyi</groupId>
             <artifactId>my-log-core</artifactId>
         </dependency>
 
+        <!-- SOFATracer HttpClient 官方插件 -->
+        <dependency>
+            <groupId>com.alipay.sofa</groupId>
+            <artifactId>sofa-tracer-httpclient-plugin</artifactId>
+        </dependency>
+
+        <!-- Spring Boot AutoConfiguration（通过 my-log-core -> base-on 传递） -->
+        <!-- 不需要显式声明，已通过依赖传递获得 -->
+
+        <!-- OkHttp -->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
+            <optional>true</optional>
         </dependency>
     </dependencies>
-
 </project>

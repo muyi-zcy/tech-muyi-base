@@ -29,22 +29,15 @@
         <module>tech-muyi-base-sentinel</module>
         <module>tech-muyi-base-core</module>
         <module>my-log-plugins</module>
-        <module>my-log-plugins/my-log-core</module>
-        <module>my-log-plugins/my-log-springmvc-plugin</module>
-        <module>my-log-plugins/my-log-dubbo-plugin</module>
-        <module>my-log-plugins/my-log-rocketmq-plugin</module>
-        <module>my-log-plugins/my-log-redis-plugin</module>
-        <module>my-log-plugins/my-log-db-plugin</module>
         <module>tech-muyi-base-id</module>
         <module>tech-muyi-base-okhttp</module>
-        <module>my-log-plugins/my-log-okhttp-plugin</module>
-        <module>tech-muyi-base-tracer</module>
         <module>tech-muyi-base-db-shardingjdbc</module>
         <module>tech-muyi-base-feign</module>
         <module>tech-muyi-base-dmask</module>
         <module>tech-muyi-base-sso</module>
         <module>tech-muyi-base-flyway</module>
         <module>tech-muyi-base-boot</module>
+        <module>my-log-plugins/my-log-feign-plugin</module>
     </modules>
 
     <properties>
@@ -68,7 +61,7 @@
 
         <mybatis-spring-boot-starter.version>2.1.0</mybatis-spring-boot-starter.version>
         <mybatis-plus-boot-starter.version>3.5.3.1</mybatis-plus-boot-starter.version>
-        <mysql-connector-java.version>8.0.17</mysql-connector-java.version>
+        <mysql-connector-java.version>8.0.33</mysql-connector-java.version>
         <druid.version>1.2.1</druid.version>
         <sharding-jdbc-spring-boot-starter.version>4.1.1</sharding-jdbc-spring-boot-starter.version>
 
@@ -81,7 +74,7 @@
         <reflections.version>0.9.10</reflections.version>
 
         <slf4j-api.version>1.7.21</slf4j-api.version>
-        <logback-classic.version>1.2.3</logback-classic.version>
+        <logback-classic.version>1.2.13</logback-classic.version>
 
         <lombok.version>1.18.22</lombok.version>
 
@@ -117,7 +110,7 @@
         <sofatracer.version>3.1.1</sofatracer.version>
         <openfeign.version>2.2.9.RELEASE</openfeign.version>
         <feign.version>10.12</feign.version>
-        <fastjson.version>1.2.76</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
 
     </properties>
 
@@ -760,6 +753,11 @@
             <dependency>
                 <groupId>com.alipay.sofa</groupId>
                 <artifactId>sofa-tracer-flexible-plugin</artifactId>
+                <version>${sofatracer.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alipay.sofa</groupId>
+                <artifactId>sofa-tracer-redis-plugin</artifactId>
                 <version>${sofatracer.version}</version>
             </dependency>
             <dependency>

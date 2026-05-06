@@ -19,14 +19,26 @@
     </properties>
 
     <dependencies>
+        <!-- my-log-core -->
         <dependency>
             <groupId>tech.muyi</groupId>
             <artifactId>my-log-core</artifactId>
         </dependency>
 
+        <!-- SOFATracer SpringMVC 官方插件 -->
+        <dependency>
+            <groupId>com.alipay.sofa</groupId>
+            <artifactId>sofa-tracer-springmvc-plugin</artifactId>
+        </dependency>
+
+        <!-- Spring Boot AutoConfiguration（通过 my-log-core -> base-on 传递） -->
+        <!-- 不需要显式声明，已通过依赖传递获得 -->
+
+        <!-- Servlet API -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 </project>

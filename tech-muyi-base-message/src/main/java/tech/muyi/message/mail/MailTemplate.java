@@ -1,5 +1,6 @@
 package tech.muyi.message.mail;
 
+import lombok.extern.slf4j.Slf4j;
 import tech.muyi.exception.MyException;
 import tech.muyi.exception.enumtype.CommonErrorCodeEnum;
 
@@ -17,6 +18,7 @@ import java.util.Properties;
  * @Author: muyi
  * @Date: 2021/1/11 23:52
  */
+@Slf4j
 public class MailTemplate  implements Serializable {
     //    smtp服务器
     private String host;
@@ -62,7 +64,7 @@ public class MailTemplate  implements Serializable {
             try {
                 sendMail(mailDTO);
             }catch (Exception e){
-                e.printStackTrace();
+                log.error("发送邮件失败", e);
                 throw new MyException(CommonErrorCodeEnum.UNKNOWN_EXCEPTION.getResultCode(),CommonErrorCodeEnum.UNKNOWN_EXCEPTION.getResultMsg());
             }
         }
@@ -77,7 +79,7 @@ public class MailTemplate  implements Serializable {
         try {
             sendMail(mailDTO);
         }catch (Exception e){
-            e.printStackTrace();
+            log.error("发送邮件失败", e);
             throw new MyException(CommonErrorCodeEnum.UNKNOWN_EXCEPTION.getResultCode(),CommonErrorCodeEnum.UNKNOWN_EXCEPTION.getResultMsg());
         }
     }
@@ -98,8 +100,8 @@ public class MailTemplate  implements Serializable {
 
 
         // 2. 根据配置创建会话对象, 用于和邮件服务器交互
-        Session session = Session.getDefaultInstance(props);
-        session.setDebug(false);                                 // 设置为debug模式, 可以查看详细的发送 log
+        Session session = Session.getInstance(props);
+        session.setDebug(debug);                                 // 设置为debug模式, 可以查看详细的发送 log
 
         // 3. 根据 Session 获取邮件传输对象
         Transport transport = session.getTransport();

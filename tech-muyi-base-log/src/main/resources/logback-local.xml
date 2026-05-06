@@ -4,7 +4,7 @@
 
     <springProperty scope="context" name="APP" source="spring.application.name"/>
 
-    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} ${APP:-default}, [%X{traceId}] [%X{spanId}] [%thread] %-5level %logger{50} - %msg%n"/>
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} ${APP:-default}, [%X{SOFA-TraceId}] [%X{SOFA-SpanId}] [%thread] %-5level %logger{50} - %msg%n"/>
 
     <!-- 活动文件的大小 -->
     <property name="max.file.size" value="50MB"/>
