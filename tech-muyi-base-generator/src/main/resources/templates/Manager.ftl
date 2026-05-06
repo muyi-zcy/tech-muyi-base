@@ -31,6 +31,12 @@ public class ${entity}Manager extends MyServiceImpl<${entity}DAO, ${entity}DO>{
     @Resource
     private ${entity}DAO ${entity?uncap_first}DAO;
 
+
+
+    @Override
+    public ${entity}DO createEntity() {
+        return new ${entity}DO();
+    }
     public Boolean deleteById(Long id){
         return this.removeById(id);
     }
